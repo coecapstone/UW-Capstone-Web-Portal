@@ -1,4 +1,4 @@
-const baseURL = "https://uwcoe-api.azurewebsites.net/api/";
+// const baseURL = "https://uwcoe-api.azurewebsites.net/api/";
 // const baseURL = "http://localhost:3000/api/";
 
 // Template POst request Ajax call

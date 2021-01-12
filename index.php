@@ -20,6 +20,7 @@
         $eppn = $_SERVER["eppn"];
     ?>
 
+    <script type="text/javascript" src="UW-Capstone-Web-Portal/vuexy-html-admin/app-assets/js/scripts/myScripts/util.js"></script>
     <script type="text/javascript">
         var eppn = "<?php echo $eppn; ?>";
         var at = eppn.indexOf("@");
@@ -43,8 +44,6 @@
         var onFaliure = function() {
             alert("Backend faliure !");
         }
-
-        const baseURL = "https://uwcoe-api.azurewebsites.net/api/";
 
         var makeGetRequest = function(url, onSuccess, onFailure) {
             $.ajax({
