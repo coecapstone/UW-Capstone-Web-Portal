@@ -423,8 +423,8 @@ $(document).on('click', '#delete',function getAllOrders(){
 function getBudgetsInfo() {
     var onSuccess = function(data) {
         if (data.status == true) {
-            // console.log("budgets information is here");
-            // console.log(data.data);
+            console.log("budgets information is here");
+            console.log(data.data);
             for (var i = 0; i < data.data.length; i++) {
                 budgets_database.push(data.data[i].budgetNumber);
             }
