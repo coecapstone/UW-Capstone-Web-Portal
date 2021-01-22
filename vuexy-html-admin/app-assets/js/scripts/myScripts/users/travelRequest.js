@@ -463,7 +463,7 @@ function getUserInfo() {
             user_accessLevel=data.data.AccessLevel;
 
             // Get budget info now that we know the unitID
-            this.getBudgetsInfo();
+            getBudgetsInfo();
         } else {
             //error message
             console.log("user information returned false");
