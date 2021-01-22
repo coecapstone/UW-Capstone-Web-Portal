@@ -77,7 +77,7 @@ var ApproversLogicSelectBox = document.getElementById("ApproversLogicSelectBox")
 var updateApprovalChainLogic_btn = document.getElementById("updateApprovalChainLogic_btn");
 var currentApproverLogic = document.getElementById("currentApproverLogic");
 
-window.onload = function()
+addLoadEvent(function()
 {
     
     //initializing all the tables
@@ -101,7 +101,7 @@ window.onload = function()
     updateSubUnit_with_budgets_btn.disabled = true;
     //approver overviewsection
     hide_all_btns_logic_approver_overview();
-}
+});
 
 function update_Subunit_overview_table()
 {

@@ -27,7 +27,7 @@ var user_accessLevel="";
  * and then get userInfo one by one,
  * then getAllOrders again and write to the requestsInfo global array
  */
-window.onload = function() {
+addLoadEvent(function() {
     update_Dashboard_welcomebar_navigationbar();
 
     // All requests table
@@ -37,7 +37,7 @@ window.onload = function() {
     // Prepare for modal
     this.prepareReassignSelector();
     
-};
+});
 
 
 function updateAllRequestsTable() {

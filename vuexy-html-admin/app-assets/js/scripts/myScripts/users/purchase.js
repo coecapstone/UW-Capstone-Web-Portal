@@ -180,7 +180,7 @@ $(".steps-validation").validate({
  * Get user information and budget information when the page loading
  * Set global variables
  */
-window.onload = function() {
+addLoadEvent(function() {
     if (window.localStorage.getItem('defaultAddr')) {
         defaultMode = true;
     }
@@ -217,7 +217,7 @@ window.onload = function() {
     }
 
     this.lineItemInit("Purchase Request");
-};
+});
 
 
 

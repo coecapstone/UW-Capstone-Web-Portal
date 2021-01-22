@@ -30024,7 +30024,7 @@ var List = function (dimensions, hostModel) {
     this.dimensions = dimensionNames;
 
     /**
-     * Infomation of each data dimension, like data type.
+     * Information of each data dimension, like data type.
      * @type {Object}
      */
     this._dimensionInfos = dimensionInfos;

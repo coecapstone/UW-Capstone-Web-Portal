@@ -6,7 +6,6 @@ var feedbackBlock = document.getElementById("feedback-block");
 var feedback = document.getElementById("feedback_input");
 
 var request_id = null;
-const baseURL = "https://uwcoe-api.azurewebsites.net/api/";
 var user_id = "5e8e45eea148b9004420651f";
 var userID = null;
 
@@ -66,7 +65,7 @@ var makeGetRequest = function(url, onSuccess, onFailure) {
 /*
     update the page content
 */
-window.onload = function() {
+addLoadEvent(function() {
     userID = window.sessionStorage.getItem("id");
     document.getElementById('requestID').innerHTML = window.sessionStorage.getItem("orderId");
     document.getElementById('request-type').innerHTML = window.sessionStorage.getItem("type")+"&nbsp;";
@@ -101,49 +100,49 @@ window.onload = function() {
     }
     //check the attached file
     if(window.sessionStorage.getItem("passport_file").localeCompare("undefined")!=0){
-        document.getElementById('passportFile').innerHTML = "<a href=\"https://coe-api.azurewebsites.net/api/downloadAttachment/" 
+        document.getElementById('passportFile').innerHTML = "<a href=\"" + baseURL + "downloadAttachment/" 
                                                         + window.sessionStorage.getItem("orderId") + "/" 
                                                         + window.sessionStorage.getItem("passport_file")
                                                         + "\" style=\"cursor:pointer;color:blue;text-decoration:underline;\">Download</a>";
     }
     if(window.sessionStorage.getItem("visa_file").localeCompare("undefined")!=0){
-        document.getElementById('visaFile').innerHTML = "<a href=\"https://coe-api.azurewebsites.net/api/downloadAttachment/" 
+        document.getElementById('visaFile').innerHTML = "<a href=\"" + baseURL + "downloadAttachment/" 
                                                         + window.sessionStorage.getItem("orderId") + "/" 
                                                         + window.sessionStorage.getItem("visa_file")
                                                         + "\" style=\"cursor:pointer;color:blue;text-decoration:underline;\">Download</a>";
     }
     if(window.sessionStorage.getItem("registration_file").localeCompare("undefined")!=0){
-        document.getElementById('registrationFile').innerHTML = "<a href=\"https://coe-api.azurewebsites.net/api/downloadAttachment/" 
+        document.getElementById('registrationFile').innerHTML = "<a href=\"" + baseURL + "downloadAttachment/" 
                                                         + window.sessionStorage.getItem("orderId") + "/" 
                                                         + window.sessionStorage.getItem("registration_file")
                                                         + "\" style=\"cursor:pointer;color:blue;text-decoration:underline;\">Download</a>";
     }
     if(window.sessionStorage.getItem("car_file").localeCompare("undefined")!=0){
-        document.getElementById('carFile').innerHTML = "<a href=\"https://coe-api.azurewebsites.net/api/downloadAttachment/" 
+        document.getElementById('carFile').innerHTML = "<a href=\"" + baseURL + "downloadAttachment/" 
                                                         + window.sessionStorage.getItem("orderId") + "/" 
                                                         + window.sessionStorage.getItem("car_file")
                                                         + "\" style=\"cursor:pointer;color:blue;text-decoration:underline;\">Download</a>";
     }
     if(window.sessionStorage.getItem("rental_file").localeCompare("undefined")!=0){
-        document.getElementById('carRentalFile').innerHTML = "<a href=\"https://coe-api.azurewebsites.net/api/downloadAttachment/" 
+        document.getElementById('carRentalFile').innerHTML = "<a href=\"" + baseURL + "downloadAttachment/" 
                                                         + window.sessionStorage.getItem("orderId") + "/" 
                                                         + window.sessionStorage.getItem("rental_file")
                                                         + "\" style=\"cursor:pointer;color:blue;text-decoration:underline;\">Download</a>";
     }
     if(window.sessionStorage.getItem("airfare_file").localeCompare("undefined")!=0){
-        document.getElementById('airfareFile').innerHTML = "<a href=\"https://coe-api.azurewebsites.net/api/downloadAttachment/" 
+        document.getElementById('airfareFile').innerHTML = "<a href=\"" + baseURL + "downloadAttachment/" 
                                                         + window.sessionStorage.getItem("orderId") + "/" 
                                                         + window.sessionStorage.getItem("airfare_file")
                                                         + "\" style=\"cursor:pointer;color:blue;text-decoration:underline;\">Download</a>";
     }
     if(window.sessionStorage.getItem("train_file").localeCompare("undefined")!=0){
-        document.getElementById('trainFile').innerHTML = "<a href=\"https://coe-api.azurewebsites.net/api/downloadAttachment/" 
+        document.getElementById('trainFile').innerHTML = "<a href=\"" + baseURL + "downloadAttachment/" 
                                                         + window.sessionStorage.getItem("orderId") + "/" 
                                                         + window.sessionStorage.getItem("train_file")
                                                         + "\" style=\"cursor:pointer;color:blue;text-decoration:underline;\">Download</a>";
     }
     if(window.sessionStorage.getItem("hotel_file").localeCompare("undefined")!=0){
-        document.getElementById('hotelFile').innerHTML = "<a href=\"https://coe-api.azurewebsites.net/api/downloadAttachment/" 
+        document.getElementById('hotelFile').innerHTML = "<a href=\"" + baseURL + "downloadAttachment/" 
                                                         + window.sessionStorage.getItem("orderId") + "/" 
                                                         + window.sessionStorage.getItem("hotel_file")
                                                         + "\" style=\"cursor:pointer;color:blue;text-decoration:underline;\">Download</a>";
@@ -222,7 +221,7 @@ window.onload = function() {
         alert("fail");
     }
     makeGetRequest("getOrderInformation/"+window.sessionStorage.getItem('orderId'),onSuccess,onFaliure);
-}
+});
 
 function updateActionField(data) {
     var request_status = data.OrderStatus;

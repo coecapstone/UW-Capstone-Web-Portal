@@ -6,7 +6,6 @@ var feedbackBlock = document.getElementById("feedback-block");
 var feedback = document.getElementById("feedback_input");
 
 var request_id = null;
-const baseURL = "https://uwcoe-api.azurewebsites.net/api/";
 var user_id = "5e8e45eea148b9004420651f";
 var userID = null;
 var actionTable = document.getElementById("action_table");
@@ -68,7 +67,7 @@ var makeDeleteRequest = function(url, onSuccess, onFailure) {
 /*
     update the page content
 */
-window.onload = function() {
+addLoadEvent(function() {
     userID = window.sessionStorage.getItem("id");
     document.getElementById('requestID').innerHTML = window.sessionStorage.getItem("orderId");
     document.getElementById('requester').innerHTML = window.sessionStorage.getItem("user_name");
@@ -115,7 +114,7 @@ window.onload = function() {
     request_id = window.sessionStorage.getItem('orderId');
     this.console.log(request_id);
     requestInfo = getRequestInfo(request_id);
-}
+});
 
 function takeNoteClicked() {
     // send data

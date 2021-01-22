@@ -5,8 +5,8 @@ var table2 = [];
 var formData = new FormData();
 var type = "";
 var unitID = "";
-const baseURL = "https://uwcoe-api.azurewebsites.net/api/";
-var user_id = "5e8e45eea148b9004420651f";
+//var user_id = "5e8e45eea148b9004420651f";
+var user_id = window.sessionStorage.getItem("id");
 var user_name="";
 var user_uwid="";
 var user_email="";
@@ -79,9 +79,9 @@ var makeGetRequest = function(url, onSuccess, onFailure) {
     });
 };
 
-window.onload = function() {
+addLoadEvent(function() {
     this.getUserInfo();
-    this.getBudgetsInfo();
+    //this.getBudgetsInfo();
     var budget_select = this.document.getElementById('budget_num_1');
     var budget_select2 = this.document.getElementById('budget_num_2');
     for (var i = 0; i < this.budgets_database.length; i++) {
@@ -89,7 +89,7 @@ window.onload = function() {
         budget_select.appendChild(addBudgetData(num));
         budget_select2.appendChild(addBudgetData(num));
     }
-};
+});
 
 /*
     submit the form
@@ -505,27 +505,40 @@ function getUserInfo() {
             console.log("user information is here");
             console.log(data.data);
             var level = data.data.AccessLevel;
+            // XXX these thould be named constants, not magic string values XXX KES
             if (level == "Submitter" || level == "Approver") {
                 type = "subunit";
                 unitID = data.data.SubUnitID;
-            } else if (level == "Fiscal Staff" || level == "Fiscal Administrator") {
+            } else if (level == "Fiscal Staff" || level == "Fiscal Administrator"
+                       || level == "Financial Admin") {
                 type = "unit";
                 unitID = data.data.UnitID;
+            } else {
+                console.log("UNKNOWN LEVEL: " + level);
+                unitID = data.data.UnitID;
+		if (unitID == null) {
+                  unitID = data.data.SubUnitID;
+		}
             }
             user_name = data.data.userInfo.Name;
             user_uwid=data.data.userInfo.UWID;
             user_email=data.data.userInfo.email;
             user_subunitName=data.data.SubUnitName;
             user_accessLevel=data.data.AccessLevel;
+            getBudgetsInfo();
         } else {
             //error message
+            console.log("user information status failure");
+            console.log(data);
         }
     }
 
     var onFailure = function() {
         // failure message
+        console.log("user information FAILED");
     }
 
+    console.log("requesting user information for user_id=" + user_id);
     makeGetRequest("getuserInformation/" + user_id, onSuccess, onFailure);
 }
 
@@ -581,18 +594,22 @@ $(document).on('click', '#option_project', function() {
 function getBudgetsInfo() {
     var onSuccess = function(data) {
         if (data.status == true) {
-            // console.log("budgets information is here");
-            // console.log(data.data);
+            console.log("budgets information is here");
+            console.log(data.data);
             for (var i = 0; i < data.data.length; i++) {
                 budgets_database.push(data.data[i].budgetNumber);
             }
         } else {
             //error message
+            console.log("budgets information status false");
+            console.log(data);
         }
     }
     var onFailure = function() {
         // failure message
+        console.log("budgets information FAILED");
     }
+    console.log("requesting budgets information using user_id " + user_id + ", unitID: " + unitID);
     makeGetRequest("getBudgetsUnderSubUnit/" + unitID, onSuccess, onFailure);
 }
 

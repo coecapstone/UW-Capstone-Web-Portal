@@ -16,7 +16,7 @@ var city_input = document.getElementById("city_input");
 var state_input = document.getElementById("state_input");
 var zip_input = document.getElementById("zip_input");
 
-window.onload = function(){
+addLoadEvent(function(){
     load_userInformation();
     enable_disable_update_btn();
 
@@ -36,7 +36,7 @@ window.onload = function(){
     $("#Image_holder").hide();
     upload_btn.disabled = true;
 
-}
+});
 
 
 

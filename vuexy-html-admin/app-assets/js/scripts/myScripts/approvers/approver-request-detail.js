@@ -14,7 +14,7 @@ var actionArr = [];
 var action_card = document.getElementById('action_card');
 var note_add_card = document.getElementById('note_add_card');
 
-window.onload = function() {
+addLoadEvent(function() {
     request_id = window.sessionStorage.getItem('RequestID');
     userID = window.sessionStorage.getItem("id");
     this.console.log(request_id);
@@ -38,7 +38,7 @@ window.onload = function() {
     adjustActionHeight();
 
     // changeOrderStatus();
-}
+});
 
 // just for debug
 function changeOrderStatus() {

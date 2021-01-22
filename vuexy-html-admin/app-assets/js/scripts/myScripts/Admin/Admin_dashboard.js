@@ -1,7 +1,7 @@
 var administrative_staff_table = null;
 
 
-window.onload = function()
+addLoadEvent(function()
 {
     //const socket = io.connect('http://localhost:3000');
     update_Dashboard_welcomebar_navigationbar();
@@ -17,7 +17,7 @@ window.onload = function()
         Handle_notifications(data.Title,data.Message,data.timeStamp,data.Type);
     });*/
 
-}
+});
 
 /*
 <a class="d-flex justify-content-between" href="javascript:void(0)">

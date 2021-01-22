@@ -3,7 +3,6 @@ var lineItems = [];
 var formData = new FormData();
 var type = "";
 var unitID = "";
-const baseURL = "https://uwcoe-api.azurewebsites.net/api/";
 var user_id = "5e8e45eea148b9004420651f";
 
 var user_name="";
@@ -77,7 +76,7 @@ var makeGetRequest = function(url, onSuccess, onFailure) {
     });
 };
 
-window.onload = function() {
+addLoadEvent(function() {
     this.getUserInfo();//get user info 
     this.getBudgetsInfo();//get budget info
 
@@ -89,7 +88,7 @@ window.onload = function() {
         budget_select.appendChild(addBudgetData(num));
         budget_select2.appendChild(addBudgetData(num));
     }
-};
+});
 
 /*
     click the submit button

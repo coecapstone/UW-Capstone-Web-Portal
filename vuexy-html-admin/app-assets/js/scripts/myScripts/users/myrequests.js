@@ -27,7 +27,7 @@ var user_id = "5e8e45eea148b9004420651f";
  * and then get userInfo one by one,
  * then getAllOrders again and write to the requestsInfo global array
  */
-window.onload = function() {
+addLoadEvent(function() {
     update_Dashboard_welcomebar_navigationbar();
 
     // All requests table
@@ -36,7 +36,7 @@ window.onload = function() {
 
     this.getUserInfo();
     
-};
+});
 
 
 function updateAllRequestsTable() {

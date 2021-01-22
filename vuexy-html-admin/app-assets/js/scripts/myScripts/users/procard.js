@@ -165,7 +165,7 @@ $(".steps-validation").validate({
  * Get user information and budget information when the page loading
  * Set global variables
  */
-window.onload = function() {
+addLoadEvent(function() {
     this.getUserInfo();
     this.getBudgetsInfo();
     // this.console.log(this.budgets_database);
@@ -185,7 +185,7 @@ window.onload = function() {
     }
 
     this.lineItemInit("Procard Receipt");
-};
+});
 
 
 /**

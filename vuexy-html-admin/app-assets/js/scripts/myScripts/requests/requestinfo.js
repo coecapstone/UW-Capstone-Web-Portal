@@ -419,7 +419,7 @@ function genLineItemTableRow(item_seq, request_type, line_item_info, line_item_l
                 var a = document.createElement('a');
                 var name = docsName[x];
                 a.setAttribute('href', 
-                `https://coe-api.azurewebsites.net/api/downloadAttachment/${request_id}/${name}`);
+                `${baseURL}downloadAttachment/${request_id}/${name}`);
                 a.setAttribute('style', 'margin-right: 1rem;');
                 a.innerHTML = name;
                 doc_td.appendChild(a);

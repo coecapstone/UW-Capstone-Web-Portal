@@ -29,7 +29,7 @@ var modal_uploading_part = document.getElementById("modal_uploading_part");
 var modal_results_part = document.getElementById("modal_results_part");
 var modal_close_btn = document.getElementById("modal_close_btn");
 
-window.onload = function()
+addLoadEvent(function()
 {
     
     initialize_table();
@@ -39,7 +39,7 @@ window.onload = function()
     update_btn_hide_unhide();
     remove_btn_hide_unhide();
     modal_file_upload_btn.disabled = true;
-}
+});
 
 //onlick event for staff overview table
 $('#allBudgets_table tbody').on( 'click', 'tr', function () {

@@ -21,7 +21,7 @@ var staff_table_body = document.getElementById("staff_overview_table_body");
 
 var formVisiblity_table_body = document.getElementById("formVisiblity_table_body");
 
-window.onload = function()
+addLoadEvent(function()
 {
     update_staff_overview_table();
     initialize_table();
@@ -33,7 +33,7 @@ window.onload = function()
     Manage_unit_name_button_hide_unhide_logic();
 
     update_FormVisibility_table();
-}
+});
 
 
 

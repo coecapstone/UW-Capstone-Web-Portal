@@ -167,7 +167,7 @@ function setDocs(name, file_id) {
     second.setAttribute('class', 'col-md-3');
     var a = document.createElement('a');
     a.setAttribute('href', 
-    `https://coe-api.azurewebsites.net/api/downloadAttachment/${request_id}/${name}`);
+    `${baseURL}downloadAttachment/${request_id}/${name}`);
     // a.setAttribute('class', 'mt-2');
     a.innerHTML = name;
     second.appendChild(a);

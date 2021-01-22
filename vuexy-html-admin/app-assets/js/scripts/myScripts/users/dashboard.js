@@ -1,7 +1,7 @@
-window.onload = function()
+addLoadEvent(function()
 {
     update_Dashboard_welcomebar_navigationbar();
-}
+});
 
 function update_Dashboard_welcomebar_navigationbar()
 {

@@ -7,7 +7,7 @@ var feedback = document.getElementById("feedback_input");
 
 var request_id = null;
 
-window.onload = function() {
+addLoadEvent(function() {
     request_id = window.sessionStorage.getItem('RequestID');
     this.console.log(request_id);
 
@@ -28,7 +28,7 @@ window.onload = function() {
 
     updateActionField(requestInfo);
     // changeOrderStatus();
-}
+});
 
 // just for debug
 function changeOrderStatus() {
