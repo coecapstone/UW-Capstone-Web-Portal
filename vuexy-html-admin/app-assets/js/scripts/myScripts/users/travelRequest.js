@@ -430,7 +430,8 @@ function getUserInfo() {
             if (level == "Submitter" || level == "Approver") {
                 type = "subunit";
                 unitID = data.data.SubUnitID;
-            } else if (level == "Fiscal Staff" || level == "Fiscal Administrator") {
+            } else if (level == "Fiscal Staff" || level == "Fiscal Administrator"
+                       || level == "Financial Admin") {
                 type = "unit";
                 unitID = data.data.UnitID;
             }
