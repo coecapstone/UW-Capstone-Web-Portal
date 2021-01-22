@@ -3,7 +3,7 @@ var lineItems = [];
 var formData = new FormData();
 var type = "";
 var unitID = "";
-var user_id = "5e8e45eea148b9004420651f";
+var user_id = window.sessionStorage.getItem("id");
 
 var user_name="";
 var user_uwid="";

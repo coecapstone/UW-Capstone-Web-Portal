@@ -6,7 +6,7 @@ var feedbackBlock = document.getElementById("feedback-block");
 var feedback = document.getElementById("feedback_input");
 
 var request_id = null;
-var user_id = "5e8e45eea148b9004420651f";
+var user_id = window.sessionStorage.getItem("id");
 var userID = null;
 
 // Template POst request Ajax call

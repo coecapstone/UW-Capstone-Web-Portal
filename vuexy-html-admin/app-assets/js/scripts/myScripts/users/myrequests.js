@@ -19,7 +19,7 @@ var user_uwid="";
 var user_email="";
 var user_subunitName="";
 var user_accessLevel="";
-var user_id = "5e8e45eea148b9004420651f";
+var user_id = window.sessionStorage.getItem("id");
 /**
  * Initialize the window
  * Since we cannot get all needed information just from getAllOrders api
