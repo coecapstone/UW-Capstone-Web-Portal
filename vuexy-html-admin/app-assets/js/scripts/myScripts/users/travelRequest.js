@@ -429,11 +429,11 @@ function getBudgetsInfo() {
                 budgets_database.push(data.data[i].budgetNumber);
             }
         } else {
-            //error message
+            console.log("budgets information returned false for unit " + unitID);
         }
     }
     var onFailure = function() {
-        // failure message
+        console.log("budgets information failed for unit " + unitID);
     }
     makeGetRequest("getBudgetsUnderSubUnit/" + unitID, onSuccess, onFailure);
 }
