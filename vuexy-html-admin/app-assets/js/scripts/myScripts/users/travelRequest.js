@@ -434,6 +434,7 @@ function getUserInfo() {
                 type = "unit";
                 unitID = data.data.UnitID;
             }
+            console.log("using type " + type + " with unitID = " + unitID);
             user_name = data.data.userInfo.Name;
             user_uwid=data.data.userInfo.UWID;
             user_email=data.data.userInfo.email;
