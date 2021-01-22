@@ -1,6 +1,5 @@
 // Site-wide configuration
-//const baseURL = "https://uwcoe-api.azurewebsites.net/api/";
-const baseURL = "http://engine.nano.uw.edu/api/";
+const baseURL = "https://uwcoe-api.azurewebsites.net/api/";
 
 /*
  * Simon Willison's addLoadEvent function,
