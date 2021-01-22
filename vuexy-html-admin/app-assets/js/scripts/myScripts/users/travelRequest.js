@@ -418,6 +418,27 @@ $(document).on('click', '#delete',function getAllOrders(){
 });
 
 /*
+    Get budget information
+ */
+function getBudgetsInfo() {
+    var onSuccess = function(data) {
+        if (data.status == true) {
+            // console.log("budgets information is here");
+            // console.log(data.data);
+            for (var i = 0; i < data.data.length; i++) {
+                budgets_database.push(data.data[i].budgetNumber);
+            }
+        } else {
+            //error message
+        }
+    }
+    var onFailure = function() {
+        // failure message
+    }
+    makeGetRequest("getBudgetsUnderSubUnit/" + unitID, onSuccess, onFailure);
+}
+
+/*
     get the user information
 */
 function getUserInfo() {
@@ -618,24 +639,6 @@ $(document).on('click', '#split_with_1_1', function(){
 $(document).on('click', '#split_with_2_2', function(){
     splitWithChanged(2, 2);
 });
-
-function getBudgetsInfo() {
-    var onSuccess = function(data) {
-        if (data.status == true) {
-            // console.log("budgets information is here");
-            // console.log(data.data);
-            for (var i = 0; i < data.data.length; i++) {
-                budgets_database.push(data.data[i].budgetNumber);
-            }
-        } else {
-            //error message
-        }
-    }
-    var onFailure = function() {
-        // failure message
-    }
-    makeGetRequest("getBudgetsUnderSubUnit/" + unitID, onSuccess, onFailure);
-}
 
 function addBudgetData(num) {
     var op = document.createElement('option');
