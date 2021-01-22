@@ -78,7 +78,6 @@ var makeGetRequest = function(url, onSuccess, onFailure) {
 
 addLoadEvent(function() {
     this.getUserInfo();//get user info 
-    this.getBudgetsInfo();//get budget info
 
     //handle budget field
     var budget_select = this.document.getElementById('budget_num_1');
@@ -441,13 +440,18 @@ function getUserInfo() {
             user_email=data.data.userInfo.email;
             user_subunitName=data.data.SubUnitName;
             user_accessLevel=data.data.AccessLevel;
+
+            // Get budget info now that we know the unitID
+            this.getBudgetsInfo();
         } else {
             //error message
+            console.log("user information returned false");
         }
     }
 
     var onFailure = function() {
         // failure message
+        console.log("user information failure");
     }
     makeGetRequest("getuserInformation/" + user_id, onSuccess, onFailure);
 }
