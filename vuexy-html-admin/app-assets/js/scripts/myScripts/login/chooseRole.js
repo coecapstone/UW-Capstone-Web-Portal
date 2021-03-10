@@ -11,7 +11,7 @@ function main()
     console.log(data);
     var approverRoles = data.approver[0];
     var submitter = data.submitter;
-    var fisacalStaff = data.fisacalStaff;
+    var fiscalStaff = data.fiscalStaff;
     var fiscalAdmin =data.fiscalAdmin;
 
     for(var x=0;x<fiscalAdmin.length;x++)
@@ -20,10 +20,10 @@ function main()
         parent_section.appendChild(generate_card(elementID,"bg-gradient-danger","admin","Financial Administrator",fiscalAdmin[x].UnitName,fiscalAdmin[x].UnitID));
     }
 
-    for(var x=0;x<fisacalStaff.length;x++)
+    for(var x=0;x<fiscalStaff.length;x++)
     {
         elementID++;
-        parent_section.appendChild(generate_card(elementID,"bg-gradient-info","staff","Financial Staff",fisacalStaff[x].UnitName,fisacalStaff[x].UnitID));
+        parent_section.appendChild(generate_card(elementID,"bg-gradient-info","staff","Financial Staff",fiscalStaff[x].UnitName,fiscalStaff[x].UnitID));
     }
 
     for(var x=0;x<submitter.length;x++)
