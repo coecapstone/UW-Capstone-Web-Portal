@@ -4,13 +4,10 @@ var table1 = [];
 var table2 = [];
 var formData = new FormData();
 var type = "";
-var unitID = "";
 var user_id = window.sessionStorage.getItem("id");
 var user_name="";
 var user_uwid="";
 var user_email="";
-var user_subunitName="";
-var user_accessLevel="";
 var budgets_database = [];
 
 /******************************************************* BEGIN: Wizard step control ************************************************/
@@ -79,8 +76,7 @@ var makeGetRequest = function(url, onSuccess, onFailure) {
 };
 
 addLoadEvent(function() {
-    this.getUserInfo();
-    //this.getBudgetsInfo();
+    this.getUserAndBudgetInfo();
     var budget_select = this.document.getElementById('budget_num_1');
     var budget_select2 = this.document.getElementById('budget_num_2');
     for (var i = 0; i < this.budgets_database.length; i++) {
@@ -196,7 +192,7 @@ $(document).on('click', '#confirm_item', function uploadFiles_without_HTML_FORMS
        
         alert("Submitted!");
         alert('send data to database');
-        getUserInfo();
+        getUserAndBudgetInfo();
         var formData = new FormData();
 
         //this is the JSON Object we are sending to the server
@@ -445,12 +441,12 @@ $(document).on('click', '#confirm_item', function uploadFiles_without_HTML_FORMS
                 console.log(requestInfo_obj);
                 // transfer data and direct to summary-travelReimbursement.html
                 window.sessionStorage.setItem('orderId',data_obj._id);
-                window.sessionStorage.setItem('user_id',user_id);
-                window.sessionStorage.setItem('user_name',user_name);
-                window.sessionStorage.setItem('user_uwid',user_uwid);
-                window.sessionStorage.setItem('user_email',user_email);
-                window.sessionStorage.setItem('user_subunitName',user_subunitName);
-                window.sessionStorage.setItem('user_AccessLevel',user_accessLevel);
+                //window.sessionStorage.setItem('user_id',user_id);
+                //window.sessionStorage.setItem('user_name',user_name);
+                //window.sessionStorage.setItem('user_uwid',user_uwid);
+                //window.sessionStorage.setItem('user_email',user_email);
+                //window.sessionStorage.setItem('user_subunitName', EngineUI.getSubunitName());
+                //window.sessionStorage.setItem('user_AccessLevel', EngineUI.getLevel());
                 window.sessionStorage.setItem('type',"Travel Reimbursement");
                 window.sessionStorage.setItem('submit_date',$("input[name='submit_date']").val());
                 window.sessionStorage.setItem('status',"Awaiting Approval");
@@ -491,40 +487,76 @@ $(document).on('click', '#confirm_item', function uploadFiles_without_HTML_FORMS
                 window.location.href = "summary-travelReimbursement.html";
             }
         }
-        request.open('POST', baseURL + "uploadOrder/" + type + "/" + unitID);
+	// XXX This line assumes that requests are always made at the submit level.
+	// XXX is that true?
+        request.open('POST', baseURL + "uploadOrder/subunit/" + EngineUI.getSubunitID());
         request.send(formData);
         return true;
         // window.location.href = "../../../html/ltr/users/user-summary.html";
         // window.location.replace("../../../html/ltr/users/user-summary.html");
 });
 
-function getUserInfo() {
+/*
+ * The data struture returned by /api/getUserInfoAndBudgets/:_userID
+ * looks like this:
+ *
+ * "user": {
+ *    "verified_user": false,
+ *    "_id": "5f8732937fc57b003520909b",
+ *    "Name": "Konrad",
+ *    "email": "perseant@uw.edu",
+ *    "UWID": "perseant",
+ *    "profileImage_URL": "",
+ *    "address": null,
+ *    "__v": 0
+ *  },
+ *  "units": {
+ *    "5e8e4a7ea148b90044206522": {
+ *      "name": "test mar11"
+ *    }
+ *  },
+ *  "roles": [
+ *    {
+ *      "type": "unit",
+ *      "unit": "5e8e4a7ea148b90044206522",
+ *      "role": "Financial Administrator"
+ *    }
+ *  ],
+ *  "subunits": [
+ *    {
+ *      "_id": "5ea9bf22c389960044c3ae4d",
+ *      "subUnitName": "Civil and Environmental Engineering",
+ *      "UnitID_ref": "5e8e4a7ea148b90044206522"
+ *    }
+ *  ],
+ *  "submitter_budgets": [
+ *    {
+ *      "budgetNumber": "63-6238",
+ *      "budgetName": "VALLE-HENRIK/ELLEN END",
+ *      "startDate": "3 March, 1980",
+ *      "endDate": "",
+ *      "approvers": [],
+ *      "approvalLogic": ""
+ *    },
+ *   ...
+ */
+function getUserAndBudgetInfo() {
     var onSuccess = function(data) {
         if (data.status == true) {
             console.log("user information is here");
             console.log(data.data);
-            var level = data.data.AccessLevel;
-            // XXX these thould be named constants, not magic string values XXX KES
-            if (level == "Submitter" || level == "Approver") {
-                type = "subunit";
-                unitID = data.data.SubUnitID;
-            } else if (level == "Fiscal Staff" || level == "Fiscal Administrator"
-                       || level == "Financial Admin") {
-                type = "unit";
-                unitID = data.data.UnitID;
-            } else {
-                console.log("UNKNOWN LEVEL: " + level);
-                unitID = data.data.UnitID;
-		if (unitID == null) {
-                  unitID = data.data.SubUnitID;
-		}
+            
+            type = "subunit";
+            user_name = data.data.user.Name;
+            user_uwid=data.data.user.UWID;
+            user_email=data.data.user.email;
+            // XXX what if I have more than one?
+            // XXX Maybe this selection should be stored at login time?
+            user_accessLevel="Submitter";
+
+            for (var i = 0; i < data.data.submitter_budgets.length; i++) {
+                budgets_database.push(data.data.submitter_budgets[i].budgetNumber);
             }
-            user_name = data.data.userInfo.Name;
-            user_uwid=data.data.userInfo.UWID;
-            user_email=data.data.userInfo.email;
-            user_subunitName=data.data.SubUnitName;
-            user_accessLevel=data.data.AccessLevel;
-            getBudgetsInfo();
         } else {
             //error message
             console.log("user information status failure");
@@ -537,8 +569,8 @@ function getUserInfo() {
         console.log("user information FAILED");
     }
 
-    console.log("requesting user information for user_id=" + user_id);
-    makeGetRequest("getuserInformation/" + user_id, onSuccess, onFailure);
+    console.log("requesting user and budget information for user_id=" + user_id);
+    makeGetRequest("getUserInfoAndBudgets", onSuccess, onFailure);
 }
 
 /************************************************ END: Wizard step control *******************************************************/
@@ -589,28 +621,6 @@ $(document).on('click', '#option_project', function() {
 });
 
 /** END: Budgets Controller */
-
-function getBudgetsInfo() {
-    var onSuccess = function(data) {
-        if (data.status == true) {
-            console.log("budgets information is here");
-            console.log(data.data);
-            for (var i = 0; i < data.data.length; i++) {
-                budgets_database.push(data.data[i].budgetNumber);
-            }
-        } else {
-            //error message
-            console.log("budgets information status false");
-            console.log(data);
-        }
-    }
-    var onFailure = function() {
-        // failure message
-        console.log("budgets information FAILED");
-    }
-    console.log("requesting budgets information using user_id " + user_id + ", unitID: " + unitID);
-    makeGetRequest("getBudgetsUnderSubUnit/" + unitID, onSuccess, onFailure);
-}
 
 function addBudgetData(num) {
     var op = document.createElement('option');

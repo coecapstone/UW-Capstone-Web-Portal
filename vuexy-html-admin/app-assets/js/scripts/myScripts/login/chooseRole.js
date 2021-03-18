@@ -111,57 +111,38 @@ function card_click(elementID, cardType)
     {
         var unitName = document.getElementById("unitSubunitname"+elementID).innerHTML;
         var unitID = document.getElementById("unitSubunitID"+elementID).innerHTML;
-        window.sessionStorage.setItem("unitID",unitID);
-        window.sessionStorage.setItem("unitName",unitName);
-        window.sessionStorage.setItem("level","Admin");
+	EngineUI.setUnitID(unitID);
+	EngineUI.setUnitName(unitName);
+	EngineUI.setLevel(EngineUI.LEVEL_ADMIN);
 
         window.location.replace("../Admin/dashboard_admin.html");
-        //window.sessionStorage.setItem("unitName",data.userInfo._id);
     }else if(cardType == "staff")
     {
         var unitName = document.getElementById("unitSubunitname"+elementID).innerHTML;
         var unitID = document.getElementById("unitSubunitID"+elementID).innerHTML;
-        window.sessionStorage.setItem("unitID",unitID);
-        window.sessionStorage.setItem("unitName",unitName);
-        window.sessionStorage.setItem("level","FiscalStaff");
+	EngineUI.setUnitID(unitID);
+	EngineUI.setUnitName(unitName);
+	EngineUI.setLevel(EngineUI.LEVEL_FISCAL_STAFF);
 
         window.location.replace("../buyers/buyer-dashboard.html");
-
     }else if (cardType == "submitter")
     {
         console.log("submitetr clk");
-        var SubunitName = document.getElementById("unitSubunitname"+elementID).innerHTML;
+        var subunitName = document.getElementById("unitSubunitname"+elementID).innerHTML;
         var subunitID = document.getElementById("unitSubunitID"+elementID).innerHTML;
-        window.sessionStorage.setItem("subunitID",subunitID);
-        window.sessionStorage.setItem("subunitName",SubunitName);
-        window.sessionStorage.setItem("level","Submitter");
+	EngineUI.setSubunitID(subunitID);
+	EngineUI.setSubunitName(subunitName);
+	EngineUI.setLevel(EngineUI.LEVEL_SUBMITTER);
 
         window.location.replace("../users/user-dashboard.html");
-
     }else if (cardType == "approver")
     {
-        var SubunitName = document.getElementById("unitSubunitname"+elementID).innerHTML;
+        var subunitName = document.getElementById("unitSubunitname"+elementID).innerHTML;
         var subunitID = document.getElementById("unitSubunitID"+elementID).innerHTML;
-        window.sessionStorage.setItem("subunitID",subunitID);
-        window.sessionStorage.setItem("subunitName",SubunitName);
-        window.sessionStorage.setItem("level","Approver");
+	EngineUI.setSubunitID(subunitID);
+	EngineUI.setSubunitName(subunitName);
+	EngineUI.setLevel(EngineUI.LEVEL_APPROVER);
 
         window.location.replace("../approvers/approver-dashboard.html");
     }
 }
-
-
-/*
-<div class="col-lg-4 col-md-6 col-sm-12">
-<div class="card text-white bg-gradient-success text-center" onclick="console.log(1)">
-    <div class="card-content">
-        <div class="card-body">
-            <img src="../../../app-assets/images/elements/husky.png" alt="element 02" width="150" class="mb-1">
-            <h3  class="card-title text-white">Approver</h3>
-            <p id="unitName1" class="card-text">Electrical and Computer Engineering</p>
-            <p id="unitID1" hidden>123123</p>
-        </div>
-    </div>
-</div>
-</div>
-*/
