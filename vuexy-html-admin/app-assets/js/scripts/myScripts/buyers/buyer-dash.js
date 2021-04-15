@@ -60,7 +60,7 @@ function updateAllRequestsTable() {
             requestsInfo[x].RequestID,
             requestsInfo[x].Requester,
             requestsInfo[x].Type,
-            requestsInfo[x].Subunit,
+            "(unknown)", // requestsInfo[x].Subunit, // XXX this is the error
             requestsInfo[x].Date,
             requestsInfo[x].Status,
             requestsInfo[x].Assigned
