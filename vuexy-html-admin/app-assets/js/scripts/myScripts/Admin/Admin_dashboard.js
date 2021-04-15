@@ -3,34 +3,11 @@ var administrative_staff_table = null;
 
 addLoadEvent(function()
 {
-    //const socket = io.connect('http://localhost:3000');
+    update_left_navigationbar();
     update_Dashboard_welcomebar_navigationbar();
     update_administrativeStaff_table();
     update_subunit_table();
-
-    /*socket.on('connect', function(data) {
-        socket.emit('join', window.sessionStorage.getItem('id'));
-     });
-    socket.on('message', data =>{
-        console.log(data);
-        console.log(data.Message);
-        Handle_notifications(data.Title,data.Message,data.timeStamp,data.Type);
-    });*/
-
 });
-
-/*
-<a class="d-flex justify-content-between" href="javascript:void(0)">
-<div class="media d-flex align-items-start">
-    <div class="media-left"><i class="feather icon-plus-square font-medium-5 primary"></i></div>
-    <div class="media-body">
-        <h6 class="primary media-heading">You have new order!</h6><small class="notification-text"> Amazon Web Services - Standard Order</small>
-    </div>
-    <small>
-        <time class="media-meta" datetime="2015-06-11T18:29:20+08:00">9 hours ago</time>
-    </small>
-</div>
-</a>*/
 
 function getMonth_inName(monthNum)
 {
@@ -122,6 +99,15 @@ function Handle_notifications(Title,content,timeStamp,type)
 
 }
 
+
+function update_left_navigationbar()
+{
+    // XXX this needs to come from a new user role, not be hard-coded in this way
+    if (window.sessionStorage.getItem("uwid") == "perseant"
+	|| window.sessionStorage.getItem("uwid") == "tjhanson") {
+        document.getElementById("manage_units").style.display="list-item";
+    }
+}
 
 function update_Dashboard_welcomebar_navigationbar()
 {

@@ -9,7 +9,7 @@
     <meta name="description" content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
-    <title>Subunits</title>
+    <title>Units</title>
     <link rel="apple-touch-icon" href="../../../app-assets/images/ico/apple-icon-120.png">
     <link rel="shortcut icon" type="image/x-icon" href="../../../app-assets/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
@@ -165,7 +165,7 @@
                 <li class=" navigation-header"><span>Manage</span></li>
 		<li id="manage_units" style="display: none" class=" nav-item"><a href="manage_units.html"><i class="feather icon-plus-square"></i><span class="menu-title" data-i18n="Manage Units">Manage Units</span></a></li>
                 <li class="nav-item"><a href="manage_myUnits.html"><i class="feather icon-square"></i><span class="menu-title" data-i18n="UserSettings">My Unit</span></a></li>
-                <li class=" active"><a href="manage_subunits.html"><i class="feather icon-layers"></i><span class="menu-title" data-i18n="Notifications">Subunits</span></a></li>
+                <li class=" active"><a href="manage_units.html"><i class="feather icon-layers"></i><span class="menu-title" data-i18n="Notifications">Units</span></a></li>
                 <li class=" nav-item"><a href="allBudgets.html"><i class="feather icon-clipboard"></i><span class="menu-title" data-i18n="Logout">All Budgets</span></a></li>
 
 				<li class=" navigation-header"><span>User</span></li>
@@ -198,7 +198,7 @@
                 <div class="content-header-left col-md-9 col-12 mb-2">
                     <div class="row breadcrumbs-top">
                         <div class="col-12">
-                            <h2 class="content-header-title float-left mb-0">Manage Subunits</h2>
+                            <h2 class="content-header-title float-left mb-0">Manage Units</h2>
                         </div>
                     </div>
                 </div>
@@ -213,7 +213,7 @@
                         <div class="col-md-5 col-12" >
                             <div class="card h-100" >
                                 <div class="card-header">
-                                    <h4 class="mb-0"><b>Subunit Overview</b></h4>
+                                    <h4 class="mb-0"><b>Unit Overview</b></h4>
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body card-dashboard">
@@ -221,14 +221,14 @@
                                     <div class="row" style="margin-left: 10px; margin-right:10px;">
                                         <div class="col-md-12 col-12">
                                             <div class="table-responsive">
-                                                <table id="subunit_names_table" class="table" style="cursor: pointer;">
+                                                <table id="unit_names_table" class="table" style="cursor: pointer;">
                                                     <thead>
                                                         <tr>
                                                             <th>_id</th>
                                                             <th>Name</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody id="subunit_names_table_body">
+                                                    <tbody id="unit_names_table_body">
           
     
                                                     </tbody>
@@ -240,14 +240,14 @@
                                     <div class="row" style="margin-left: 10px; margin-right:10px; padding-top: 50px;">
                                         <div class="col-md-12 col-12">
                                             <div class="form-group">
-                                                <label for="first-name-icon">Subunit Name</label>
+                                                <label for="first-name-icon">Unit Name</label>
                                                 <div class="position-relative has-icon-left">
-                                                    <input type="text" id="subUnit_name_input" class="form-control" name="fname-icon" placeholder="Subunit Name" onkeyup="add_btn_hide_unhide_logic_Subunit_overview(); update_btn_hide_unhide_logic_Subunit_overview();">
+                                                    <input type="text" id="unit_name_input" class="form-control" name="fname-icon" placeholder="Unit Name" onkeyup="add_btn_hide_unhide_logic_Unit_overview(); update_btn_hide_unhide_logic_Unit_overview();">
                                                     <div class="form-control-position">
                                                         <i class="feather icon-layers"></i>
                                                     </div>
                                                 </div>
-                                                <label id="subUnit_name_input_error" style="color: #e74c3c;"></label>
+                                                <label id="unit_name_input_error" style="color: #e74c3c;"></label>
                                             </div>
 
                                             
@@ -256,270 +256,14 @@
                                     </div>
                                     <!--End of Input part-->   
                                     <div id="buttons_staff_overview" style="margin-right: 10px; padding-top: 30px;">
-                                        <button type="button" class="btn btn-primary mr-1 mb-1 pull-right" onclick="clear_Information_Subunit_overview();">Clear</button>
-                                        <button id="ManageSubUnit_removeBtn" type="button" class="btn btn-primary mr-1 mb-1 pull-right" onclick="remove_SubUnit_SubUnit_overview();">Remove</button>
-                                        <button id="ManageSubUnit_updateBtn" type="button" class="btn btn-primary mr-1 mb-1 pull-right" onclick="update_SubUnit_SubUnit_overview();">Update</button>
-                                        <button id="ManageSubUnit_addBtn" type="button" class="btn btn-primary mr-1 mb-1 pull-right" onclick="add_SubUnit_SubUnit_overview();">Add</button>
+                                        <button type="button" class="btn btn-primary mr-1 mb-1 pull-right" onclick="clear_Information_Unit_overview();">Clear</button>
+                                        <button id="ManageUnit_removeBtn" type="button" class="btn btn-primary mr-1 mb-1 pull-right" onclick="remove_Unit_Unit_overview();">Remove</button>
+                                        <button id="ManageUnit_updateBtn" type="button" class="btn btn-primary mr-1 mb-1 pull-right" onclick="update_Unit_Unit_overview();">Update</button>
+                                        <button id="ManageUnit_addBtn" type="button" class="btn btn-primary mr-1 mb-1 pull-right" onclick="add_Unit_Unit_overview();">Add</button>
                                     </div>                                 
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-md-7 col-12" >
-                            <div class="card h-100" >
-                                <div class="card-header">
-                                    <h4 class="mb-0"><b>Submitters Overview</b></h4>
-                                </div>
-                                <div class="card-content">
-                                    <div class="card-body card-dashboard">
-                                    </div>
-                                    <div class="row" style="margin-left: 10px; margin-right:10px;">
-                                        <div class="col-md-12 col-12">
-                                            <div class="table-responsive">
-                                                <table id="submitters_overview_table" class="table" style="cursor: pointer;">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>_id</th>
-                                                            <th></th>
-                                                            <th>Name</th>
-                                                            <th>UW ID</th>
-                                                            <th>Email</th>
-                                                            <th>Verified User</th>
-                                                            <th>URL</th>
-
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="submitters_overview_table_body">
-          
-    
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--Input part-->
-                                    <div class="row" style="margin-left: 10px; margin-right:10px; padding-top: 50px;">
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group">
-                                                <label for="first-name-icon">Name</label>
-                                                <div class="position-relative has-icon-left">
-                                                    <input type="text" id="submitters_name_input" class="form-control" name="fname-icon" placeholder="Name" onkeyup="update_btn_hide_unhide_logic_Submitter_overview();">
-                                                    <div class="form-control-position">
-                                                        <i class="feather icon-user"></i>
-                                                    </div>
-                                                </div>
-                                                <label id="submitters_name_input_error" style="color: #e74c3c;"></label>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="first-name-icon">Email</label>
-                                                <div class="position-relative has-icon-left">
-                                                    <input type="text" id="submitter_email_input" class="form-control" name="fname-icon" placeholder="Email" onkeyup="update_btn_hide_unhide_logic_Submitter_overview(); add_btn_hide_unhide_logic_Submitter_overview();">
-                                                    <div class="form-control-position">
-                                                        <i class="feather icon-mail"></i>
-                                                    </div>
-                                                </div>
-                                                <label id="submitter_email_input_error" style="color: #e74c3c;"></label>
-                                            </div>
-
-                                            
-
-                                        </div>
-                                        
-                                        <div class="col-md-6 col-12">
-
-                                            <div class="form-group">
-                                                <label for="first-name-icon">UW ID</label>
-                                                <div class="position-relative has-icon-left">
-                                                    <input type="text" id="submitter_UWID_input" class="form-control" name="fname-icon" placeholder="UW ID" onkeyup="update_btn_hide_unhide_logic_Submitter_overview(); add_btn_hide_unhide_logic_Submitter_overview();">
-                                                    <div class="form-control-position">
-                                                        <i class="feather icon-hash"></i>
-                                                    </div>
-                                                </div>
-                                                <label id="submitter_UWID_input_error" style="color: #e74c3c;"></label>
-                                            </div>
-                                      
-                                        </div>
-                                    </div>
-                                    <!--End of Input part-->   
-                                    <div id="buttons_staff_overview" style="margin-right: 10px; padding-top: 30px;">
-                                        <button id="submitter_clearBtn" type="button" class="btn btn-primary mr-1 mb-1 pull-right" onclick="clear_Infomraiton_Submitter_overview();">Clear</button>
-                                        <button id="submitter_removeBtn" type="button" class="btn btn-primary mr-1 mb-1 pull-right" onclick="remove_user_Submitter_overview();">Remove</button>
-                                        <button id="submitter_updateBtn" type="button" class="btn btn-primary mr-1 mb-1 pull-right" onclick="update_user_Submitter_overview();">Update</button>
-                                        <button id="submitter_addBtn" type="button" class="btn btn-primary mr-1 mb-1 pull-right" onclick="add_user_Submitter_overview();">Add</button>
-                                    </div>       
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-
-								
-					<div class="row" style="padding-top: 20px;">
-                        <div class="col-md-5 col-12" >
-                            <div class="card h-100" >
-                                <div class="card-header">
-                                    <h4 class="mb-0"><b>Budget Overview</b></h4>
-                                </div>
-                                <div class="card-content">
-                                    <div class="card-body card-dashboard">
-                                    </div>
-                                    <div class="row" style="margin-left: 10px; margin-right:10px;">
-                                        <div class="col-md-12 col-12">
-                                            <div class="table-responsive">
-                                                <table id="budget_overview_table" class="table" style="cursor: pointer;">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Budget Number</th>
-                                                            <th>Budget Name</th>
-                                                            <th>Start Date</th>
-                                                            <th>End Date</th>
-                                                            <th>Approval Logic</th>
-                                                            <th>Approval Logic Status</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="budget_overview_table_body">
-          
-    
-                                                    </tbody>
-                                                </table>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div id="buttons_staff_overview" style="margin-right: 10px; padding-top: 30px;">
-                                        <button id="budget_removeBtn" type="button" class="btn btn-primary mr-1 mb-1 pull-right" onclick="RemoveBudget_button();">Remove budget</button>
-                                        <button id="budget_addBtn" type="button" class="btn btn-primary mr-1 mb-1 pull-right" data-toggle="modal" data-target="#large" onclick="addNewBudgets_button();">Add new budget</button>
-                                    </div>     
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-7 col-12" >
-                            <div class="card h-100" >
-                                <div class="card-header">
-                                    <h4 class="mb-0"><b>Approvers Overview</b></h4>
-                                </div>
-                                <div class="card-content">
-                                    <div class="card-body card-dashboard">
-                                    </div>
-                                    <div class="row" style="margin-left: 10px; margin-right:10px;">
-                                        <div class="col-md-12 col-12">
-                                            <div class="table-responsive">
-                                                <table id="approvers_overview_table" class="table" style="cursor: pointer;">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>_id</th>
-                                                            <th></th>
-                                                            <th>Name</th>
-                                                            <th>UW ID</th>
-                                                            <th>Email</th>
-                                                            <th>Verified User</th>
-                                                            <th>Limit ($)</th>
-                                                            <th>Allowed Requests</th>
-                                                            <th>PI</th>
-                                                            <th></th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="approvers_overview_table_body">
-          
-    
-                                                    </tbody>
-                                                </table>
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                     <!--Input part-->
-                                    <div class="row" style="margin-left: 10px; margin-right:10px; padding-top: 50px;">
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group">
-                                                <label for="first-name-icon">Name</label>
-                                                <div class="position-relative has-icon-left">
-                                                    <input type="text" id="approver_name_input" class="form-control" name="fname-icon" placeholder="Subunit Name" onkeyup="update_btn_hide_unhide_logic_Approver_overview();">
-                                                    <div class="form-control-position">
-                                                        <i class="feather icon-user"></i>
-                                                    </div>
-                                                </div>
-                                                <label id="approver_name_input_error" style="color: #e74c3c;"></label>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="first-name-icon">Email</label>
-                                                <div class="position-relative has-icon-left">
-                                                    <input type="text" id="approver_email_input" class="form-control" name="fname-icon" placeholder="Email" onkeyup="add_btn_hide_unhide_logic_Approvers_overview();update_btn_hide_unhide_logic_Approver_overview();">
-                                                    <div class="form-control-position">
-                                                        <i class="feather icon-mail"></i>
-                                                    </div>
-                                                </div>
-                                                <label id="approver_email_input_error" style="color: #e74c3c;"></label>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="location1">PI</label>
-                                                <select class="custom-select form-control" id="approver_PI_input" name="accessLevel" onchange="update_btn_hide_unhide_logic_Approver_overview();">
-                                                    <option value="empty"></option>
-                                                    <option value="yes">Yes</option>
-                                                    <option value="no">No</option>
-                                                </select>   
-                                                <label id="approver_PI_input_error" style="color: #e74c3c;"></label>
-                                            </div>
-
-                                            
-
-                                        </div>
-                    
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group">
-                                                <label for="first-name-icon">UW ID</label>
-                                                <div class="position-relative has-icon-left">
-                                                    <input type="text" id="approver_UWID_input" class="form-control" name="fname-icon" placeholder="UW ID" onkeyup="add_btn_hide_unhide_logic_Approvers_overview();update_btn_hide_unhide_logic_Approver_overview();">
-                                                    <div class="form-control-position">
-                                                        <i class="feather icon-hash"></i>
-                                                    </div>
-                                                </div>
-                                                <label id="approver_UWID_input_error" style="color: #e74c3c;"></label>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="first-name-icon">Limit ($)</label>
-                                                <div class="position-relative has-icon-left">
-                                                    <input type="text" id="approver_limit_input" class="form-control" name="fname-icon" placeholder="Limit (Leave empty for no limit)" onkeyup="update_btn_hide_unhide_logic_Approver_overview();">
-                                                    <div class="form-control-position">
-                                                        <i class="feather icon-credit-card"></i>
-                                                    </div>
-                                                </div>
-                                                <label id="approver_limit_input_error" style="color: #e74c3c;"></label>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="first-name-icon">Allowed Requests</label>
-                                                <select class="select2 form-control" multiple="multiple" id="formAllowed_selectBox" onchange="update_btn_hide_unhide_logic_Approver_overview();">
-
-                                                </select>
-                                                <label id="approver_allowedRequests_input_error" style="color: #e74c3c;"></label>
-                                            </div>
-                                      
-                                      
-                                        </div>
-                                    </div>
-                                    <!--End of Input part-->   
-                                    <div id="buttons_staff_overview" style="margin-right: 10px; padding-top: 30px;">
-                                        <button id="approvers_clearBtn" type="button" class="btn btn-primary mr-1 mb-1 pull-right" onclick="clear_Infomraiton_Approver_overview();">Clear</button>
-                                        <button id="approvers_removeBtn" type="button" class="btn btn-primary mr-1 mb-1 pull-right" onclick="remove_user_Approver_overview();">Remove</button>
-                                        <button id="approvers_updateBtn" type="button" class="btn btn-primary mr-1 mb-1 pull-right" onclick="update_user_Approver_overview();">Update</button>
-                                        <button id="approvers_addBtn" type="button" class="btn btn-primary mr-1 mb-1 pull-right" onclick="add_user_Approver_overview();">Add</button>
-                                    </div>                
-
-                                </div>
-                            </div>
-                        </div>
-
-					</div>
-
-  
                                         
                 </section>
                 <!-- Dashboard Ecommerce ends -->
@@ -571,7 +315,7 @@
 
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button  type="button" class="btn btn-primary" id="updateSubUnit_with_budgets_btn_"  onclick="updateSubUnit_with_budgets();">Update Subunit with Budgets</button>
+                                                                    <button  type="button" class="btn btn-primary" id="updateUnit_with_budgets_btn_"  onclick="updateUnit_with_budgets();">Update Unit with Budgets</button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -713,7 +457,7 @@
     <script src="../../../app-assets/js/scripts/myScripts/util.js"></script>
     <script src="../../../app-assets/js/scripts/myScripts/connections/connections.js"></script>
     <script src="../../../app-assets/js/scripts/myScripts/Admin/navigation_handler.js"></script>
-    <script src="../../../app-assets/js/scripts/myScripts/Admin/manage_subunits.js"></script>
+    <script src="../../../app-assets/js/scripts/myScripts/Admin/manage_units.js"></script>
 
     <!--End of My Scripts-->
 
