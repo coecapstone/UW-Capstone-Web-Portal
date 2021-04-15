@@ -77,7 +77,7 @@ var makeGetRequest = function(url, onSuccess, onFailure) {
 };
 
 addLoadEvent(function() {
-    this.getUserInfo();//get user info 
+    this.getUserAndBudgetInfo();//get user info 
 
     //handle budget field
     var budget_select = this.document.getElementById('budget_num_1');
@@ -417,67 +417,43 @@ $(document).on('click', '#delete',function getAllOrders(){
     makeGetRequest("getOrders/5e8e4bcaa148b90044206526",onSuccess,onFaliure);
 });
 
-/*
-    Get budget information
- */
-function getBudgetsInfo() {
-    var onSuccess = function(data) {
-        if (data.status == true) {
-            console.log("budgets information is here");
-            console.log(data.data);
-            for (var i = 0; i < data.data.length; i++) {
-                budgets_database.push(data.data[i].budgetNumber);
-            }
-        } else {
-            console.log("budgets information returned false for unit " + unitID);
-        }
-    }
-    var onFailure = function() {
-        console.log("budgets information failed for unit " + unitID);
-    }
-    makeGetRequest("getBudgetsUnderSubUnit/" + unitID, onSuccess, onFailure);
-}
 
 /*
     get the user information
 */
-function getUserInfo() {
+
+function getUserAndBudgetInfo() {
     var onSuccess = function(data) {
         if (data.status == true) {
             console.log("user information is here");
             console.log(data.data);
-            var level = data.data.AccessLevel;
-            if (level == "Submitter" || level == "Approver") {
-                type = "subunit";
-                unitID = data.data.SubUnitID;
-            } else if (level == "Fiscal Staff" || level == "Fiscal Administrator"
-                       || level == "Financial Admin") {
-                type = "unit";
-                unitID = data.data.UnitID;
-            }
-            console.log("using type " + type + " with unitID = " + unitID);
-            user_name = data.data.userInfo.Name;
-            user_uwid=data.data.userInfo.UWID;
-            user_email=data.data.userInfo.email;
-            user_subunitName=data.data.SubUnitName;
-            user_accessLevel=data.data.AccessLevel;
+            
+            type = "subunit";
+            user_name = data.data.user.Name;
+            user_uwid=data.data.user.UWID;
+            user_email=data.data.user.email;
+            // XXX what if I have more than one?
+            // XXX Maybe this selection should be stored at login time?
+            user_accessLevel="Submitter";
 
-            // Get budget info now that we know the unitID
-            getBudgetsInfo();
+            for (var i = 0; i < data.data.submitter_budgets.length; i++) {
+                budgets_database.push(data.data.submitter_budgets[i].budgetNumber);
+            }
         } else {
             //error message
-            console.log("user information returned false");
+            console.log("user information status failure");
+            console.log(data);
         }
     }
 
     var onFailure = function() {
         // failure message
-        console.log("user information failure");
+        console.log("user information FAILED");
     }
-    makeGetRequest("getuserInformation/" + user_id, onSuccess, onFailure);
+
+    console.log("requesting user and budget information for user_id=" + user_id);
+    makeGetRequest("getUserInfoAndBudgets", onSuccess, onFailure);
 }
-
-
 
 /************************************************ END: Wizard step control *******************************************************/
 

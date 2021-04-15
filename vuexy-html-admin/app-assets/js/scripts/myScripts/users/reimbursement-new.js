@@ -213,9 +213,11 @@ $(".steps-validation").validate({
  * Get user information and budget information when the page loading
  * Set global variables
  */
-window.addEventListener('load', function() {
-    this.getUserInfo();
-    this.getBudgetsInfo();
+addLoadEvent(function() {
+    //this.getUserInfo();
+    //this.getBudgetsInfo();
+    this.getUserAndBudgetInfo();
+    
     // this.console.log(this.budgets_database);
     // Initialize the budget select box
     var budget_select = this.document.getElementById('budget_num_1_1');
@@ -451,3 +453,36 @@ function updateRequest(request_id) {
 
 
 /***************************************************** END: Form Control **********************************************************/
+
+function getUserAndBudgetInfo() {
+    var onSuccess = function(data) {
+        if (data.status == true) {
+            console.log("user information is here");
+            console.log(data.data);
+            
+            type = "subunit";
+            user_name = data.data.user.Name;
+            user_uwid=data.data.user.UWID;
+            user_email=data.data.user.email;
+            // XXX what if I have more than one?
+            // XXX Maybe this selection should be stored at login time?
+            user_accessLevel="Submitter";
+
+            for (var i = 0; i < data.data.submitter_budgets.length; i++) {
+                budgets_database.push(data.data.submitter_budgets[i].budgetNumber);
+            }
+        } else {
+            //error message
+            console.log("user information status failure");
+            console.log(data);
+        }
+    }
+
+    var onFailure = function() {
+        // failure message
+        console.log("user information FAILED");
+    }
+
+    console.log("requesting user and budget information for user_id=" + user_id);
+    makeGetRequest("getUserInfoAndBudgets", onSuccess, onFailure);
+}

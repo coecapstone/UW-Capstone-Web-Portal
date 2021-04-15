@@ -197,8 +197,7 @@ addLoadEvent(function() {
         var addrInput = document.getElementById('mail-addr');
         addrInput.setAttribute('class', 'visible');
     }
-    this.getUserInfo();
-    this.getBudgetsInfo();
+    this.getUserAndBudgetInfo();
     // Initialize the budget select box
     var budget_select = this.document.getElementById('budget_num_1_1');
     for (var i = 0; i < this.budgets_database.length; i++) {
@@ -231,38 +230,38 @@ function genAddrCountry(content) {
     return p;
 }
 
-/**
- * Get the user information from database
- * @param {string} type global variable, track the type (unit or subunit) which will be used in upload route
- * @param {string} unitID global variable, track the unit or subunit id, also need in upload route
- */
-function getUserInfo() {
+function getUserAndBudgetInfo() {
     var onSuccess = function(data) {
         if (data.status == true) {
             console.log("user information is here");
             console.log(data.data);
-            var level = data.data.AccessLevel;
-            if (level == "Submitter" || level == "Approver") {
-                type = "subunit";
-                unit_id = data.data.SubUnitID;
-            } else if (level == "Fiscal Staff" || level == "Fiscal Administrator") {
-                type = "unit";
-                unit_id = data.data.UnitID;
-            }
             
+            type = "subunit";
+            user_name = data.data.user.Name;
+            user_uwid=data.data.user.UWID;
+            user_email=data.data.user.email;
+            // XXX what if I have more than one?
+            // XXX Maybe this selection should be stored at login time?
+            user_accessLevel="Submitter";
+
+            for (var i = 0; i < data.data.submitter_budgets.length; i++) {
+                budgets_database.push(data.data.submitter_budgets[i].budgetNumber);
+            }
         } else {
             //error message
+            console.log("user information status failure");
+            console.log(data);
         }
     }
 
     var onFailure = function() {
         // failure message
+        console.log("user information FAILED");
     }
 
-    makeGetRequest("getuserInformation/" + user_id, onSuccess, onFailure);
+    console.log("requesting user and budget information for user_id=" + user_id);
+    makeGetRequest("getUserInfoAndBudgets", onSuccess, onFailure);
 }
-
-
 
 /************ BEGIIN:  Step1 & Step2 *****************/
 
@@ -493,3 +492,4 @@ function updateRequest(request_id) {
 
 
 /***************************************************** END: Form Control **********************************************************/
+
