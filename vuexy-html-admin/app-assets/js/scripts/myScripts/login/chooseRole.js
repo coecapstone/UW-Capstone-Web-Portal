@@ -18,6 +18,7 @@ function main()
     {
         elementID++;
         parent_section.appendChild(generate_card(elementID,"bg-gradient-danger","admin","Financial Administrator",fiscalAdmin[x].UnitName,fiscalAdmin[x].UnitID));
+        parent_section.appendChild(generate_card(elementID,"bg-gradient-danger","staff","Financial Staff",fiscalAdmin[x].UnitName,fiscalAdmin[x].UnitID));
     }
 
     for(var x=0;x<fiscalStaff.length;x++)
