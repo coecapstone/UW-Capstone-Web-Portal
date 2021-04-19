@@ -1,9 +1,7 @@
 var administrative_staff_table = null;
 
-
 addLoadEvent(function()
 {
-    update_left_navigationbar();
     update_Dashboard_welcomebar_navigationbar();
     update_administrativeStaff_table();
     update_subunit_table();
@@ -97,16 +95,6 @@ function Handle_notifications(Title,content,timeStamp,type)
     else
         notification_num_span.innerHTML = (parseInt(notification_num_span.innerHTML)+1).toString(); 
 
-}
-
-
-function update_left_navigationbar()
-{
-    // XXX this needs to come from a new user role, not be hard-coded in this way
-    if (window.sessionStorage.getItem("uwid") == "perseant"
-	|| window.sessionStorage.getItem("uwid") == "tjhanson") {
-        document.getElementById("manage_units").style.display="list-item";
-    }
 }
 
 function update_Dashboard_welcomebar_navigationbar()
