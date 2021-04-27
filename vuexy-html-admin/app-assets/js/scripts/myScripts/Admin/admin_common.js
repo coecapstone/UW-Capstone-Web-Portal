@@ -17,20 +17,6 @@ console.log("uwid = " + trueName);
 }
 
 /*
- * XXX The decision as to whether a user is a super-user
- * XXX needs to come from a new user role, not be hard-coded in this way.
- */
-function canImpersonate()
-{
-    var trueName = window.sessionStorage.getItem("true_uwnetid");
-console.log("trueName = " + trueName);
-    if (trueName != "perseant" && trueName != "yangx38" && trueName != "xiyueyao" && trueName != "ab32") {
-        return false;
-    }
-    return true;
-}
-
-/*
  * If the authenticated user is a super-user, show the "manage units" control
  * and the "impersonate a user" control.
  */
@@ -43,9 +29,6 @@ function update_left_navigationbar()
 	
 	if (document.getElementById("manage_units") && canAddUnits()) {
             document.getElementById("manage_units").style.display="list-item";
-	}
-	if (document.getElementById("impersonate") && canImpersonate()) {
-            document.getElementById("impersonate").style.display="list-item";
 	}
     }
     

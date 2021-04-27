@@ -1,12 +1,21 @@
-
 var parent_section = document.getElementById("parentRow");
 var data = JSON.parse(window.sessionStorage.getItem('infomation'));
 main();
 
+// Depending on my NetID, look up whether I can impersonate.  If I can, add a card for that too.
+if (true) {
+makePostRequest("whoami", {}, function(data) {
+        window.sessionStorage.setItem('uwnetid', data.data.uwnetid);
+        window.sessionStorage.setItem('true_uwnetid', data.data.true_uwnetid);
+	if (EngineUI.canImpersonate()) {	
+		parent_section.appendChild(generate_impersonate_card("bg-gradient-warning"));
+	}
+}, function() { });
+}
+
 function main()
 {
     var elementID= 0;
-
     
     console.log(data);
     var approverRoles = data.approver[0];
@@ -39,9 +48,46 @@ function main()
         elementID++;
         parent_section.appendChild(generate_card(elementID,"bg-gradient-primary","approver","Approver",approverRoles[x].SubunitName,approverRoles[x].SubunitID));
     }
-        
+}
 
+function generate_impersonate_card(cardColor) {
+    var parent_div = document.createElement('div');
+    parent_div.setAttribute('class', 'col-lg-4 col-md-6 col-sm-12');
 
+    var div_main_card = document.createElement('div');
+    div_main_card.setAttribute('class',`card text-white ${cardColor} text-center`);
+    div_main_card.setAttribute('onclick','window.location.replace("/UW-Capstone-Web-Portal/vuexy-html-admin/html/ltr/Admin/impersonate.html")');
+
+    var card_content = document.createElement('div');
+    card_content.setAttribute('class','card-content')
+
+    var card_body = document.createElement('div');
+    card_body.setAttribute('class','card-body');
+
+    var imageTag = document.createElement('img');
+    imageTag.setAttribute('src','../../../app-assets/images/elements/husky.png');
+    imageTag.setAttribute('alt','Husky');
+    imageTag.setAttribute('width','150');
+    imageTag.setAttribute('class','mb-1');
+
+    var card_title = document.createElement('h3');
+    card_title.setAttribute('class','card-title text-white');
+    card_title.innerHTML = "Impersonate another User";
+
+    var unitSubunit_name = document.createElement('p');
+    unitSubunit_name.setAttribute('class',`card-text`);
+    unitSubunit_name.innerHTML = "Currently " + window.sessionStorage.getItem('uwnetid');
+
+    card_body.appendChild(imageTag);
+    card_body.appendChild(card_title);
+    card_body.appendChild(unitSubunit_name);
+
+    card_content.appendChild(card_body);
+    div_main_card.appendChild(card_content);
+
+    parent_div.appendChild(div_main_card);
+
+    return parent_div;
 }
 
 function generate_card(ElementID, cardColor,cardType, role, unit_subUnit_name,unit_subunit_ID)
@@ -92,8 +138,6 @@ function generate_card(ElementID, cardColor,cardType, role, unit_subUnit_name,un
 
 
     return parent_div;
-
-
 }
 
 function card_click(elementID, cardType)
