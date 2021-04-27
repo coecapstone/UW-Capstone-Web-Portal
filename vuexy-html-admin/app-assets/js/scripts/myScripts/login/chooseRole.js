@@ -76,7 +76,7 @@ function generate_impersonate_card(cardColor) {
 
     var unitSubunit_name = document.createElement('p');
     unitSubunit_name.setAttribute('class',`card-text`);
-    unitSubunit_name.innerHTML = "Currently " + window.sessionStorage.getItem('uwnetid');
+    unitSubunit_name.innerHTML = "Currently <em>" + window.sessionStorage.getItem('uwnetid') + "</em>";
 
     card_body.appendChild(imageTag);
     card_body.appendChild(card_title);
