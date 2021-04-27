@@ -13,7 +13,6 @@
         var onSuccessKnowingNetid = function(data) {
             var onSuccess = function(data) {
                 if (data.status) {
-                    window.sessionStorage.clear();
                     console.log(data);
                     window.sessionStorage.setItem('infomation',JSON.stringify(data.data));
     
@@ -41,6 +40,9 @@
             };
 
             uwid = data.data.uwnetid;
+            window.sessionStorage.clear();
+            window.sessionStorage.setItem('uwnetid', data.data.uwnetid);
+            window.sessionStorage.setItem('true_uwnetid', data.data.true_uwnetid);
             makeGetRequest("login/" + uwid, onSuccess, onFaliure);
         }
 

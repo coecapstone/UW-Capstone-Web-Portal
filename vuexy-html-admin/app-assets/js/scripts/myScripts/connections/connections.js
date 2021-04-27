@@ -1,3 +1,22 @@
+// Busy indicator that displays whenever AJAX calls are active
+var ajaxActiveCallCount = 0;
+$.ajaxSetup({
+    beforeSend:function(){
+        // show animation - if it exists
+        if (!document.getElementById("loading"))
+            return;
+        $("#loading").show();
+        ++ajaxActiveCallCount;
+    },
+    complete:function(){
+        // hide animation, if it exists
+        if (!document.getElementById("loading"))
+            return;
+	if (--ajaxActiveCallCount == 0)
+       	    $("#loading").hide();
+    }
+});
+
 // Template POst request Ajax call
 var makePostRequest = function(url, data, onSuccess, onFailure) {
     $.ajax({

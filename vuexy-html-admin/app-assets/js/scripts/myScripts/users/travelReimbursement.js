@@ -190,8 +190,6 @@ $(document).on('click', '#confirm_item', function uploadFiles_without_HTML_FORMS
         }
         //---------------------------------------------------------------------------------------------------------------------------------
        
-        alert("Submitted!");
-        alert('send data to database');
         getUserAndBudgetInfo();
         var formData = new FormData();
 
