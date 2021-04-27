@@ -42,7 +42,7 @@ function updateAllRequestsTable() {
             requestsInfo[x].RequestID,
             requestsInfo[x].Requester,
             requestsInfo[x].Type,
-            requestsInfo[x].Subunit,
+            (requestsInfo[x].Subunit ? requestsInfo[x].Subunit : "(unknown)"),
             requestsInfo[x].Date,
             requestsInfo[x].Status
         ]).draw();
