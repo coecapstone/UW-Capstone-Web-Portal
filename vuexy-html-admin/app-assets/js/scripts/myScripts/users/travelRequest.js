@@ -375,7 +375,7 @@ $(document).on('click', '#confirm_item', function uploadFiles_without_HTML_FORMS
                 window.location.href = "summary.html";
             }
         }
-        request.open('POST', baseURL + "uploadOrder/" + type + "/" + unitID);
+        request.open('POST', baseURL + "uploadOrder/subunit/" + EngineUI.getSubunitID()); // XXX always subunit requests?
         request.send(formData);
         return true;
 });

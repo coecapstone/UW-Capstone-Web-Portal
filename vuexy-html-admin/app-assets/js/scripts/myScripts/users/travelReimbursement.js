@@ -486,8 +486,7 @@ $(document).on('click', '#confirm_item', function uploadFiles_without_HTML_FORMS
             }
         }
 	// XXX This line assumes that requests are always made at the submit level.
-	// XXX is that true?
-        request.open('POST', baseURL + "uploadOrder/subunit/" + EngineUI.getSubunitID());
+        request.open('POST', baseURL + "uploadOrder/subunit/" + EngineUI.getSubunitID()); // XXX always subunit requests?
         request.send(formData);
         return true;
         // window.location.href = "../../../html/ltr/users/user-summary.html";

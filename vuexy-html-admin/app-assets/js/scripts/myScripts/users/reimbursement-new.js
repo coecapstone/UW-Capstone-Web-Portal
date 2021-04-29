@@ -388,7 +388,7 @@ function uploadRequest() {
             window.location.href = "../../../html/ltr/users/user-request-detailpage.html";
         }
     }
-    request.open('POST', baseURL + "uploadOrder/" + type + "/" + unit_id);
+    request.open('POST', baseURL + "uploadOrder/subunit/" + EngineUI.getSubunitID()); // XXX always subunit requests?
     request.send(formData);
 }
 
