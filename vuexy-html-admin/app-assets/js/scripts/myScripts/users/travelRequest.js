@@ -188,8 +188,6 @@ $(document).on('click', '#confirm_item', function uploadFiles_without_HTML_FORMS
         }
         //-------------- budget validation end ------------------------------------------------------------------------------------------
 
-        alert("Submitted!");
-        alert('send data to database');
         var formData = new FormData();
 
         //this is the JSON Object we are sending to the server
@@ -318,7 +316,7 @@ $(document).on('click', '#confirm_item', function uploadFiles_without_HTML_FORMS
         //this function will get the response from the server after we upload the order
         request.onreadystatechange = function() {
             console.log("Request info is here:");
-            if (request.readyState == 4) {
+            if (request.readyState == XMLHttpRequest.DONE) {
                 console.log(request.response);
                 // show it in the console
                 const response_obj = JSON.parse(request.response);
@@ -375,6 +373,9 @@ $(document).on('click', '#confirm_item', function uploadFiles_without_HTML_FORMS
                 window.location.href = "summary.html";
             }
         }
+    	if (!EngineUI.getSubunitID()) {
+	    alert("SubunitID is undefined, don't expect this to work!");
+	}
         request.open('POST', baseURL + "uploadOrder/subunit/" + EngineUI.getSubunitID()); // XXX always subunit requests?
         request.send(formData);
         return true;

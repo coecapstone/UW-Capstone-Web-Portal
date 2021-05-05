@@ -4,7 +4,7 @@ const baseURL = "https://engine.ce.washington.edu/api/";
 
 /*
  * Simon Willison's addLoadEvent function,
- * frmo https://www.htmlgoodies.com/beyond/javascript/article.php/3724571/using-multiple-javascript-onload-functions.htm
+ * from https://www.htmlgoodies.com/beyond/javascript/article.php/3724571/using-multiple-javascript-onload-functions.htm
  *
  * usage: addLoadEvent(func);
  *     or addLoadEvent(function() { some code; });

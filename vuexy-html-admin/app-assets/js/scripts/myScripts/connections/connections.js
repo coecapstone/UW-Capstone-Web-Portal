@@ -2,18 +2,21 @@
 var ajaxActiveCallCount = 0;
 $.ajaxSetup({
     beforeSend:function(){
+	$("body").css("cursor", "progress");
         // show animation - if it exists
-        if (!document.getElementById("loading"))
-            return;
-        $("#loading").show();
+        //if (!document.getElementById("loading"))
+        //    return;
+        //$("#loading").show();
         ++ajaxActiveCallCount;
     },
     complete:function(){
         // hide animation, if it exists
-        if (!document.getElementById("loading"))
-            return;
-	if (--ajaxActiveCallCount == 0)
-       	    $("#loading").hide();
+        //if (!document.getElementById("loading"))
+        //    return;
+	if (--ajaxActiveCallCount == 0) {
+	    $("body").css("cursor", "default");
+       	    // $("#loading").hide();
+	}
     }
 });
 

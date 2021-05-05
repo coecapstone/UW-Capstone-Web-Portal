@@ -96,9 +96,6 @@ $(".steps-validation").steps({
     },
     onFinished: function (event, currentIndex) {
         // console.log("submit");
-        alert("Submitted!");
-        alert('send data to database');
-
         if (window.sessionStorage.getItem("RequestID")) {
             updateRequest(window.sessionStorage.getItem("RequestID"));
         } else {
@@ -370,12 +367,13 @@ function uploadRequest() {
 
     //here we just pass in the JSON object we need to pass to the server. "JSON_body" should stay as it is, becuase this is how server can identify files from the JSON information, when it get this HTTP request
     formData.set("JSON_body", JSON.stringify(JSON_toServer));
+
     // Http Request  
     var request = new XMLHttpRequest();
     //this function will get the response from the server after we upload the order
     request.onreadystatechange = function() {
         console.log("Request info is here:");
-        if (request.readyState == 4) {
+        if (request.readyState == XMLHttpRequest.DONE) {
             // show it in the console
             const response_obj = JSON.parse(request.response);
             const data_obj = response_obj.data;
@@ -387,6 +385,9 @@ function uploadRequest() {
             window.sessionStorage.setItem('RequestID', data_obj._id);
             window.location.href = "../../../html/ltr/users/user-request-detailpage.html";
         }
+    }
+    if (!EngineUI.getSubunitID()) {
+	    alert("SubunitID is undefined, don't expect this to work!");
     }
     request.open('POST', baseURL + "uploadOrder/subunit/" + EngineUI.getSubunitID()); // XXX always subunit requests?
     request.send(formData);

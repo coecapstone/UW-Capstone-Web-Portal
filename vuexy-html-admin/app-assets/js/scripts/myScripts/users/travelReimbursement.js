@@ -423,12 +423,13 @@ $(document).on('click', '#confirm_item', function uploadFiles_without_HTML_FORMS
         
         //here we just pass in the JSON object we need to pass to the server. "JSON_body" should stay as it is, becuase this is how server can identify files from the JSON information, when it get this HTTP request
         formData.set("JSON_body", JSON.stringify(JSON_toServer));
-        // Http Request  
+
+	// Http Request  
         var request = new XMLHttpRequest();
         //this function will get the response from the server after we upload the order
         request.onreadystatechange = function() {
             console.log("Request info is here:");
-            if (request.readyState == 4) {
+            if (request.readyState == XMLHttpRequest.DONE) {
                 console.log(request.response);
                 // show it in the console
                 const response_obj = JSON.parse(request.response);
@@ -485,6 +486,9 @@ $(document).on('click', '#confirm_item', function uploadFiles_without_HTML_FORMS
                 window.location.href = "summary-travelReimbursement.html";
             }
         }
+	if (!EngineUI.getSubunitID()) {
+	    alert("SubunitID is undefined, don't expect this to work!");
+	}
 	// XXX This line assumes that requests are always made at the submit level.
         request.open('POST', baseURL + "uploadOrder/subunit/" + EngineUI.getSubunitID()); // XXX always subunit requests?
         request.send(formData);
