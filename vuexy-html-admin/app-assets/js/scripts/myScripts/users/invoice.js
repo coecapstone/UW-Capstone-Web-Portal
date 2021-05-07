@@ -280,11 +280,7 @@ $(document).on('click', '#use-new-addr', function() {
 
 function uploadRequest() {
     /** Confirm each line item */
-    for (var x = 1; x <= idFlags.length; x++) {
-        if (idFlags[x]) {
-            confirmItem(x);
-        }
-    }
+    idFlags.forEach(x => function(x) { if (idFlags[x]) confirmItem(x); });
 
     // getUserInfo();
     var formData = new FormData();
