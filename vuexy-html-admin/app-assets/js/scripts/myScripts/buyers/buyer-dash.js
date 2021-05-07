@@ -70,7 +70,7 @@ function updateAllRequestsTable() {
     $('#DataTables_Table_1 tbody').on( 'click', 'tr td:not(:last-child)', function () {
         var data = table.row( $(this).parents('tr') ).data();
         console.log('row id: ' + data[0]);
-        if(data[2].localeCompare("Travel Request")==0 || data[2].localeCompare("Travel Reimbursement")==0){
+        if(data[2].localeCompare(EngineUI.ORDER_TYPE_TRAVEL_REQUEST)==0 || data[2].localeCompare(EngineUI.ORDER_TYPE_TRAVEL_REIMBURSEMENT)==0){
             directToSummary(data[0]);
         }else{
             sendRequestId(data[0]);
@@ -159,7 +159,7 @@ function updateMyPendingRequestsTable() {
         var data = table.row( $(this) ).data();
         console.log('row id: ' + data[0]);
         console.log(data);
-        if(data[2].localeCompare("Travel Request")==0 || data[2].localeCompare("Travel Reimbursement")==0){
+        if(data[2].localeCompare(EngineUI.ORDER_TYPE_TRAVEL_REQUEST)==0 || data[2].localeCompare(EngineUI.ORDER_TYPE_TRAVEL_REIMBURSEMENT)==0){
             directToSummary(data[0]);
         }else{
             sendRequestId(data[0]);
@@ -518,7 +518,7 @@ function genPendingRequestCard(request_id, requester, type, date) {
     edit_btn.setAttribute('class', 'btn gradient-light-primary btn-block mt-2');
     edit_btn.setAttribute('id', "edit_" + request_id);
     console.log(type);
-    if(type.localeCompare("Travel Request")==0 || type.localeCompare("Travel Reimbursement")==0){
+    if(type.localeCompare(EngineUI.ORDER_TYPE_TRAVEL_REQUEST)==0 || type.localeCompare(EngineUI.ORDER_TYPE_TRAVEL_REIMBURSEMENT)==0){
         edit_btn.setAttribute('onclick',`directToSummary('${request_id}');`);
     }else{
         edit_btn.setAttribute('onclick',`sendRequestId('${request_id}');`);
@@ -567,7 +567,7 @@ function directToSummary(orderId){
     }
     var temp = requestsInfo[index].OrderInfo;
     getUserInfo(requestsInfo[index].UserId);
-    if(requestsInfo[x].Type.localeCompare("Travel Request")==0){
+    if(requestsInfo[x].Type.localeCompare(EngineUI.ORDER_TYPE_TRAVEL_REQUEST)==0){
         if(temp.LineItems[0].Budgets.length==1){
             EngineUI.setOrderId(orderId);
             EngineUI.setUser_id(requestsInfo[index].UserId);
@@ -661,7 +661,7 @@ function directToSummary(orderId){
             EngineUI.setHotel_moveout(temp.HotelMoveout);
             window.location.href = "summary.html";
         }
-    }else if(requestsInfo[x].Type.localeCompare("Travel Reimbursement")==0){
+    }else if(requestsInfo[x].Type.localeCompare(EngineUI.ORDER_TYPE_TRAVEL_REIMBURSEMENT)==0){
         if(temp.LineItems[0].Budgets.length==1){
             EngineUI.setOrderId(orderId);
             EngineUI.setUser_id(requestsInfo[index].UserId);

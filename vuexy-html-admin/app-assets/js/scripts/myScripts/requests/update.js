@@ -5,7 +5,7 @@
 
 
 function prepareRequest(request_info, request_type) {
-    if (request_type == "Reimbursement") {
+    if (request_type == EngineUI.ORDER_TYPE_REIMBURSEMENT) {
         setRadioValueByName("myself_onbehalf_radio", request_info.ReimburseFor);
         if (request_info.ReimburseFor == "onbehalf") {
             document.getElementById("onBehalf_Yes").setAttribute('class', 'visible');
@@ -30,13 +30,13 @@ function prepareRequest(request_info, request_type) {
                 setAddress(request_info.Addr);
             }
         }
-    } else if (request_type == "Purchase Request" || request_type == "Pay an Invoice") {
+    } else if (request_type == EngineUI.ORDER_TYPE_PURCHASE_REQUEST || request_type == EngineUI.ORDER_TYPE_PAY_AN_INVOICE) {
         var vendorObj = request_info.VendorInfo;
         setTextValueById("vendor-name", vendorObj.Name);
         setTextValueById("vendor-email", vendorObj.Email);
         setTextValueById("vendor-website", vendorObj.Website);
         setTextValueById("vendor-phone", vendorObj.Phone);
-    } else if (request_type == "Procard Receipt") {
+    } else if (request_type == EngineUI.ORDER_TYPE_PROCARD_RECEIPT) {
         setTextValueById("name-on-card", request_info.Cardholder);
         var vendorObj = request_info.VendorInfo;
         setTextValueById("vendor-name", vendorObj.Name);
@@ -59,14 +59,14 @@ function prepareLineItem(itemObj, type) {
         setTextValueById(`purpose_${x}`, data.Purpose);
         setTextValueById(`category_${x}`, data.Category);
 
-        if (type == "Purchase Request") {
+        if (type == EngineUI.ORDER_TYPE_PURCHASE_REQUEST) {
             setTextValueById(`quantity_${x}`, data.Quantity);
             setTextValueById(`unit_price_${x}`, data.UnitPrice);
         } else {
             setTextValueById(`amount_${x}`, data.Amount);
         }
 
-        if (type == "Reimbursement" || type == "Procard Receipt") {
+        if (type == EngineUI.ORDER_TYPE_REIMBURSEMENT || type == EngineUI.ORDER_TYPE_PROCARD_RECEIPT) {
             setRadioValueByName(`taxRadio${x}`, data.TaxPaid);
         }
         setBudgetsValueById(x, data.Budgets);

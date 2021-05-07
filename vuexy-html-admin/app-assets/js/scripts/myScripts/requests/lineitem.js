@@ -31,7 +31,7 @@ function lineItemInit(type) {
         splitWithChanged(1, 1);
     });
     
-    if (type == "Purchase Request") {
+    if (type == EngineUI.ORDER_TYPE_PURCHASE_REQUEST) {
         var quantityEl = document.getElementById("quantity_1");
         var unitpriceEl = document.getElementById("unit_price_1");
 
@@ -595,7 +595,7 @@ function confirmItem(_id) {
         // console.log('budgets array:');
         // console.log(budgetsArr);
 
-        if (request_type == "Purchase Request") {
+        if (request_type == EngineUI.ORDER_TYPE_PURCHASE_REQUEST) {
             var q = document.getElementById('quantity_' + _id).value;
             var u = document.getElementById('unit_price_' + _id).value;
             var amount = q * u;
@@ -610,7 +610,7 @@ function confirmItem(_id) {
                 Budgets: budgetsArr,
                 Amount: amount
             });
-        } else if (request_type == "Pay an Invoice") {
+        } else if (request_type == EngineUI.ORDER_TYPE_PAY_AN_INVOICE) {
             lineItems.push({
                 id: _id,
                 Expense: document.getElementById('expense_' + _id).value,
@@ -684,13 +684,13 @@ function addNewLineItem(_id) {
     row.appendChild(addNewExpense(_id));
     row.appendChild(addNewPurpose(_id));
     row.appendChild(addNewCategory(_id));
-    if (request_type == "Purchase Request") {
+    if (request_type == EngineUI.ORDER_TYPE_PURCHASE_REQUEST) {
         row.appendChild(addNewQuantity(_id));
         row.appendChild(addNewUnitPrice(_id));
     } else {
         row.appendChild(addNewAmount(_id));
     }
-    if (request_type == "Reimbursement" || request_type == "Procard Receipt") {
+    if (request_type == EngineUI.ORDER_TYPE_REIMBURSEMENT || request_type == EngineUI.ORDER_TYPE_PROCARD_RECEIPT) {
         row.appendChild(addNewTax(_id));
     }
     row.appendChild(addBudget(_id, 1, true));

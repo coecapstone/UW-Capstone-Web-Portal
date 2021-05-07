@@ -26,8 +26,7 @@ window.addEventListener('load', function() {
     request_id = EngineUI.getRequestID();
     userID = EngineUI.getId();
 
-    requestInfo = getRequestInfo(request_id);
-    updateRequestInfo(requestInfo);
+    getRequestInfo(request_id);
 });
 
 
@@ -42,7 +41,8 @@ function getRequestInfo(request_id) {
             console.log("request information is here");
             console.log(data.data);
             info = data.data;
-            
+            requestInfo = info;
+            updateRequestInfo(requestInfo);
         } else {
             //error message
             info = null;
@@ -83,8 +83,7 @@ function updateRequestInfo(request_data) {
     }
 
     const requestContent = JSON.parse(basicInfo.OrderInfo);
-    // console.log(requestContent);
-    if (request_type == "Reimbursement") {
+    if (request_type == EngineUI.ORDER_TYPE_REIMBURSEMENT) {
         payee.setAttribute('class', 'visible');
         payeeLabel.setAttribute('class', 'mt-2');
 
@@ -121,17 +120,17 @@ function genRequestInfoHead(request_type) {
     var th_1 = document.createElement('th');
     var th_2 = document.createElement('th');
     var th_3 = document.createElement('th');
-    if (request_type == "Reimbursement") {
+    if (request_type == EngineUI.ORDER_TYPE_REIMBURSEMENT) {
         th_1.innerHTML = "SHIPPING ADDRESS";
         th_2.innerHTML = "DELIVERY METHODS";
         th_3.setAttribute('colspan', '2');
         th_3.innerHTML = "REQUEST SUMMARY";
-    } else if (request_type == "Purchase Request" || request_type == "Pay an Invoice") {
+    } else if (request_type == EngineUI.ORDER_TYPE_PURCHASE_REQUEST || request_type == EngineUI.ORDER_TYPE_PAY_AN_INVOICE) {
         th_1.innerHTML = "SHIPPING ADDRESS";
         th_2.innerHTML = "VENDOR CONTACTS";
         th_3.setAttribute('colspan', '2');
         th_3.innerHTML = "REQUEST SUMMARY";
-    } else if (request_type == "Procard Receipt") {
+    } else if (request_type == EngineUI.ORDER_TYPE_PROCARD_RECEIPT) {
         th_1.innerHTML = "CARDHOLDER";
         th_2.innerHTML = "VENDOR CONTACTS";
         th_3.setAttribute('colspan', '2');
@@ -161,7 +160,7 @@ function genRequestInfoBody(request_type, request_info) {
     td_4.setAttribute('style', 'vertical-align: top;');
 
     // Part 1: Addr / Cardholder
-    if (request_type == "Reimbursement") {
+    if (request_type == EngineUI.ORDER_TYPE_REIMBURSEMENT) {
         var p1 = document.createElement('p');
         var p2 = document.createElement('p');
         var p3 = document.createElement('p');
@@ -182,7 +181,7 @@ function genRequestInfoBody(request_type, request_info) {
         td_1.appendChild(p2);
         td_1.appendChild(p3);
         td_1.appendChild(p4);
-    } else if (request_type == "Purchase Request" || request_type == "Pay an Invoice") {
+    } else if (request_type == EngineUI.ORDER_TYPE_PURCHASE_REQUEST || request_type == EngineUI.ORDER_TYPE_PAY_AN_INVOICE) {
         var p1 = document.createElement('p');
         var p2 = document.createElement('p');
         var p3 = document.createElement('p');
@@ -196,7 +195,7 @@ function genRequestInfoBody(request_type, request_info) {
         td_1.appendChild(p2);
         td_1.appendChild(p3);
         td_1.appendChild(p4);
-    } else if (request_type == "Procard Receipt") {
+    } else if (request_type == EngineUI.ORDER_TYPE_PROCARD_RECEIPT) {
         var p = document.createElement('p');
         p.innerHTML = request_info.Cardholder;
         td_1.appendChild(p);
@@ -204,11 +203,11 @@ function genRequestInfoBody(request_type, request_info) {
 
 
     // Part 2: delivery method / vendor contacts
-    if (request_type == "Reimbursement") {
+    if (request_type == EngineUI.ORDER_TYPE_REIMBURSEMENT) {
         td_2.innerHTML = request_info.Payment;
-    } else if (request_type == "Purchase Request" || 
-                    request_type == "Procard Receipt" || 
-                    request_type == "Pay an Invoice") {
+    } else if (request_type == EngineUI.ORDER_TYPE_PURCHASE_REQUEST || 
+                    request_type == EngineUI.ORDER_TYPE_PROCARD_RECEIPT || 
+                    request_type == EngineUI.ORDER_TYPE_PAY_AN_INVOICE) {
         var name = document.createElement('p');
         var email = document.createElement('p');
         var phone = document.createElement('p');
@@ -225,7 +224,7 @@ function genRequestInfoBody(request_type, request_info) {
     }
 
     // Part 3: Cost summary
-    if (request_type == "Reimbursement" || request_type == "Procard Receipt") {
+    if (request_type == EngineUI.ORDER_TYPE_REIMBURSEMENT || request_type == EngineUI.ORDER_TYPE_PROCARD_RECEIPT) {
         var summary_p1 = document.createElement('p');
         var summary_p2 = document.createElement('p');
         var summary_p3 = document.createElement('p');
@@ -246,7 +245,7 @@ function genRequestInfoBody(request_type, request_info) {
         td_4.appendChild(item_cost);
         td_4.appendChild(estimated_tax);
         td_4.appendChild(grand_total);
-    } else if (request_type == "Purchase Request" || request_type == "Pay an Invoice") {
+    } else if (request_type == EngineUI.ORDER_TYPE_PURCHASE_REQUEST || request_type == EngineUI.ORDER_TYPE_PAY_AN_INVOICE) {
         var summary_p1 = document.createElement('p');
         var summary_p2 = document.createElement('p');
         var summary_p3 = document.createElement('p');
@@ -309,21 +308,21 @@ function genLineItemTableHead(request_type) {
     head.appendChild(th_3);
     head.appendChild(th_4);
 
-    if (request_type == "Reimbursement" || request_type == "Procard Receipt") {
+    if (request_type == EngineUI.ORDER_TYPE_REIMBURSEMENT || request_type == EngineUI.ORDER_TYPE_PROCARD_RECEIPT) {
         th_5.innerHTML = "Amount";
         th_6.innerHTML = "Tax";
         th_7.innerHTML = "Documentation";
         head.appendChild(th_5);
         head.appendChild(th_6);
         head.appendChild(th_7);
-    } else if (request_type == "Purchase Request") {
+    } else if (request_type == EngineUI.ORDER_TYPE_PURCHASE_REQUEST) {
         th_5.innerHTML = "Quantity";
         th_6.innerHTML = "Unit Price";
         th_7.innerHTML = "Documentation";
         head.appendChild(th_5);
         head.appendChild(th_6);
         head.appendChild(th_7);
-    } else if (request_type == "Pay an Invoice") {
+    } else if (request_type == EngineUI.ORDER_TYPE_PAY_AN_INVOICE) {
         th_5.innerHTML = "Amount";
         th_5.innerHTML = "Documentation";
         head.appendChild(th_5);
@@ -369,7 +368,7 @@ function genLineItemTableRow(item_seq, request_type, line_item_info, line_item_l
     tr.appendChild(category_td);
     tr.appendChild(budgets_td);
 
-    if (request_type == "Reimbursement" || request_type == "Procard Receipt") {
+    if (request_type == EngineUI.ORDER_TYPE_REIMBURSEMENT || request_type == EngineUI.ORDER_TYPE_PROCARD_RECEIPT) {
         var amount_td = document.createElement('td');
         amount_td.innerHTML = line_item_info.Amount;
         itemAmount += parseFloat(line_item_info.Amount);
@@ -390,7 +389,7 @@ function genLineItemTableRow(item_seq, request_type, line_item_info, line_item_l
             tax_td.innerHTML = "Not Taxable";
         }
         tr.appendChild(tax_td);
-    } else if (request_type == "Purchase Request") {
+    } else if (request_type == EngineUI.ORDER_TYPE_PURCHASE_REQUEST) {
         var quantity_td = document.createElement('td');
         var unit_id = document.createElement('td');
         quantity_td.innerHTML = line_item_info.Quantity;
@@ -400,7 +399,7 @@ function genLineItemTableRow(item_seq, request_type, line_item_info, line_item_l
         itemAmount += quantityNum * unitPriceNum;
         tr.appendChild(quantity_td);
         tr.appendChild(unit_id);
-    } else if (request_type == "Pay an Invoice") {
+    } else if (request_type == EngineUI.ORDER_TYPE_PAY_AN_INVOICE) {
         var amount_td = document.createElement('td');
         amount_td.innerHTML = line_item_info.Amount;
         itemAmount += parseFloat(line_item_info.Amount);

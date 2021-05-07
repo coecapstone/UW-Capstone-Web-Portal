@@ -172,8 +172,9 @@ addLoadEvent(function() {
         budget_select.appendChild(addBudgetData(num));
     }
 
-    if (EngineUI.getRequestID()) {
-        var request_id = EngineUI.getRequestID();
+    var request_id = EngineUI.getRequestID();
+    if (request_id) {
+	    console.log("request ID: " + request_id);
         var request_type = EngineUI.getRequestType();
         var request_info = getRequestInfo(request_id);
         prepareRequest(request_info, request_type);
@@ -226,6 +227,7 @@ $(document).on('click', 'input', function(){
 /***************** BEGIN: Step3 *******************/
 
 function uploadRequest() {
+    console.log("in uploadRequest()");
     /** Confirm each line item */
     for (var x = 1; x <= idFlags.length; x++) {
         if (idFlags[x]) {
@@ -259,11 +261,13 @@ function uploadRequest() {
         LineItems: lineItems
         // ItemsCost: itemsCost
     };
+    console.log("VendorInfo: " + vendor_info);
 
     //now lets set up the JSON_toServer JSON Object
     JSON_toServer.userID_ref = user_id;  // 5e63127145f8e019d1f26ddc
     JSON_toServer.OrderType = EngineUI.ORDER_TYPE_PROCARD_RECEIPT;
     JSON_toServer.OrderInfo = JSON.stringify(requestInfo);
+    console.log("input: " + requestInfo);
     // console.log(typeof(requestInfo));
     JSON_toServer.OrderStatus = "Submitted"; //leave this as Submitted, this represent current status of the Order. Example Order Status: Submitted, approved, etc:
     JSON_toServer.ChatInfo = "TEST CHAT INFO"; //leaving this empty since there's no chat when user upload a order first
@@ -308,6 +312,7 @@ function uploadRequest() {
 	    alert("SubunitID is undefined, don't expect this to work!");
     }
     request.open('POST', baseURL + "uploadOrder/subunit/" + EngineUI.getSubunitID()); // XXX always subunit requests?
+    console.log("posted: " + formData);
     request.send(formData);
     // window.location.href = "../../../html/ltr/users/user-summary.html";
     // window.location.replace("../../../html/ltr/users/user-summary.html");
