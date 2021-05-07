@@ -231,7 +231,7 @@ addLoadEvent(function() {
         prepareDocs(request_id);
     }
 
-    this.lineItemInit("Reimbursement");
+    this.lineItemInit(EngineUI.ORDER_TYPE_REIMBURSEMENT);
 });
 
 
@@ -344,7 +344,7 @@ function uploadRequest() {
 
     //now lets set up the JSON_toServer JSON Object
     JSON_toServer.userID_ref = user_id;  // 5e63127145f8e019d1f26ddc
-    JSON_toServer.OrderType = "Reimbursement";
+    JSON_toServer.OrderType = EngineUI.ORDER_TYPE_REIMBURSEMENT;
     JSON_toServer.OrderInfo = JSON.stringify(requestInfo);
     // console.log(typeof(requestInfo));
     JSON_toServer.OrderStatus = "Awaiting Approval"; //leave this as Submitted, this represent current status of the Order. Example Order Status: Submitted, approved, etc:

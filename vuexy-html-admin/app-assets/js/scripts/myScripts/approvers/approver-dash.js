@@ -440,7 +440,7 @@ function directToSummary(orderId){
             EngineUI.setUser_email(user_email);
             EngineUI.setUser_subunitName(user_subunitName);
             EngineUI.setUser_AccessLevel(user_accessLevel);
-            EngineUI.setType(requestsInfo[index].Type);
+            EngineUI.setRequestType(requestsInfo[index].Type);
             EngineUI.setSubmit_date(requestsInfo[index].Date);
             EngineUI.setStatus(requestsInfo[index].Status);
             EngineUI.setAmount(requestsInfo[index].Amount);
@@ -486,7 +486,7 @@ function directToSummary(orderId){
             EngineUI.setUser_email(user_email);
             EngineUI.setUser_subunitName(user_subunitName);
             EngineUI.setUser_AccessLevel(user_accessLevel);
-            EngineUI.setType(requestsInfo[index].Type);
+            EngineUI.setRequestType(requestsInfo[index].Type);
             EngineUI.setSubmit_date(requestsInfo[index].Date);
             EngineUI.setStatus(requestsInfo[index].Status);
             EngineUI.setAmount(requestsInfo[index].Amount);
@@ -534,7 +534,7 @@ function directToSummary(orderId){
             EngineUI.setUser_email(user_email);
             EngineUI.setUser_subunitName(user_subunitName);
             EngineUI.setUser_AccessLevel(user_accessLevel);
-            EngineUI.setType(requestsInfo[index].Type);
+            EngineUI.setRequestType(requestsInfo[index].Type);
             EngineUI.setSubmit_date(requestsInfo[index].Date);
             EngineUI.setStatus(requestsInfo[index].Status);
             EngineUI.setNote(temp.NoteFromApprover);
@@ -580,7 +580,7 @@ function directToSummary(orderId){
             EngineUI.setUser_email(user_email);
             EngineUI.setUser_subunitName(user_subunitName);
             EngineUI.setUser_AccessLevel(user_accessLevel);
-            EngineUI.setType(requestsInfo[index].Type);
+            EngineUI.setRequestType(requestsInfo[index].Type);
             EngineUI.setSubmit_date(requestsInfo[index].Date);
             EngineUI.setStatus(requestsInfo[index].Status);
             EngineUI.setNote(temp.NoteFromApprover);

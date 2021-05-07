@@ -415,7 +415,7 @@ $(document).on('click', '#confirm_item', function uploadFiles_without_HTML_FORMS
 
         //now lets set up the JSON_toServer JSON Object
         JSON_toServer.userID_ref = user_id;  // 5e63127145f8e019d1f26ddc
-        JSON_toServer.OrderType = "Travel Reimbursement";
+        JSON_toServer.OrderType = EngineUI.ORDER_TYPE_TRAVEL_REIMBURSEMENT;
         JSON_toServer.OrderInfo = JSON.stringify(requestInfo);
         // console.log(typeof(requestInfo));
         JSON_toServer.OrderStatus = "Awaiting Approval"; //leave this as Submitted, this represent current status of the Order. Example Order Status: Submitted, approved, etc:
@@ -440,7 +440,7 @@ $(document).on('click', '#confirm_item', function uploadFiles_without_HTML_FORMS
                 console.log(requestInfo_obj);
                 // transfer data and direct to summary-travelReimbursement.html
                 EngineUI.setOrderId(data_obj._id);
-                EngineUI.setType("Travel Reimbursement");
+                EngineUI.setRequestType(EngineUI.ORDER_TYPE_TRAVEL_REIMBURSEMENT);
                 EngineUI.setSubmit_date($("input[name='submit_date']").val());
                 EngineUI.setStatus("Awaiting Approval");
                 EngineUI.setNote("");

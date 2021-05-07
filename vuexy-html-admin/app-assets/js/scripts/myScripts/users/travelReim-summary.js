@@ -68,7 +68,7 @@ var makeGetRequest = function(url, onSuccess, onFailure) {
 addLoadEvent(function() {
     userID = EngineUI.getId();
     document.getElementById('requestID').innerHTML = EngineUI.getOrderId();
-    document.getElementById('request-type').innerHTML = EngineUI.getType()+"&nbsp;";
+    document.getElementById('request-type').innerHTML = EngineUI.getRequestType()+"&nbsp;";
     document.getElementById('requester').innerHTML = EngineUI.getUser_name();
     document.getElementById('subunit').innerHTML = EngineUI.getUser_subunitName();
     document.getElementById('userEmail').innerHTML = EngineUI.getUser_email();
@@ -111,16 +111,16 @@ addLoadEvent(function() {
                                                         + EngineUI.getVisa_file()
                                                         + "\" style=\"cursor:pointer;color:blue;text-decoration:underline;\">Download</a>";
     }
-    if(EngineUI.getRegistration(file").localeCompare("undefined")!=0){
+    if(EngineUI.getRegistration_file().localeCompare("undefined")!=0){
         document.getElementById('registrationFile').innerHTML = "<a href=\"" + baseURL + "downloadAttachment/" 
                                                         + EngineUI.getOrderId() + "/" 
-                                                        + EngineUI.getRegistration(file")
+                                                        + EngineUI.getRegistration_file()
                                                         + "\" style=\"cursor:pointer;color:blue;text-decoration:underline;\">Download</a>";
     }
-    if(EngineUI.getCar(file").localeCompare("undefined")!=0){
+    if(EngineUI.getCar_file().localeCompare("undefined")!=0){
         document.getElementById('carFile').innerHTML = "<a href=\"" + baseURL + "downloadAttachment/" 
                                                         + EngineUI.getOrderId() + "/" 
-                                                        + EngineUI.getCar(file")
+                                                        + EngineUI.getCar_file()
                                                         + "\" style=\"cursor:pointer;color:blue;text-decoration:underline;\">Download</a>";
     }
     if(EngineUI.getRental_file().localeCompare("undefined")!=0){
@@ -129,34 +129,34 @@ addLoadEvent(function() {
                                                         + EngineUI.getRental_file()
                                                         + "\" style=\"cursor:pointer;color:blue;text-decoration:underline;\">Download</a>";
     }
-    if(EngineUI.getAirfare(file").localeCompare("undefined")!=0){
+    if(EngineUI.getAirfare_file().localeCompare("undefined")!=0){
         document.getElementById('airfareFile').innerHTML = "<a href=\"" + baseURL + "downloadAttachment/" 
                                                         + EngineUI.getOrderId() + "/" 
-                                                        + EngineUI.getAirfare(file")
+                                                        + EngineUI.getAirfare_file()
                                                         + "\" style=\"cursor:pointer;color:blue;text-decoration:underline;\">Download</a>";
     }
-    if(EngineUI.getTrain(file").localeCompare("undefined")!=0){
+    if(EngineUI.getTrain_file().localeCompare("undefined")!=0){
         document.getElementById('trainFile').innerHTML = "<a href=\"" + baseURL + "downloadAttachment/" 
                                                         + EngineUI.getOrderId() + "/" 
-                                                        + EngineUI.getTrain(file")
+                                                        + EngineUI.getTrain_file()
                                                         + "\" style=\"cursor:pointer;color:blue;text-decoration:underline;\">Download</a>";
     }
-    if(EngineUI.getHotel(file").localeCompare("undefined")!=0){
+    if(EngineUI.getHotel_file().localeCompare("undefined")!=0){
         document.getElementById('hotelFile').innerHTML = "<a href=\"" + baseURL + "downloadAttachment/" 
                                                         + EngineUI.getOrderId() + "/" 
-                                                        + EngineUI.getHotel(file")
+                                                        + EngineUI.getHotel_file()
                                                         + "\" style=\"cursor:pointer;color:blue;text-decoration:underline;\">Download</a>";
     }
     //----------------------------------------------------------------------------------------------------------------------------------------
     document.getElementById('personalTravel').innerHTML = EngineUI.getPersonalTravel();
     document.getElementById('affliation').innerHTML = EngineUI.getSomeoneAffliation()+"&nbsp;";
-    document.getElementById('travelDetail').innerHTML = EngineUI.getPersonalTravel(etails");
+    document.getElementById('travelDetail').innerHTML = EngineUI.getPersonalTravelDetails();
     document.getElementById('registration').innerHTML = "$"+EngineUI.getRegistration()+"&nbsp;";
     document.getElementById('carFee').innerHTML = "$"+EngineUI.getCar()+"&nbsp;";
-    document.getElementById('carRental').innerHTML = "$"+EngineUI.getCar(ental")+"&nbsp;";
+    document.getElementById('carRental').innerHTML = "$"+EngineUI.getCarRental()+"&nbsp;";
     document.getElementById('airfare').innerHTML = "$"+EngineUI.getAirfare()+"&nbsp;";
     document.getElementById('train').innerHTML = "$"+EngineUI.getTrain()+"&nbsp;";
-    document.getElementById('hotel').innerHTML = "$"+EngineUI.getHotel(ee")+"&nbsp;";
+    document.getElementById('hotel').innerHTML = "$"+EngineUI.getHotelFee()+"&nbsp;";
     if(EngineUI.getMeal().localeCompare("meal1")==0){
         document.getElementById('meal').innerHTML = "Yes, maximum allowable perdiem";
     }else if(EngineUI.getMeal().localeCompare("meal2")==0){
@@ -166,8 +166,8 @@ addLoadEvent(function() {
     }else if(EngineUI.getMeal().localeCompare("meal4")==0){
         document.getElementById('meal').innerHTML = "No";
     }
-    document.getElementById('mealAmount').innerHTML = "$"+EngineUI.getMeal(amount")+"&nbsp;";
-    document.getElementById('mealProvid').innerHTML = EngineUI.getMeal(rovided")+"&nbsp;";
+    document.getElementById('mealAmount').innerHTML = "$"+EngineUI.getMeal_amount()+"&nbsp;";
+    document.getElementById('mealProvid').innerHTML = EngineUI.getMealProvided()+"&nbsp;";
     
     var onSuccess = function(data){
         var col1=1;

@@ -149,17 +149,17 @@ function adjustActionHeight() {
 
 
 function updateClicked() {
-    if (requestInfo.OrderType == "Reimbursement") {
-        EngineUI.setRequestType( "Reimbursement");
+    if (requestInfo.OrderType == EngineUI.ORDER_TYPE_REIMBURSEMENT) {
+        EngineUI.setRequestType( EngineUI.ORDER_TYPE_REIMBURSEMENT);
         window.location.href = "../../../html/ltr/users/user-reimbursement-3.html";
-    } else if (requestInfo.OrderType == "Purchase Request") {
-        EngineUI.setRequestType( "Purchase Request");
+    } else if (requestInfo.OrderType == EngineUI.ORDER_TYPE_PURCHASE_REQUEST) {
+        EngineUI.setRequestType( EngineUI.ORDER_TYPE_PURCHASE_REQUEST);
         window.location.href = "../../../html/ltr/users/user-purchase.html";
-    } else if (requestInfo.OrderType == "Procard Receipt") {
-        EngineUI.setRequestType( "Procard Receipt");
+    } else if (requestInfo.OrderType == EngineUI.ORDER_TYPE_PROCARD_RECEIPT) {
+        EngineUI.setRequestType( EngineUI.ORDER_TYPE_PROCARD_RECEIPT);
         window.location.href = "../../../html/ltr/users/user-procard.html";
-    } else if (requestInfo.OrderType == "Pay an Invoice") {
-        EngineUI.setRequestType( "Pay an Invoice");
+    } else if (requestInfo.OrderType == EngineUI.ORDER_TYPE_PAY_AN_INVOICE) {
+        EngineUI.setRequestType( EngineUI.ORDER_TYPE_PAY_AN_INVOICE);
         window.location.href = "../../../html/ltr/users/user-invoice.html";
     }
 }

@@ -124,6 +124,13 @@ const LEVEL_FISCAL_STAFF = "FiscalStaff";
 const LEVEL_SUBMITTER = "Submitter";
 const LEVEL_APPROVER = "Approver";
 
+const ORDER_TYPE_PAY_AN_INVOICE = "Pay an Invoice";
+const ORDER_TYPE_PROCARD_RECEIPT = "Procard Receipt";
+const ORDER_TYPE_PURCHASE_REQUEST = "Purchase Request";
+const ORDER_TYPE_REIMBURSEMENT = "Reimbursement";
+const ORDER_TYPE_TRAVEL_REIMBURSEMENT = "Travel Reimbursement";
+const ORDER_TYPE_TRAVEL_REQUEST = "Travel Request";
+
 class EngineUI {
     /*
      * This is the role chosen at in chooseRole.html,
@@ -142,6 +149,25 @@ class EngineUI {
     }
     static get LEVEL_APPROVER() {
 	return LEVEL_APPROVER;
+    }
+
+    static get ORDER_TYPE_PAY_AN_INVOICE() {
+	return ORDER_TYPE_PAY_AN_INVOICE;
+    }
+    static get ORDER_TYPE_PROCARD_RECEIPT() {
+	return ORDER_TYPE_PROCARD_RECEIPT;
+    }
+    static get ORDER_TYPE_PURCHASE_REQUEST() {
+	return ORDER_TYPE_PURCHASE_REQUEST;
+    }
+    static get ORDER_TYPE_REIMBURSEMENT() {
+	return ORDER_TYPE_REIMBURSEMENT;
+    }
+    static get ORDER_TYPE_TRAVEL_REIMBURSEMENT() {
+	return ORDER_TYPE_TRAVEL_REIMBURSEMENT;
+    }
+    static get ORDER_TYPE_TRAVEL_REQUEST() {
+	return ORDER_TYPE_TRAVEL_REQUEST;
     }
 
     /*
@@ -361,4 +387,3 @@ class EngineUI {
 	return true;
     }
 }
-

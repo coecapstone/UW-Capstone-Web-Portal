@@ -303,7 +303,7 @@ $(document).on('click', '#confirm_item', function uploadFiles_without_HTML_FORMS
 
         //now lets set up the JSON_toServer JSON Object
         JSON_toServer.userID_ref = user_id;  // 5e63127145f8e019d1f26ddc
-        JSON_toServer.OrderType = "Travel Request";
+        JSON_toServer.OrderType = EngineUI.ORDER_TYPE_TRAVEL_REQUEST;
         JSON_toServer.OrderInfo = JSON.stringify(requestInfo);
         // console.log(typeof(requestInfo));
         JSON_toServer.OrderStatus = "Awaiting Approval"; //leave this as Submitted, this represent current status of the Order. Example Order Status: Submitted, approved, etc:
@@ -333,7 +333,7 @@ $(document).on('click', '#confirm_item', function uploadFiles_without_HTML_FORMS
                 EngineUI.setUser_email(user_email);
                 EngineUI.setUser_subunitName(user_subunitName);
                 EngineUI.setUser_AccessLevel(user_accessLevel);
-                EngineUI.setType("Travel Request");
+                EngineUI.setRequestType(EngineUI.ORDER_TYPE_TRAVEL_REQUEST);
                 EngineUI.setSubmit_date(date);
                 EngineUI.setStatus("Awaiting Approval");
                 EngineUI.setAmount("N/A");
