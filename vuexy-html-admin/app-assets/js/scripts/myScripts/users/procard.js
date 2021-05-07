@@ -229,11 +229,7 @@ $(document).on('click', 'input', function(){
 function uploadRequest() {
     console.log("in uploadRequest()");
     /** Confirm each line item */
-    for (var x = 1; x <= idFlags.length; x++) {
-        if (idFlags[x]) {
-            confirmItem(x);
-        }
-    }
+    Object.keys(idFlags).forEach(x => { if (idFlags[x]) confirmItem(x); });
 
     // getUserInfo();
     var formData = new FormData();
@@ -321,11 +317,7 @@ function uploadRequest() {
 
 function updateRequest(request_id) {
     /** Confirm each line item */
-    for (var x = 1; x <= idFlags.length; x++) {
-        if (idFlags[x]) {
-            confirmItem(x);
-        }
-    }
+    Object.keys(idFlags).forEach(x => { if (idFlags[x]) confirmItem(x); });
 
     var vendor_info = {
         Name: $("input[name='vendor-name']").val(),

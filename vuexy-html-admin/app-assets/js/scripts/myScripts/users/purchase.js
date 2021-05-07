@@ -99,8 +99,10 @@ $(".steps-validation").steps({
     },
     onFinished: function (event, currentIndex) {
         if (EngineUI.getRequestID()) {
+	    console.log("sending request as an UPDATE");
             updateRequest(EngineUI.getRequestID());
         } else {
+	    console.log("sending request as NEW");
             uploadRequest();
         }
     }
@@ -284,7 +286,11 @@ $(document).on('click', '#use-new-addr', function() {
 
 function uploadRequest() {
     /** Confirm each line item */
-    idFlags.forEach(x => function(x) { if (idFlags[x]) confirmItem(x); });
+    Object.keys(idFlags).forEach(x => {
+	console.log("consider idFlags[" + x + "] = " + idFlags[x]);
+	if (idFlags[x])
+	    confirmItem(x);
+    });
 
     // getUserInfo();
     var formData = new FormData();
@@ -379,14 +385,16 @@ function uploadRequest() {
     var request = new XMLHttpRequest();
     //this function will get the response from the server after we upload the order
     request.onreadystatechange = function() {
-        console.log("Request info is here:");
+        console.log("Request info is here (uploadOrder):");
         if (request.readyState == 4 /* XMLHttpRequest.DONE */) {
             // show it in the console
             const response_obj = JSON.parse(request.response);
             const data_obj = response_obj.data;
+            console.log("upload complete; response is:");
             console.log(data_obj);
             //convert order info to JSON
             const requestInfo_obj = JSON.parse(data_obj.OrderInfo);
+            console.log("upload complete; order is:");
             console.log(requestInfo_obj);
             sendRequestHistory(data_obj._id, "Submitted");
             EngineUI.setRequestID( data_obj._id);
@@ -403,11 +411,7 @@ function uploadRequest() {
 
 function updateRequest(request_id) {
     /** Confirm each line item */
-    for (var x = 1; x <= idFlags.length; x++) {
-        if (idFlags[x]) {
-            confirmItem(x);
-        }
-    }
+    Object.keys(idFlags).forEach(x => { if (idFlags[x]) confirmItem(x); });
 
     var addrInfo = null;
 
@@ -474,7 +478,7 @@ function updateRequest(request_id) {
         if (data.status == true) {
             console.log("update success");
         } else {
-            //error message
+            console.log("update fail with error: " + data.data);
         }
     }
 

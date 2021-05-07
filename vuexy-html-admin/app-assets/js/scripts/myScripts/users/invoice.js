@@ -280,7 +280,7 @@ $(document).on('click', '#use-new-addr', function() {
 
 function uploadRequest() {
     /** Confirm each line item */
-    idFlags.forEach(x => function(x) { if (idFlags[x]) confirmItem(x); });
+    Object.keys(idFlags).forEach(x => function(x) { if (idFlags[x]) confirmItem(x); });
 
     // getUserInfo();
     var formData = new FormData();
@@ -401,11 +401,7 @@ function uploadRequest() {
 
 function updateRequest(request_id) {
     /** Confirm each line item */
-    for (var x = 1; x <= idFlags.length; x++) {
-        if (idFlags[x]) {
-            confirmItem(x);
-        }
-    }
+    Object.keys(idFlags).forEach(x => { if (idFlags[x]) confirmItem(x); });
 
     var addrInfo = null;
 

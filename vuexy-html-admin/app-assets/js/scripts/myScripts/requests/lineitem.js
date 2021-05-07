@@ -539,6 +539,7 @@ function genBudgetsSelectBox(_id, _budget_id) {
 
 /** Confirm function */
 function confirmItem(_id) {
+    console.log("confirmItem(" + _id + ")");
     if (EngineUI.getRequestType()) {
         request_type = EngineUI.getRequestType();
     }
