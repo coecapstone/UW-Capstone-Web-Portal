@@ -9,7 +9,7 @@ function update_top_navigation_inofrmation()
 
     //this will update the navigation bar profile picture
     var nav_image_element = document.getElementById("navigationBarImage");
-    const profile_pic_url = window.sessionStorage.getItem("profile_pic_url");
+    const profile_pic_url = EngineUI.getProfile_pic_url();
 
     if(profile_pic_url== "" || profile_pic_url == null)
         nav_image_element.setAttribute('src','../../../app-assets/images/portrait/small/default.jpg');

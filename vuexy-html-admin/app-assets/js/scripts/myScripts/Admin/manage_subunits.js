@@ -678,7 +678,7 @@ function add_SubUnit_SubUnit_overview()
     {
         if(add_subUnit(subUnit_name_input.value))
         {
-            toastr.success(`Subunit ${subUnit_name_input.value} added to ${window.sessionStorage.getItem("unitName")}`, 'Success', { positionClass: 'toast-top-right', containerId: 'toast-top-right' });
+            toastr.success(`Subunit ${subUnit_name_input.value} added to ${EngineUI.getUnitName()}`, 'Success', { positionClass: 'toast-top-right', containerId: 'toast-top-right' });
             clear_Information_Subunit_overview();
             update_Subunit_overview_table();
         }
@@ -1780,7 +1780,7 @@ function getAll_Subunits_under_Unit()
         return_value = null;
     }
 
-    makeGetRequest("subunitsinUnit/"+window.sessionStorage.getItem("unitID"),onSuccess,onFaliure);
+    makeGetRequest("subunitsinUnit/"+EngineUI.getUnitID(),onSuccess,onFaliure);
     return return_value;
 }
 
@@ -1817,7 +1817,7 @@ function add_subUnit(SubUnit_name)
 
     "subUnitName": SubUnit_name,
     "Submitters_IDs": [],
-    "UnitID_ref":window.sessionStorage.getItem("unitID"),
+    "UnitID_ref":EngineUI.getUnitID(),
     "BudgetTable": [] 
     }
 
@@ -2115,7 +2115,7 @@ function get_all_budgets_under_Unit()
     }
     
 
-    makeGetRequest("allBudgets/"+window.sessionStorage.getItem("unitID"),onSuccess,onFaliure);
+    makeGetRequest("allBudgets/"+EngineUI.getUnitID(),onSuccess,onFaliure);
 
     return return_val;
 }
@@ -2176,7 +2176,7 @@ function getAllFormInformation()
     }
     
 
-    makeGetRequest("formVisibility/"+window.sessionStorage.getItem("unitID"),onSuccess,onFaliure);
+    makeGetRequest("formVisibility/"+EngineUI.getUnitID(),onSuccess,onFaliure);
 
     return return_value;
 }

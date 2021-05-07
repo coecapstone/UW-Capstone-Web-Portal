@@ -15,8 +15,8 @@ var action_card = document.getElementById('action_card');
 var note_add_card = document.getElementById('note_add_card');
 
 addLoadEvent(function() {
-    request_id = window.sessionStorage.getItem('RequestID');
-    userID = window.sessionStorage.getItem("id");
+    request_id = EngineUI.getRequestID();
+    userID = EngineUI.getId();
     this.console.log(request_id);
 
     // Request Example: Reimbursement
@@ -171,7 +171,7 @@ function sendBackClicked(budgetnum, lineitemid) {
     };
 
     var history = {
-        userName: window.sessionStorage.getItem("id"),
+        userName: EngineUI.getId(),
         action: "Budget Number " + budgetnum + " Sent Back"
     };
 
@@ -205,7 +205,7 @@ function approveClicked(budgetnum, lineitemid) {
     };
 
     var history = {
-        userName: window.sessionStorage.getItem("id"),
+        userName: EngineUI.getId(),
         action: "Budget Number " + budgetnum + " Approved"
     };
 
@@ -238,7 +238,7 @@ function approveClicked(budgetnum, lineitemid) {
 function takeNoteClicked() {
     // send data
     var data = {
-        userName: window.sessionStorage.getItem("id"),
+        userName: EngineUI.getId(),
         comment: feedback.value
     };
     var onSuccess = function(data) {

@@ -6,7 +6,7 @@ var feedbackBlock = document.getElementById("feedback-block");
 var feedback = document.getElementById("feedback_input");
 
 var request_id = null;
-var user_id = window.sessionStorage.getItem("id");
+var user_id = EngineUI.getId();
 var userID = null;
 var actionTable = document.getElementById("action_table");
 
@@ -68,50 +68,50 @@ var makeDeleteRequest = function(url, onSuccess, onFailure) {
     update the page content
 */
 addLoadEvent(function() {
-    userID = window.sessionStorage.getItem("id");
-    document.getElementById('requestID').innerHTML = window.sessionStorage.getItem("orderId");
-    document.getElementById('requester').innerHTML = window.sessionStorage.getItem("user_name");
-    document.getElementById('subunit').innerHTML = window.sessionStorage.getItem("user_subunitName");
-    document.getElementById('userEmail').innerHTML = window.sessionStorage.getItem("user_email");
-    document.getElementById('userUWID').innerHTML = window.sessionStorage.getItem("user_uwid");
-    document.getElementById('accessLevel').innerHTML = window.sessionStorage.getItem("user_AccessLevel");
-    document.getElementById('status').innerHTML ="<i class=\"fa fa-circle font-small-3 text-warning mr-50\"></i>" + window.sessionStorage.getItem("status");
-    document.getElementById('submitDate').innerHTML = window.sessionStorage.getItem("submit_date");
-    if(window.sessionStorage.getItem("budget_length").localeCompare("1")==0){
-        document.getElementById('budget').innerHTML = window.sessionStorage.getItem("budget1") +" "+window.sessionStorage.getItem("split1");
+    userID = EngineUI.getId();
+    document.getElementById('requestID').innerHTML = EngineUI.getOrderId();
+    document.getElementById('requester').innerHTML = EngineUI.getUser_name();
+    document.getElementById('subunit').innerHTML = EngineUI.getUser_subunitName();
+    document.getElementById('userEmail').innerHTML = EngineUI.getUser_email();
+    document.getElementById('userUWID').innerHTML = EngineUI.getUser_uwid();
+    document.getElementById('accessLevel').innerHTML = EngineUI.getUser_AccessLevel();
+    document.getElementById('status').innerHTML ="<i class=\"fa fa-circle font-small-3 text-warning mr-50\"></i>" + EngineUI.getStatus();
+    document.getElementById('submitDate').innerHTML = EngineUI.getSubmit_date();
+    if(EngineUI.getBudget_length().localeCompare("1")==0){
+        document.getElementById('budget').innerHTML = EngineUI.getBudget1() +" "+EngineUI.getSplit1();
     }else{
-        document.getElementById('budget').innerHTML = window.sessionStorage.getItem("budget1") +" "+window.sessionStorage.getItem("split1")
-                                             +"<br>"+window.sessionStorage.getItem("budget2") +" "+window.sessionStorage.getItem("split2");
+        document.getElementById('budget').innerHTML = EngineUI.getBudget1() +" "+EngineUI.getSplit1()
+                                             +"<br>"+EngineUI.getBudget2() +" "+EngineUI.getSplit2();
     }
-    document.getElementById('reason').innerHTML = window.sessionStorage.getItem("reason");
-    document.getElementById('firstName').innerHTML = window.sessionStorage.getItem("firstname");
-    document.getElementById('departDate').innerHTML = window.sessionStorage.getItem("date");
-    document.getElementById('lastName').innerHTML = window.sessionStorage.getItem("lastname");
-    document.getElementById('returnDate').innerHTML = window.sessionStorage.getItem("returndate");
-    document.getElementById('departure').innerHTML = window.sessionStorage.getItem("departure");
-    document.getElementById('birthday').innerHTML = window.sessionStorage.getItem("birthday")+"&nbsp;";
-    document.getElementById('destination').innerHTML = window.sessionStorage.getItem("destionation");
-    document.getElementById('flight').innerHTML = window.sessionStorage.getItem("flight")+"&nbsp;";
-    document.getElementById('flightFrom').innerHTML = window.sessionStorage.getItem("flight_from")+"&nbsp;";
-    document.getElementById('flightReference').innerHTML = window.sessionStorage.getItem("flight_reference")+"&nbsp;";
-    document.getElementById('airline').innerHTML = window.sessionStorage.getItem("flight_company")+"&nbsp;";
-    document.getElementById('flightTo').innerHTML = window.sessionStorage.getItem("flight_to")+"&nbsp;";
-    document.getElementById('flightNumber').innerHTML = window.sessionStorage.getItem("flight_number")+"&nbsp;";
-    document.getElementById('flightDepartDate').innerHTML = window.sessionStorage.getItem("flight_departdate")+"&nbsp;";
-    document.getElementById('flightAmount').innerHTML = "$"+window.sessionStorage.getItem("flight_amount")+"&nbsp;";
-    document.getElementById('flightReturnDate').innerHTML = window.sessionStorage.getItem("flight_returndate")+"&nbsp;";
-    document.getElementById('hotel').innerHTML = window.sessionStorage.getItem("hotel")+"&nbsp;";
-    document.getElementById('hotelNum').innerHTML = window.sessionStorage.getItem("hotel_num")+"&nbsp;";
-    document.getElementById('hotelLink').innerHTML = window.sessionStorage.getItem("hotel_link")+"&nbsp;";
-    document.getElementById('hotelName').innerHTML = window.sessionStorage.getItem("hotel_name")+"&nbsp;";
-    document.getElementById('hotelCheckIn').innerHTML = window.sessionStorage.getItem("hotel_movein")+"&nbsp;";
-    document.getElementById('hotelNote').innerHTML = window.sessionStorage.getItem("hotel_note")+"&nbsp;";
-    document.getElementById('hotelAddress').innerHTML = window.sessionStorage.getItem("hotel_address")+"&nbsp;";
-    document.getElementById('hotelCheckout').innerHTML = window.sessionStorage.getItem("hotel_moveout")+"&nbsp;";
-    document.getElementById('hotelZip').innerHTML = window.sessionStorage.getItem("hotel_zip")+"&nbsp;";
-    document.getElementById('hotelAmount').innerHTML = "$"+window.sessionStorage.getItem("hotel_amount")+"&nbsp;";
-    document.getElementById('request-type').innerHTML = window.sessionStorage.getItem("type")+"&nbsp;";
-    request_id = window.sessionStorage.getItem('orderId');
+    document.getElementById('reason').innerHTML = EngineUI.getReason();
+    document.getElementById('firstName').innerHTML = EngineUI.getFirstname();
+    document.getElementById('departDate').innerHTML = EngineUI.getDate();
+    document.getElementById('lastName').innerHTML = EngineUI.getLastname();
+    document.getElementById('returnDate').innerHTML = EngineUI.getReturndate();
+    document.getElementById('departure').innerHTML = EngineUI.getDeparture();
+    document.getElementById('birthday').innerHTML = EngineUI.getBirthday()+"&nbsp;";
+    document.getElementById('destination').innerHTML = EngineUI.getDestionation();
+    document.getElementById('flight').innerHTML = EngineUI.getFlight()+"&nbsp;";
+    document.getElementById('flightFrom').innerHTML = EngineUI.getFlight(from")+"&nbsp;";
+    document.getElementById('flightReference').innerHTML = EngineUI.getFlight(reference")+"&nbsp;";
+    document.getElementById('airline').innerHTML = EngineUI.getFlight(company")+"&nbsp;";
+    document.getElementById('flightTo').innerHTML = EngineUI.getFlight(to")+"&nbsp;";
+    document.getElementById('flightNumber').innerHTML = EngineUI.getFlight(number")+"&nbsp;";
+    document.getElementById('flightDepartDate').innerHTML = EngineUI.getFlight(departdate")+"&nbsp;";
+    document.getElementById('flightAmount').innerHTML = "$"+EngineUI.getFlight(amount")+"&nbsp;";
+    document.getElementById('flightReturnDate').innerHTML = EngineUI.getFlight(returndate")+"&nbsp;";
+    document.getElementById('hotel').innerHTML = EngineUI.getHotel()+"&nbsp;";
+    document.getElementById('hotelNum').innerHTML = EngineUI.getHotel(num")+"&nbsp;";
+    document.getElementById('hotelLink').innerHTML = EngineUI.getHotel(link")+"&nbsp;";
+    document.getElementById('hotelName').innerHTML = EngineUI.getHotel(name")+"&nbsp;";
+    document.getElementById('hotelCheckIn').innerHTML = EngineUI.getHotel(movein")+"&nbsp;";
+    document.getElementById('hotelNote').innerHTML = EngineUI.getHotel(note")+"&nbsp;";
+    document.getElementById('hotelAddress').innerHTML = EngineUI.getHotel(address")+"&nbsp;";
+    document.getElementById('hotelCheckout').innerHTML = EngineUI.getHotel(moveout")+"&nbsp;";
+    document.getElementById('hotelZip').innerHTML = EngineUI.getHotel(zip")+"&nbsp;";
+    document.getElementById('hotelAmount').innerHTML = "$"+EngineUI.getHotel(amount")+"&nbsp;";
+    document.getElementById('request-type').innerHTML = EngineUI.getType()+"&nbsp;";
+    request_id = EngineUI.getOrderId();
     this.console.log(request_id);
     requestInfo = getRequestInfo(request_id);
 });
@@ -119,7 +119,7 @@ addLoadEvent(function() {
 function takeNoteClicked() {
     // send data
     var data = {
-        userName: window.sessionStorage.getItem("id"),
+        userName: EngineUI.getId(),
         comment: feedback.value
     };
     var onSuccess = function(data) {

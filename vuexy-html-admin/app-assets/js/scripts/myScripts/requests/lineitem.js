@@ -106,7 +106,7 @@ function getBudgetsInfo() {
 
 function sendRequestHistory(request_id, actionstr) {
     var history = {
-        userName: window.sessionStorage.getItem("id"),
+        userName: EngineUI.getId(),
         action: actionstr
     };
 
@@ -539,8 +539,8 @@ function genBudgetsSelectBox(_id, _budget_id) {
 
 /** Confirm function */
 function confirmItem(_id) {
-    if (window.sessionStorage.getItem('RequestType')) {
-        request_type = window.sessionStorage.getItem('RequestType');
+    if (EngineUI.getRequestType()) {
+        request_type = EngineUI.getRequestType();
     }
     // If this id exists (the item is not deleted)
     if (idFlags[_id]) {
@@ -658,8 +658,8 @@ function removeLineItem(_id) {
 
 /** Core function */
 function addNewLineItem(_id) {
-    if (window.sessionStorage.getItem('RequestType')) {
-        request_type = window.sessionStorage.getItem('RequestType');
+    if (EngineUI.getRequestType()) {
+        request_type = EngineUI.getRequestType();
     }
     idFlags.push(true);
 

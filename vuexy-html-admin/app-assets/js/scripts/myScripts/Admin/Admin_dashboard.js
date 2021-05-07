@@ -128,7 +128,7 @@ function update_administrativeStaff_table()
         console.log("Backend error");
     }
 
-    makeGetRequest("units/getUserInfomation/"+window.sessionStorage.getItem("unitID"),onSuccess,onFaliure);
+    makeGetRequest("units/getUserInfomation/"+EngineUI.getUnitID(),onSuccess,onFaliure);
 }
 
 function update_subunit_table()
@@ -151,7 +151,7 @@ function update_subunit_table()
         console.log("Backend error");
     }
 
-    makeGetRequest("subunitsinUnit/"+window.sessionStorage.getItem("unitID"),onSuccess,onFaliure);
+    makeGetRequest("subunitsinUnit/"+EngineUI.getUnitID(),onSuccess,onFaliure);
 }
 
 

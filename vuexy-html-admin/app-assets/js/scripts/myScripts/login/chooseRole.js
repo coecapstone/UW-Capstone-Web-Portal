@@ -1,12 +1,12 @@
 var parent_section = document.getElementById("parentRow");
-var data = JSON.parse(window.sessionStorage.getItem('infomation'));
+var data = JSON.parse(EngineUI.getInfomation());
 main();
 
 // Depending on my NetID, look up whether I can impersonate.  If I can, add a card for that too.
 if (true) {
 makePostRequest("whoami", {}, function(data) {
-        window.sessionStorage.setItem('uwnetid', data.data.uwnetid);
-        window.sessionStorage.setItem('true_uwnetid', data.data.true_uwnetid);
+        EngineUI.setUwnetid( data.data.uwnetid);
+        EngineUI.setTrue_uwnetid( data.data.true_uwnetid);
 	if (EngineUI.canImpersonate()) {	
 		parent_section.appendChild(generate_impersonate_card("bg-gradient-warning"));
 	}
@@ -76,7 +76,7 @@ function generate_impersonate_card(cardColor) {
 
     var unitSubunit_name = document.createElement('p');
     unitSubunit_name.setAttribute('class',`card-text`);
-    unitSubunit_name.innerHTML = "Currently <em>" + window.sessionStorage.getItem('uwnetid') + "</em>";
+    unitSubunit_name.innerHTML = "Currently <em>" + EngineUI.getUwnetid() + "</em>";
 
     card_body.appendChild(imageTag);
     card_body.appendChild(card_title);
@@ -143,13 +143,13 @@ function generate_card(ElementID, cardColor,cardType, role, unit_subUnit_name,un
 function card_click(elementID, cardType)
 {
     window.sessionStorage.clear();
-    window.sessionStorage.setItem("id",data.userInfo._id);
-    window.sessionStorage.setItem("name",data.userInfo.Name);
-    window.sessionStorage.setItem("uwid",data.userInfo.UWID);
-    window.sessionStorage.setItem("email",data.userInfo.email);
-    window.sessionStorage.setItem("verified_user",data.userInfo.verified_user);
-    window.sessionStorage.setItem("profile_pic_url",data.userInfo.profileImage_URL);
-    window.sessionStorage.setItem("address",JSON.stringify(data.userInfo.address));
+    EngineUI.setId(data.userInfo._id);
+    EngineUI.setName(data.userInfo.Name);
+    EngineUI.setUwid(data.userInfo.UWID);
+    EngineUI.setEmail(data.userInfo.email);
+    EngineUI.setVerified_user(data.userInfo.verified_user);
+    EngineUI.setProfile_pic_url(data.userInfo.profileImage_URL);
+    EngineUI.setAddress(JSON.stringify(data.userInfo.address));
     console.log(elementID);
     console.log(cardType);
     if(cardType == "admin")

@@ -19,7 +19,7 @@ var formData = new FormData();
 var type = "";
 var unit_id = "";
 var budgets_database = [];
-var user_id = window.sessionStorage.getItem("id");
+var user_id = EngineUI.getId();
 
 /******************************************************* BEGIN: Wizard step control ************************************************/
 
@@ -96,8 +96,8 @@ $(".steps-validation").steps({
     },
     onFinished: function (event, currentIndex) {
         // console.log("submit");
-        if (window.sessionStorage.getItem("RequestID")) {
-            updateRequest(window.sessionStorage.getItem("RequestID"));
+        if (EngineUI.getRequestID()) {
+            updateRequest(EngineUI.getRequestID());
         } else {
             uploadRequest();
         }
@@ -223,9 +223,9 @@ addLoadEvent(function() {
         budget_select.appendChild(addBudgetData(num));
     }
 
-    if (window.sessionStorage.getItem('RequestID')) {
-        var request_id = window.sessionStorage.getItem('RequestID');
-        var request_type = window.sessionStorage.getItem('RequestType');
+    if (EngineUI.getRequestID()) {
+        var request_id = EngineUI.getRequestID();
+        var request_type = EngineUI.getRequestType();
         var request_info = getRequestInfo(request_id);
         prepareRequest(request_info, request_type);
         prepareDocs(request_id);
@@ -372,8 +372,7 @@ function uploadRequest() {
     var request = new XMLHttpRequest();
     //this function will get the response from the server after we upload the order
     request.onreadystatechange = function() {
-        console.log("Request info is here:");
-        if (request.readyState == XMLHttpRequest.DONE) {
+        if (request.readyState == 4 /* XMLHttpRequest.DONE */) {
             // show it in the console
             const response_obj = JSON.parse(request.response);
             const data_obj = response_obj.data;
@@ -382,7 +381,7 @@ function uploadRequest() {
             const requestInfo_obj = JSON.parse(data_obj.OrderInfo);
             console.log(requestInfo_obj);
             sendRequestHistory(data_obj._id, "Submitted");
-            window.sessionStorage.setItem('RequestID', data_obj._id);
+            EngineUI.setRequestID( data_obj._id);
             window.location.href = "../../../html/ltr/users/user-request-detailpage.html";
         }
     }
@@ -390,6 +389,7 @@ function uploadRequest() {
 	    alert("SubunitID is undefined, don't expect this to work!");
     }
     request.open('POST', baseURL + "uploadOrder/subunit/" + EngineUI.getSubunitID()); // XXX always subunit requests?
+    console.log("send form data: " + formData);
     request.send(formData);
 }
 
@@ -429,7 +429,7 @@ function updateRequest(request_id) {
     };
 
     var history = {
-        userName: window.sessionStorage.getItem("id"),
+        userName: EngineUI.getId(),
         action: "Updated"
     };
 

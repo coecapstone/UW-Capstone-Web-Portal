@@ -4,7 +4,7 @@ var table1 = [];
 var table2 = [];
 var formData = new FormData();
 var type = "";
-var user_id = window.sessionStorage.getItem("id");
+var user_id = EngineUI.getId();
 var user_name="";
 var user_uwid="";
 var user_email="";
@@ -429,7 +429,7 @@ $(document).on('click', '#confirm_item', function uploadFiles_without_HTML_FORMS
         //this function will get the response from the server after we upload the order
         request.onreadystatechange = function() {
             console.log("Request info is here:");
-            if (request.readyState == XMLHttpRequest.DONE) {
+            if (request.readyState == 4 /* XMLHttpRequest.DONE */) {
                 console.log(request.response);
                 // show it in the console
                 const response_obj = JSON.parse(request.response);
@@ -439,50 +439,44 @@ $(document).on('click', '#confirm_item', function uploadFiles_without_HTML_FORMS
                 sendRequestHistory(data_obj._id, "Submitted");
                 console.log(requestInfo_obj);
                 // transfer data and direct to summary-travelReimbursement.html
-                window.sessionStorage.setItem('orderId',data_obj._id);
-                //window.sessionStorage.setItem('user_id',user_id);
-                //window.sessionStorage.setItem('user_name',user_name);
-                //window.sessionStorage.setItem('user_uwid',user_uwid);
-                //window.sessionStorage.setItem('user_email',user_email);
-                //window.sessionStorage.setItem('user_subunitName', EngineUI.getSubunitName());
-                //window.sessionStorage.setItem('user_AccessLevel', EngineUI.getLevel());
-                window.sessionStorage.setItem('type',"Travel Reimbursement");
-                window.sessionStorage.setItem('submit_date',$("input[name='submit_date']").val());
-                window.sessionStorage.setItem('status',"Awaiting Approval");
-                window.sessionStorage.setItem('note',"");
-                window.sessionStorage.setItem('budget1',budget1);
-                window.sessionStorage.setItem('split1',split1);
-                window.sessionStorage.setItem('budget_length',budgetsArr.length);
-                window.sessionStorage.setItem('budget2',budget2);
-                window.sessionStorage.setItem('split2',split2);
-                window.sessionStorage.setItem('TravelBefore',$("input[name='beforeRadio']:checked").val());
-                window.sessionStorage.setItem('ReferenceNumber',$("input[name='reference_number_input']").val());
-                window.sessionStorage.setItem('ForMyself',$("input[name='myself']").val());
-                window.sessionStorage.setItem('SomeoneName',$("input[name='someone_name']").val());
-                window.sessionStorage.setItem('SomeoneAffliation',$("input[name='someone_affliation']").val());
-                window.sessionStorage.setItem('SomeoneEmail',$("input[name='someone_email']").val());
-                window.sessionStorage.setItem('US',$("input[name='US_Radio']:checked").val());
-                window.sessionStorage.setItem('purpose',$("input[name='purpose']").val());
-                window.sessionStorage.setItem('personalTravel',$("input[name='personalTravel_Radio']:checked").val());
-                window.sessionStorage.setItem('personalTravelDetails',$("input[name='personalTravel_detail']").val());
-                window.sessionStorage.setItem('registration',$("input[name='registration']").val());
-                window.sessionStorage.setItem('airfare',$("input[name='airfare']").val());
-                window.sessionStorage.setItem('car',$("input[name='car']").val());
-                window.sessionStorage.setItem('train',$("input[name='train']").val());
-                window.sessionStorage.setItem('carRental',$("input[name='carRental']").val());
-                window.sessionStorage.setItem('hotelFee',$("input[name='hotel']").val());
-                window.sessionStorage.setItem('visa_file',visa_name);
-                window.sessionStorage.setItem('passport_file',passport_name);
-                window.sessionStorage.setItem('airfare_file',airfare_name);
-                window.sessionStorage.setItem('train_file',train_name);
-                window.sessionStorage.setItem('rental_file',rental_name);
-                window.sessionStorage.setItem('hotel_file',hotel_name);
-                window.sessionStorage.setItem('meal',$("input[name='meal_Radio']:checked").val());
-                window.sessionStorage.setItem('meal_amount',$("input[name='meal_amount']").val());
-                window.sessionStorage.setItem('mealProvided',$("input[name='meal2_Radio']:checked").val());
-                window.sessionStorage.setItem('registration_file',registration_name);
-                window.sessionStorage.setItem('car_file',car_name);
-                window.sessionStorage.setItem('amount',amount);
+                EngineUI.setOrderId(data_obj._id);
+                EngineUI.setType("Travel Reimbursement");
+                EngineUI.setSubmit_date($("input[name='submit_date']").val());
+                EngineUI.setStatus("Awaiting Approval");
+                EngineUI.setNote("");
+                EngineUI.setBudget1(budget1);
+                EngineUI.setSplit1(split1);
+                EngineUI.setBudget_length(budgetsArr.length);
+                EngineUI.setBudget2(budget2);
+                EngineUI.setSplit2(split2);
+                EngineUI.setTravelBefore($("input[name='beforeRadio']:checked").val());
+                EngineUI.setReferenceNumber($("input[name='reference_number_input']").val());
+                EngineUI.setForMyself($("input[name='myself']").val());
+                EngineUI.setSomeoneName($("input[name='someone_name']").val());
+                EngineUI.setSomeoneAffliation($("input[name='someone_affliation']").val());
+                EngineUI.setSomeoneEmail($("input[name='someone_email']").val());
+                EngineUI.setUS($("input[name='US_Radio']:checked").val());
+                EngineUI.setPurpose($("input[name='purpose']").val());
+                EngineUI.setPersonalTravel($("input[name='personalTravel_Radio']:checked").val());
+                EngineUI.setPersonalTravelDetails($("input[name='personalTravel_detail']").val());
+                EngineUI.setRegistration($("input[name='registration']").val());
+                EngineUI.setAirfare($("input[name='airfare']").val());
+                EngineUI.setCar($("input[name='car']").val());
+                EngineUI.setTrain($("input[name='train']").val());
+                EngineUI.setCarRental($("input[name='carRental']").val());
+                EngineUI.setHotelFee($("input[name='hotel']").val());
+                EngineUI.setVisa_file(visa_name);
+                EngineUI.setPassport_file(passport_name);
+                EngineUI.setAirfare_file(airfare_name);
+                EngineUI.setTrain_file(train_name);
+                EngineUI.setRental_file(rental_name);
+                EngineUI.setHotel_file(hotel_name);
+                EngineUI.setMeal($("input[name='meal_Radio']:checked").val());
+                EngineUI.setMeal_amount($("input[name='meal_amount']").val());
+                EngineUI.setMealProvided($("input[name='meal2_Radio']:checked").val());
+                EngineUI.setRegistration_file(registration_name);
+                EngineUI.setCar_file(car_name);
+                EngineUI.setAmount(amount);
                 window.location.href = "summary-travelReimbursement.html";
             }
         }
@@ -637,7 +631,7 @@ function addBudgetData(num) {
 
 function sendRequestHistory(request_id, actionstr) {
     var history = {
-        userName: window.sessionStorage.getItem("id"),
+        userName: EngineUI.getId(),
         action: actionstr
     };
 

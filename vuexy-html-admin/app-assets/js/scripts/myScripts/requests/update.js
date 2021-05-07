@@ -153,7 +153,7 @@ function prepareDocs(request_id) {
 
 
 function setDocs(name, file_id) {
-    var request_id = window.sessionStorage.getItem('RequestID');
+    var request_id = EngineUI.getRequestID();
     var row = document.createElement('div');
     row.setAttribute('class', 'form-group row');
     row.setAttribute('id', 'file_row_' + file_id);

@@ -6,7 +6,7 @@ var feedbackBlock = document.getElementById("feedback-block");
 var feedback = document.getElementById("feedback_input");
 
 var request_id = null;
-var user_id = window.sessionStorage.getItem("id");
+var user_id = EngineUI.getId();
 var userID = null;
 
 // Template POst request Ajax call
@@ -66,108 +66,108 @@ var makeGetRequest = function(url, onSuccess, onFailure) {
     update the page content
 */
 addLoadEvent(function() {
-    userID = window.sessionStorage.getItem("id");
-    document.getElementById('requestID').innerHTML = window.sessionStorage.getItem("orderId");
-    document.getElementById('request-type').innerHTML = window.sessionStorage.getItem("type")+"&nbsp;";
-    document.getElementById('requester').innerHTML = window.sessionStorage.getItem("user_name");
-    document.getElementById('subunit').innerHTML = window.sessionStorage.getItem("user_subunitName");
-    document.getElementById('userEmail').innerHTML = window.sessionStorage.getItem("user_email");
-    document.getElementById('userUWID').innerHTML = window.sessionStorage.getItem("user_uwid");
-    document.getElementById('accessLevel').innerHTML = window.sessionStorage.getItem("user_AccessLevel");
-    document.getElementById('status').innerHTML ="<i class=\"fa fa-circle font-small-3 text-warning mr-50\"></i>" + window.sessionStorage.getItem("status");
-    document.getElementById('submitDate').innerHTML = window.sessionStorage.getItem("submit_date");
+    userID = EngineUI.getId();
+    document.getElementById('requestID').innerHTML = EngineUI.getOrderId();
+    document.getElementById('request-type').innerHTML = EngineUI.getType()+"&nbsp;";
+    document.getElementById('requester').innerHTML = EngineUI.getUser_name();
+    document.getElementById('subunit').innerHTML = EngineUI.getUser_subunitName();
+    document.getElementById('userEmail').innerHTML = EngineUI.getUser_email();
+    document.getElementById('userUWID').innerHTML = EngineUI.getUser_uwid();
+    document.getElementById('accessLevel').innerHTML = EngineUI.getUser_AccessLevel();
+    document.getElementById('status').innerHTML ="<i class=\"fa fa-circle font-small-3 text-warning mr-50\"></i>" + EngineUI.getStatus();
+    document.getElementById('submitDate').innerHTML = EngineUI.getSubmit_date();
     //check how many budgets
-    if(window.sessionStorage.getItem("budget_length").localeCompare("1")==0){
-        document.getElementById('budget').innerHTML = window.sessionStorage.getItem("budget1") +" "+window.sessionStorage.getItem("split1");
+    if(EngineUI.getBudget_length().localeCompare("1")==0){
+        document.getElementById('budget').innerHTML = EngineUI.getBudget1() +" "+EngineUI.getSplit1();
     }else{
-        document.getElementById('budget').innerHTML = window.sessionStorage.getItem("budget1") +" "+window.sessionStorage.getItem("split1")
-                                                +"<br>"+window.sessionStorage.getItem("budget2") +" "+window.sessionStorage.getItem("split2");
+        document.getElementById('budget').innerHTML = EngineUI.getBudget1() +" "+EngineUI.getSplit1()
+                                                +"<br>"+EngineUI.getBudget2() +" "+EngineUI.getSplit2();
     }
     //-----------------------
-    document.getElementById('travelBefore').innerHTML = window.sessionStorage.getItem("TravelBefore");
-    if(window.sessionStorage.getItem("SomeoneName").length==0){
-        document.getElementById('requestFor').innerHTML = window.sessionStorage.getItem("user_name");
+    document.getElementById('travelBefore').innerHTML = EngineUI.getTravelBefore();
+    if(EngineUI.getSomeoneName().length==0){
+        document.getElementById('requestFor').innerHTML = EngineUI.getUser_name();
     }else{
-        document.getElementById('requestFor').innerHTML = window.sessionStorage.getItem("SomeoneName");
+        document.getElementById('requestFor').innerHTML = EngineUI.getSomeoneName();
     }
-    document.getElementById('us').innerHTML = window.sessionStorage.getItem("US");
-    document.getElementById('purpose').innerHTML = window.sessionStorage.getItem("purpose");
-    document.getElementById('referenceNumber').innerHTML = window.sessionStorage.getItem("ReferenceNumber")+"&nbsp;";
-    if(window.sessionStorage.getItem("SomeoneName").length==0){
-        document.getElementById('email').innerHTML = window.sessionStorage.getItem("user_email");
+    document.getElementById('us').innerHTML = EngineUI.getUS();
+    document.getElementById('purpose').innerHTML = EngineUI.getPurpose();
+    document.getElementById('referenceNumber').innerHTML = EngineUI.getReferenceNumber()+"&nbsp;";
+    if(EngineUI.getSomeoneName().length==0){
+        document.getElementById('email').innerHTML = EngineUI.getUser_email();
     }else{
-        document.getElementById('email').innerHTML = window.sessionStorage.getItem("SomeoneEmail");
+        document.getElementById('email').innerHTML = EngineUI.getSomeoneEmail();
     }
     //check the attached file
-    if(window.sessionStorage.getItem("passport_file").localeCompare("undefined")!=0){
+    if(EngineUI.getPassport_file().localeCompare("undefined")!=0){
         document.getElementById('passportFile').innerHTML = "<a href=\"" + baseURL + "downloadAttachment/" 
-                                                        + window.sessionStorage.getItem("orderId") + "/" 
-                                                        + window.sessionStorage.getItem("passport_file")
+                                                        + EngineUI.getOrderId() + "/" 
+                                                        + EngineUI.getPassport_file()
                                                         + "\" style=\"cursor:pointer;color:blue;text-decoration:underline;\">Download</a>";
     }
-    if(window.sessionStorage.getItem("visa_file").localeCompare("undefined")!=0){
+    if(EngineUI.getVisa_file().localeCompare("undefined")!=0){
         document.getElementById('visaFile').innerHTML = "<a href=\"" + baseURL + "downloadAttachment/" 
-                                                        + window.sessionStorage.getItem("orderId") + "/" 
-                                                        + window.sessionStorage.getItem("visa_file")
+                                                        + EngineUI.getOrderId() + "/" 
+                                                        + EngineUI.getVisa_file()
                                                         + "\" style=\"cursor:pointer;color:blue;text-decoration:underline;\">Download</a>";
     }
-    if(window.sessionStorage.getItem("registration_file").localeCompare("undefined")!=0){
+    if(EngineUI.getRegistration(file").localeCompare("undefined")!=0){
         document.getElementById('registrationFile').innerHTML = "<a href=\"" + baseURL + "downloadAttachment/" 
-                                                        + window.sessionStorage.getItem("orderId") + "/" 
-                                                        + window.sessionStorage.getItem("registration_file")
+                                                        + EngineUI.getOrderId() + "/" 
+                                                        + EngineUI.getRegistration(file")
                                                         + "\" style=\"cursor:pointer;color:blue;text-decoration:underline;\">Download</a>";
     }
-    if(window.sessionStorage.getItem("car_file").localeCompare("undefined")!=0){
+    if(EngineUI.getCar(file").localeCompare("undefined")!=0){
         document.getElementById('carFile').innerHTML = "<a href=\"" + baseURL + "downloadAttachment/" 
-                                                        + window.sessionStorage.getItem("orderId") + "/" 
-                                                        + window.sessionStorage.getItem("car_file")
+                                                        + EngineUI.getOrderId() + "/" 
+                                                        + EngineUI.getCar(file")
                                                         + "\" style=\"cursor:pointer;color:blue;text-decoration:underline;\">Download</a>";
     }
-    if(window.sessionStorage.getItem("rental_file").localeCompare("undefined")!=0){
+    if(EngineUI.getRental_file().localeCompare("undefined")!=0){
         document.getElementById('carRentalFile').innerHTML = "<a href=\"" + baseURL + "downloadAttachment/" 
-                                                        + window.sessionStorage.getItem("orderId") + "/" 
-                                                        + window.sessionStorage.getItem("rental_file")
+                                                        + EngineUI.getOrderId() + "/" 
+                                                        + EngineUI.getRental_file()
                                                         + "\" style=\"cursor:pointer;color:blue;text-decoration:underline;\">Download</a>";
     }
-    if(window.sessionStorage.getItem("airfare_file").localeCompare("undefined")!=0){
+    if(EngineUI.getAirfare(file").localeCompare("undefined")!=0){
         document.getElementById('airfareFile').innerHTML = "<a href=\"" + baseURL + "downloadAttachment/" 
-                                                        + window.sessionStorage.getItem("orderId") + "/" 
-                                                        + window.sessionStorage.getItem("airfare_file")
+                                                        + EngineUI.getOrderId() + "/" 
+                                                        + EngineUI.getAirfare(file")
                                                         + "\" style=\"cursor:pointer;color:blue;text-decoration:underline;\">Download</a>";
     }
-    if(window.sessionStorage.getItem("train_file").localeCompare("undefined")!=0){
+    if(EngineUI.getTrain(file").localeCompare("undefined")!=0){
         document.getElementById('trainFile').innerHTML = "<a href=\"" + baseURL + "downloadAttachment/" 
-                                                        + window.sessionStorage.getItem("orderId") + "/" 
-                                                        + window.sessionStorage.getItem("train_file")
+                                                        + EngineUI.getOrderId() + "/" 
+                                                        + EngineUI.getTrain(file")
                                                         + "\" style=\"cursor:pointer;color:blue;text-decoration:underline;\">Download</a>";
     }
-    if(window.sessionStorage.getItem("hotel_file").localeCompare("undefined")!=0){
+    if(EngineUI.getHotel(file").localeCompare("undefined")!=0){
         document.getElementById('hotelFile').innerHTML = "<a href=\"" + baseURL + "downloadAttachment/" 
-                                                        + window.sessionStorage.getItem("orderId") + "/" 
-                                                        + window.sessionStorage.getItem("hotel_file")
+                                                        + EngineUI.getOrderId() + "/" 
+                                                        + EngineUI.getHotel(file")
                                                         + "\" style=\"cursor:pointer;color:blue;text-decoration:underline;\">Download</a>";
     }
     //----------------------------------------------------------------------------------------------------------------------------------------
-    document.getElementById('personalTravel').innerHTML = window.sessionStorage.getItem("personalTravel");
-    document.getElementById('affliation').innerHTML = window.sessionStorage.getItem("SomeoneAffliation")+"&nbsp;";
-    document.getElementById('travelDetail').innerHTML = window.sessionStorage.getItem("personalTravelDetails");
-    document.getElementById('registration').innerHTML = "$"+window.sessionStorage.getItem("registration")+"&nbsp;";
-    document.getElementById('carFee').innerHTML = "$"+window.sessionStorage.getItem("car")+"&nbsp;";
-    document.getElementById('carRental').innerHTML = "$"+window.sessionStorage.getItem("carRental")+"&nbsp;";
-    document.getElementById('airfare').innerHTML = "$"+window.sessionStorage.getItem("airfare")+"&nbsp;";
-    document.getElementById('train').innerHTML = "$"+window.sessionStorage.getItem("train")+"&nbsp;";
-    document.getElementById('hotel').innerHTML = "$"+window.sessionStorage.getItem("hotelFee")+"&nbsp;";
-    if(window.sessionStorage.getItem("meal").localeCompare("meal1")==0){
+    document.getElementById('personalTravel').innerHTML = EngineUI.getPersonalTravel();
+    document.getElementById('affliation').innerHTML = EngineUI.getSomeoneAffliation()+"&nbsp;";
+    document.getElementById('travelDetail').innerHTML = EngineUI.getPersonalTravel(etails");
+    document.getElementById('registration').innerHTML = "$"+EngineUI.getRegistration()+"&nbsp;";
+    document.getElementById('carFee').innerHTML = "$"+EngineUI.getCar()+"&nbsp;";
+    document.getElementById('carRental').innerHTML = "$"+EngineUI.getCar(ental")+"&nbsp;";
+    document.getElementById('airfare').innerHTML = "$"+EngineUI.getAirfare()+"&nbsp;";
+    document.getElementById('train').innerHTML = "$"+EngineUI.getTrain()+"&nbsp;";
+    document.getElementById('hotel').innerHTML = "$"+EngineUI.getHotel(ee")+"&nbsp;";
+    if(EngineUI.getMeal().localeCompare("meal1")==0){
         document.getElementById('meal').innerHTML = "Yes, maximum allowable perdiem";
-    }else if(window.sessionStorage.getItem("meal").localeCompare("meal2")==0){
+    }else if(EngineUI.getMeal().localeCompare("meal2")==0){
         document.getElementById('meal').innerHTML = "Yes, specifc days and meals";
-    }else if(window.sessionStorage.getItem("meal").localeCompare("meal3")==0){
+    }else if(EngineUI.getMeal().localeCompare("meal3")==0){
         document.getElementById('meal').innerHTML = "Yes, specific amount";
-    }else if(window.sessionStorage.getItem("meal").localeCompare("meal4")==0){
+    }else if(EngineUI.getMeal().localeCompare("meal4")==0){
         document.getElementById('meal').innerHTML = "No";
     }
-    document.getElementById('mealAmount').innerHTML = "$"+window.sessionStorage.getItem("meal_amount")+"&nbsp;";
-    document.getElementById('mealProvid').innerHTML = window.sessionStorage.getItem("mealProvided")+"&nbsp;";
+    document.getElementById('mealAmount').innerHTML = "$"+EngineUI.getMeal(amount")+"&nbsp;";
+    document.getElementById('mealProvid').innerHTML = EngineUI.getMeal(rovided")+"&nbsp;";
     
     var onSuccess = function(data){
         var col1=1;
@@ -214,13 +214,13 @@ addLoadEvent(function() {
                 cell4.innerHTML="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*";
             }
         }
-        request_id = window.sessionStorage.getItem('orderId');
+        request_id = EngineUI.getOrderId();
         requestInfo = getRequestInfo(request_id);
     }
     var onFaliure = function(){
         alert("fail");
     }
-    makeGetRequest("getOrderInformation/"+window.sessionStorage.getItem('orderId'),onSuccess,onFaliure);
+    makeGetRequest("getOrderInformation/"+EngineUI.getOrderId(),onSuccess,onFaliure);
 });
 
 function updateActionField(data) {
@@ -242,7 +242,7 @@ function updateActionField(data) {
 function takeNoteClicked() {
     // send data
     var data = {
-        userName: window.sessionStorage.getItem("id"),
+        userName: EngineUI.getId(),
         comment: feedback.value
     };
     var onSuccess = function(data) {

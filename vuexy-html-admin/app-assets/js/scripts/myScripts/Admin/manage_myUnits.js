@@ -98,7 +98,7 @@ function update_staff_overview_table()
         toastr.error('Backend error occured while updating the table', 'Error', { positionClass: 'toast-top-right', containerId: 'toast-top-right' });
     }
     
-    makeGetRequest("units/getUserInfomation/"+window.sessionStorage.getItem("unitID"),onSuccess,onFaliure);
+    makeGetRequest("units/getUserInfomation/"+EngineUI.getUnitID(),onSuccess,onFaliure);
 }
 
 
@@ -142,7 +142,7 @@ function ManageUnitAdd()
             assign_Users_to_Unit(assign_JSON);
             update_and_redraw_staff_overview_table();
             clearInformation();
-            toastr.success(New_User_JSON.Name +' successfully added to '+window.sessionStorage.getItem('unitName'), 'Success', { positionClass: 'toast-top-right', containerId: 'toast-top-right' });
+            toastr.success(New_User_JSON.Name +' successfully added to '+EngineUI.getUnitName(), 'Success', { positionClass: 'toast-top-right', containerId: 'toast-top-right' });
         }
     }
 
@@ -162,7 +162,7 @@ function ManageUnitRemove()
         {
             //if(remove_user_from_users_table(userID))
             //{
-                toastr.success(`${userName} successfully removed from ${window.sessionStorage.getItem("unitName")} unit`, 'Success', { positionClass: 'toast-top-right', containerId: 'toast-top-right' });
+                toastr.success(`${userName} successfully removed from ${EngineUI.getUnitName()} unit`, 'Success', { positionClass: 'toast-top-right', containerId: 'toast-top-right' });
                 update_and_redraw_staff_overview_table();
                 clearInformation();
             //}
@@ -199,9 +199,9 @@ function ManageUnitNameUpdate()
 {
     const input_value = Manage_unit_name_field.value;
     if(update_Unit_name(input_value))
-        window.sessionStorage.setItem("unitName",input_value);
+        EngineUI.setUnitName(input_value);
     else
-        Manage_unit_name_field.value = window.sessionStorage.getItem("unitName");
+        Manage_unit_name_field.value = EngineUI.getUnitName();
 
     Manage_unit_name_button_hide_unhide_logic();
 }
@@ -224,7 +224,7 @@ function update_FormVisibility_table()
     }
     
 
-    makeGetRequest("formVisibility/"+window.sessionStorage.getItem("unitID"),onSuccess,onFaliure);
+    makeGetRequest("formVisibility/"+EngineUI.getUnitID(),onSuccess,onFaliure);
 }
 
 
@@ -246,7 +246,7 @@ function checkbox_click_event(DOM_object)
         toastr.error('Internal server error has occured. Please try again', 'Error', { positionClass: 'toast-top-right', containerId: 'toast-top-right' });
     }
 
-    makePutRequest_NoBody("formVisibility/"+window.sessionStorage.getItem("unitID")+"/"+DOM_object.id+"/"+DOM_object.checked.toString(),onSuccess,onFaliure);
+    makePutRequest_NoBody("formVisibility/"+EngineUI.getUnitID()+"/"+DOM_object.id+"/"+DOM_object.checked.toString(),onSuccess,onFaliure);
 
 }
 
@@ -296,7 +296,7 @@ function build_form_visibility_table_row(_id, formName, visibility)
 function Manage_unit_name_button_hide_unhide_logic()
 {
     //ManageUnitNameUpdate
-    if(Manage_unit_name_field.value == window.sessionStorage.getItem("unitName"))
+    if(Manage_unit_name_field.value == EngineUI.getUnitName())
         ManageUnitNameUpdate_btn.disabled = true;
     else
         ManageUnitNameUpdate_btn.disabled = false;
@@ -304,7 +304,7 @@ function Manage_unit_name_button_hide_unhide_logic()
 
 function fill_Manage_Unit_name_field()
 {
-    Manage_unit_name_field.value = window.sessionStorage.getItem("unitName");
+    Manage_unit_name_field.value = EngineUI.getUnitName();
 }
 
 
@@ -334,7 +334,7 @@ function update_Unit_name(newUnitName)
         return_value =  false;
     }
 
-    makePutRequest_NoBody("units/"+window.sessionStorage.getItem("unitID")+"/"+newUnitName,onSuccess,onFaliure);
+    makePutRequest_NoBody("units/"+EngineUI.getUnitID()+"/"+newUnitName,onSuccess,onFaliure);
 
     return return_value; 
 }
@@ -373,7 +373,7 @@ function update_accessLevel_information()
         return_value =  false;
     }
 
-    makePutRequest_NoBody("units/"+userID+"/"+accesslevel_bool+"/"+window.sessionStorage.getItem("unitID"),onSuccess,onFaliure);
+    makePutRequest_NoBody("units/"+userID+"/"+accesslevel_bool+"/"+EngineUI.getUnitID(),onSuccess,onFaliure);
 
     return return_value;  
 }
@@ -478,7 +478,7 @@ function remove_user_from_Unit(UserID)
         return_value =  false;
     }
 
-    makeDeleteRequest("units/removeUser/"+UserID+"/"+window.sessionStorage.getItem("unitID"),onSuccess,onFaliure);
+    makeDeleteRequest("units/removeUser/"+UserID+"/"+EngineUI.getUnitID(),onSuccess,onFaliure);
 
     return return_value;
 }
@@ -763,7 +763,7 @@ function assign_Users_to_Unit(JSON_data)
         return_value =  null;
     }
 
-    makePostRequest("units/"+window.sessionStorage.getItem("unitID"),JSON_data,onSuccess,onFaliure);
+    makePostRequest("units/"+EngineUI.getUnitID(),JSON_data,onSuccess,onFaliure);
 
     return return_value;
 

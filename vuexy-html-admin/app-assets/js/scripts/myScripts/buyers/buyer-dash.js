@@ -82,7 +82,7 @@ function updateAllRequestsTable() {
         // console.log('take id: ' + data[0]);
         var cell = table.cell($(this).parents('td'));
         cell.data('<button type="button" class="btn mr-0 mb-0 btn-outline-danger btn-sm" name="untakeButton" data-toggle="modal" data-target="#reassignModal">Untake</button>').draw();
-        var assign_id = window.sessionStorage.getItem("id");
+        var assign_id = EngineUI.getId();
         updateAssignedInfo(data[0], assign_id);
         sendRequestHistory(data[0], "Assigned");
 
@@ -180,8 +180,8 @@ function prepareReassignSelector() {
 }
 
 function getUnitFiscalStaff() {
-    var unit_id = window.sessionStorage.getItem("unitID");
-    var myself_id = window.sessionStorage.getItem("id");
+    var unit_id = EngineUI.getUnitID();
+    var myself_id = EngineUI.getId();
     var onSuccess = function(data) {
         if (data.status == true) {
             var info = data.data;
@@ -256,7 +256,7 @@ function getAllUsers() {
         // failure message
     }
 
-    makeGetRequest("findOrdersForFiscal/" + window.sessionStorage.getItem("unitID"), onSuccess, onFailure);
+    makeGetRequest("findOrdersForFiscal/" + EngineUI.getUnitID(), onSuccess, onFailure);
 }
 
 /**
@@ -286,7 +286,7 @@ function getAllRequestsInfo() {
                     var assigned = info[j].assignedTo;
                     if (status == "Approved" && assigned == null) { // take button cell
                         assignedValue = '<button type="button" class="btn mr-0 mb-0 btn-outline-primary btn-sm" name="takeButton">Take</button>';
-                    } else if (assigned == window.sessionStorage.getItem("id")) { // check cell
+                    } else if (assigned == EngineUI.getId()) { // check cell
                         assignedValue = '<button type="button" class="btn mr-0 mb-0 btn-outline-danger btn-sm" name="untakeButton" data-toggle="modal" data-target="#reassignModal">Untake</button>';
                     } else if (assigned != null) { // taken by others cell
                         assignedValue = getUserInfo(assigned).userInfo.Name;
@@ -318,7 +318,7 @@ function getAllRequestsInfo() {
         // failure message
     }
 
-    makeGetRequest("findOrdersForFiscal/" + window.sessionStorage.getItem("unitID"), onSuccess, onFailure);
+    makeGetRequest("findOrdersForFiscal/" + EngineUI.getUnitID(), onSuccess, onFailure);
 }
 
 /**
@@ -380,7 +380,7 @@ function updateAssignedInfo(request_id, assign_id) {
 
 function sendRequestHistory(request_id, actionstr) {
     var history = {
-        userName: window.sessionStorage.getItem("id"),
+        userName: EngineUI.getId(),
         action: actionstr
     };
 
@@ -454,7 +454,7 @@ function getMyPendingRequestsInfo() {
         // failure message
     }
 
-    makeGetRequest("getAssignedOrders/" + window.sessionStorage.getItem("id"), onSuccess, onFailure);
+    makeGetRequest("getAssignedOrders/" + EngineUI.getId(), onSuccess, onFailure);
 }
 
 
@@ -538,7 +538,7 @@ function genPendingRequestCard(request_id, requester, type, date) {
 }
 
 function sendRequestId(request_id) {
-    window.sessionStorage.setItem('RequestID', request_id);
+    EngineUI.setRequestID( request_id);
     window.location.href = "../../../html/ltr/buyers/buyer-request-detail.html";
 }
 
@@ -569,190 +569,190 @@ function directToSummary(orderId){
     getUserInfo(requestsInfo[index].UserId);
     if(requestsInfo[x].Type.localeCompare("Travel Request")==0){
         if(temp.LineItems[0].Budgets.length==1){
-            window.sessionStorage.setItem('orderId',orderId);
-            window.sessionStorage.setItem('user_id',requestsInfo[index].UserId);
-            window.sessionStorage.setItem('user_name',user_name);
-            window.sessionStorage.setItem('user_uwid',user_uwid);
-            window.sessionStorage.setItem('user_email',user_email);
-            window.sessionStorage.setItem('user_subunitName',user_subunitName);
-            window.sessionStorage.setItem('user_AccessLevel',user_accessLevel);
-            window.sessionStorage.setItem('type',requestsInfo[index].Type);
-            window.sessionStorage.setItem('submit_date',requestsInfo[index].Date);
-            window.sessionStorage.setItem('status',requestsInfo[index].Status);
-            window.sessionStorage.setItem('amount',requestsInfo[index].Amount);
-            window.sessionStorage.setItem('firstname',temp.FirstName);
-            window.sessionStorage.setItem('lastname',temp.LastName);
-            window.sessionStorage.setItem('departure',temp.Departure);
-            window.sessionStorage.setItem('destionation',temp.Destination);
-            window.sessionStorage.setItem('date',temp.Date);
-            window.sessionStorage.setItem('returndate',temp.ReturnDate);
-            window.sessionStorage.setItem('reason',temp.Reason);
-            window.sessionStorage.setItem('flight',temp.Flight);
-            window.sessionStorage.setItem('flight_company',temp.FlightCompany);
-            window.sessionStorage.setItem('flight_number',temp.FlightNumber);
-            window.sessionStorage.setItem('flight_from',temp.FlightFrom);
-            window.sessionStorage.setItem('flight_to',temp.FlightTo);
-            window.sessionStorage.setItem('flight_departdate',temp.FlightDepartingDate);
-            window.sessionStorage.setItem('flight_returndate',temp.FlightReturningDate);
-            window.sessionStorage.setItem('flight_amount',temp.FlightAmount);
-            window.sessionStorage.setItem('hotel',temp.Hotel);
-            window.sessionStorage.setItem('hotel_name',temp.HotelName);
-            window.sessionStorage.setItem('hotel_address',temp.HotelAddress);
-            window.sessionStorage.setItem('hotel_num',temp.HotelNum);
-            window.sessionStorage.setItem('hotel_zip',temp.HotelZip);
-            window.sessionStorage.setItem('hotel_amount',temp.HotelAmount);
-            window.sessionStorage.setItem('hotel_link',temp.HotelLink);
-            window.sessionStorage.setItem('flight_reference',temp.FlightReference);
-            window.sessionStorage.setItem('hotel_note',temp.HotelNote);
-            window.sessionStorage.setItem('birthday',temp.Birthday);
-            window.sessionStorage.setItem('note',temp.NoteFromApprover);
-            window.sessionStorage.setItem('budget1',temp.LineItems[0].Budgets[0].Number);
-            window.sessionStorage.setItem('split1',temp.LineItems[0].Budgets[0].Split);
-            window.sessionStorage.setItem('budget_length',temp.LineItems[0].Budgets.length);
-            window.sessionStorage.setItem('budget2',null);
-            window.sessionStorage.setItem('split2',null);
-            window.sessionStorage.setItem('hotel_movein',temp.HotelMovein);
-            window.sessionStorage.setItem('hotel_moveout',temp.HotelMoveout);
+            EngineUI.setOrderId(orderId);
+            EngineUI.setUser_id(requestsInfo[index].UserId);
+            EngineUI.setUser_name(user_name);
+            EngineUI.setUser_uwid(user_uwid);
+            EngineUI.setUser_email(user_email);
+            EngineUI.setUser_subunitName(user_subunitName);
+            EngineUI.setUser_AccessLevel(user_accessLevel);
+            EngineUI.setType(requestsInfo[index].Type);
+            EngineUI.setSubmit_date(requestsInfo[index].Date);
+            EngineUI.setStatus(requestsInfo[index].Status);
+            EngineUI.setAmount(requestsInfo[index].Amount);
+            EngineUI.setFirstname(temp.FirstName);
+            EngineUI.setLastname(temp.LastName);
+            EngineUI.setDeparture(temp.Departure);
+            EngineUI.setDestionation(temp.Destination);
+            EngineUI.setDate(temp.Date);
+            EngineUI.setReturndate(temp.ReturnDate);
+            EngineUI.setReason(temp.Reason);
+            EngineUI.setFlight(temp.Flight);
+            EngineUI.setFlight_company(temp.FlightCompany);
+            EngineUI.setFlight_number(temp.FlightNumber);
+            EngineUI.setFlight_from(temp.FlightFrom);
+            EngineUI.setFlight_to(temp.FlightTo);
+            EngineUI.setFlight_departdate(temp.FlightDepartingDate);
+            EngineUI.setFlight_returndate(temp.FlightReturningDate);
+            EngineUI.setFlight_amount(temp.FlightAmount);
+            EngineUI.setHotel(temp.Hotel);
+            EngineUI.setHotel_name(temp.HotelName);
+            EngineUI.setHotel_address(temp.HotelAddress);
+            EngineUI.setHotel_num(temp.HotelNum);
+            EngineUI.setHotel_zip(temp.HotelZip);
+            EngineUI.setHotel_amount(temp.HotelAmount);
+            EngineUI.setHotel_link(temp.HotelLink);
+            EngineUI.setFlight_reference(temp.FlightReference);
+            EngineUI.setHotel_note(temp.HotelNote);
+            EngineUI.setBirthday(temp.Birthday);
+            EngineUI.setNote(temp.NoteFromApprover);
+            EngineUI.setBudget1(temp.LineItems[0].Budgets[0].Number);
+            EngineUI.setSplit1(temp.LineItems[0].Budgets[0].Split);
+            EngineUI.setBudget_length(temp.LineItems[0].Budgets.length);
+            EngineUI.setBudget2(null);
+            EngineUI.setSplit2(null);
+            EngineUI.setHotel_movein(temp.HotelMovein);
+            EngineUI.setHotel_moveout(temp.HotelMoveout);
             window.location.href = "summary.html";
         }else{
-            window.sessionStorage.setItem('orderId',orderId);
-            window.sessionStorage.setItem('user_id',requestsInfo[index].UserId);
-            window.sessionStorage.setItem('user_name',user_name);
-            window.sessionStorage.setItem('user_uwid',user_uwid);
-            window.sessionStorage.setItem('user_email',user_email);
-            window.sessionStorage.setItem('user_subunitName',user_subunitName);
-            window.sessionStorage.setItem('user_AccessLevel',user_accessLevel);
-            window.sessionStorage.setItem('type',requestsInfo[index].Type);
-            window.sessionStorage.setItem('submit_date',requestsInfo[index].Date);
-            window.sessionStorage.setItem('status',requestsInfo[index].Status);
-            window.sessionStorage.setItem('amount',requestsInfo[index].Amount);
-            window.sessionStorage.setItem('firstname',temp.FirstName);
-            window.sessionStorage.setItem('lastname',temp.LastName);
-            window.sessionStorage.setItem('departure',temp.Departure);
-            window.sessionStorage.setItem('destionation',temp.Destination);
-            window.sessionStorage.setItem('date',temp.Date);
-            window.sessionStorage.setItem('returndate',temp.ReturnDate);
-            window.sessionStorage.setItem('reason',temp.Reason);
-            window.sessionStorage.setItem('flight',temp.Flight);
-            window.sessionStorage.setItem('flight_company',temp.FlightCompany);
-            window.sessionStorage.setItem('flight_number',temp.FlightNumber);
-            window.sessionStorage.setItem('flight_from',temp.FlightFrom);
-            window.sessionStorage.setItem('flight_to',temp.FlightTo);
-            window.sessionStorage.setItem('flight_departdate',temp.FlightDepartingDate);
-            window.sessionStorage.setItem('flight_returndate',temp.FlightReturningDate);
-            window.sessionStorage.setItem('flight_amount',temp.FlightAmount);
-            window.sessionStorage.setItem('hotel',temp.Hotel);
-            window.sessionStorage.setItem('hotel_name',temp.HotelName);
-            window.sessionStorage.setItem('hotel_address',temp.HotelAddress);
-            window.sessionStorage.setItem('hotel_num',temp.HotelNum);
-            window.sessionStorage.setItem('hotel_zip',temp.HotelZip);
-            window.sessionStorage.setItem('hotel_amount',temp.HotelAmount);
-            window.sessionStorage.setItem('hotel_link',temp.HotelLink);
-            window.sessionStorage.setItem('flight_reference',temp.FlightReference);
-            window.sessionStorage.setItem('hotel_note',temp.HotelNote);
-            window.sessionStorage.setItem('birthday',temp.Birthday);
-            window.sessionStorage.setItem('note',temp.NoteFromApprover);
-            window.sessionStorage.setItem('budget1',temp.LineItems[0].Budgets[0].Number);
-            window.sessionStorage.setItem('split1',temp.LineItems[0].Budgets[0].Split);
-            window.sessionStorage.setItem('budget_length',temp.LineItems[0].Budgets.length);
-            window.sessionStorage.setItem('budget2',temp.LineItems[0].Budgets[1].Number);
-            window.sessionStorage.setItem('split2',temp.LineItems[0].Budgets[1].Split);
-            window.sessionStorage.setItem('hotel_movein',temp.HotelMovein);
-            window.sessionStorage.setItem('hotel_moveout',temp.HotelMoveout);
+            EngineUI.setOrderId(orderId);
+            EngineUI.setUser_id(requestsInfo[index].UserId);
+            EngineUI.setUser_name(user_name);
+            EngineUI.setUser_uwid(user_uwid);
+            EngineUI.setUser_email(user_email);
+            EngineUI.setUser_subunitName(user_subunitName);
+            EngineUI.setUser_AccessLevel(user_accessLevel);
+            EngineUI.setType(requestsInfo[index].Type);
+            EngineUI.setSubmit_date(requestsInfo[index].Date);
+            EngineUI.setStatus(requestsInfo[index].Status);
+            EngineUI.setAmount(requestsInfo[index].Amount);
+            EngineUI.setFirstname(temp.FirstName);
+            EngineUI.setLastname(temp.LastName);
+            EngineUI.setDeparture(temp.Departure);
+            EngineUI.setDestionation(temp.Destination);
+            EngineUI.setDate(temp.Date);
+            EngineUI.setReturndate(temp.ReturnDate);
+            EngineUI.setReason(temp.Reason);
+            EngineUI.setFlight(temp.Flight);
+            EngineUI.setFlight_company(temp.FlightCompany);
+            EngineUI.setFlight_number(temp.FlightNumber);
+            EngineUI.setFlight_from(temp.FlightFrom);
+            EngineUI.setFlight_to(temp.FlightTo);
+            EngineUI.setFlight_departdate(temp.FlightDepartingDate);
+            EngineUI.setFlight_returndate(temp.FlightReturningDate);
+            EngineUI.setFlight_amount(temp.FlightAmount);
+            EngineUI.setHotel(temp.Hotel);
+            EngineUI.setHotel_name(temp.HotelName);
+            EngineUI.setHotel_address(temp.HotelAddress);
+            EngineUI.setHotel_num(temp.HotelNum);
+            EngineUI.setHotel_zip(temp.HotelZip);
+            EngineUI.setHotel_amount(temp.HotelAmount);
+            EngineUI.setHotel_link(temp.HotelLink);
+            EngineUI.setFlight_reference(temp.FlightReference);
+            EngineUI.setHotel_note(temp.HotelNote);
+            EngineUI.setBirthday(temp.Birthday);
+            EngineUI.setNote(temp.NoteFromApprover);
+            EngineUI.setBudget1(temp.LineItems[0].Budgets[0].Number);
+            EngineUI.setSplit1(temp.LineItems[0].Budgets[0].Split);
+            EngineUI.setBudget_length(temp.LineItems[0].Budgets.length);
+            EngineUI.setBudget2(temp.LineItems[0].Budgets[1].Number);
+            EngineUI.setSplit2(temp.LineItems[0].Budgets[1].Split);
+            EngineUI.setHotel_movein(temp.HotelMovein);
+            EngineUI.setHotel_moveout(temp.HotelMoveout);
             window.location.href = "summary.html";
         }
     }else if(requestsInfo[x].Type.localeCompare("Travel Reimbursement")==0){
         if(temp.LineItems[0].Budgets.length==1){
-            window.sessionStorage.setItem('orderId',orderId);
-            window.sessionStorage.setItem('user_id',requestsInfo[index].UserId);
-            window.sessionStorage.setItem('user_name',user_name);
-            window.sessionStorage.setItem('user_uwid',user_uwid);
-            window.sessionStorage.setItem('user_email',user_email);
-            window.sessionStorage.setItem('user_subunitName',user_subunitName);
-            window.sessionStorage.setItem('user_AccessLevel',user_accessLevel);
-            window.sessionStorage.setItem('type',requestsInfo[index].Type);
-            window.sessionStorage.setItem('submit_date',requestsInfo[index].Date);
-            window.sessionStorage.setItem('status',requestsInfo[index].Status);
-            window.sessionStorage.setItem('note',temp.NoteFromApprover);
-            window.sessionStorage.setItem('budget1',temp.LineItems[0].Budgets[0].Number);
-            window.sessionStorage.setItem('split1',temp.LineItems[0].Budgets[0].Split);
-            window.sessionStorage.setItem('budget_length',temp.LineItems[0].Budgets.length);
-            window.sessionStorage.setItem('budget2',null);
-            window.sessionStorage.setItem('split2',null);
-            window.sessionStorage.setItem('TravelBefore',temp.TravelBefore);
-            window.sessionStorage.setItem('ReferenceNumber',temp.ReferenceNumber);
-            window.sessionStorage.setItem('ForMyself',temp.ForMyself);
-            window.sessionStorage.setItem('SomeoneName',temp.SomeoneName);
-            window.sessionStorage.setItem('SomeoneAffliation',temp.SomeoneAffliation);
-            window.sessionStorage.setItem('SomeoneEmail',temp.SomeoneEmail);
-            window.sessionStorage.setItem('US',temp.UScitizen);
-            window.sessionStorage.setItem('purpose',temp.Purpose);
-            window.sessionStorage.setItem('personalTravel',temp.PersonalTravel);
-            window.sessionStorage.setItem('personalTravelDetails',temp.PersonalTravelDetail);
-            window.sessionStorage.setItem('registration',temp.Registration);
-            window.sessionStorage.setItem('airfare',temp.AirFare);
-            window.sessionStorage.setItem('car',temp.Car);
-            window.sessionStorage.setItem('train',temp.Train);
-            window.sessionStorage.setItem('carRental',temp.CarRental);
-            window.sessionStorage.setItem('hotelFee',temp.HotelFee);
-            window.sessionStorage.setItem('visa_file',temp.Visa_file);
-            window.sessionStorage.setItem('passport_file',temp.Passport_file);
-            window.sessionStorage.setItem('airfare_file',temp.Airfare_file);
-            window.sessionStorage.setItem('train_file',temp.Train_file);
-            window.sessionStorage.setItem('rental_file',temp.Rental_file);
-            window.sessionStorage.setItem('hotel_file',temp.Hotel_file);
-            window.sessionStorage.setItem('meal',temp.Meal);
-            window.sessionStorage.setItem('meal_amount',temp.Meal_amount);
-            window.sessionStorage.setItem('mealProvided',temp.MealProvided);
-            window.sessionStorage.setItem('registration_file',temp.Registration_file);
-            window.sessionStorage.setItem('car_file',temp.Car_file);
-            window.sessionStorage.setItem('amount',temp.amount);
+            EngineUI.setOrderId(orderId);
+            EngineUI.setUser_id(requestsInfo[index].UserId);
+            EngineUI.setUser_name(user_name);
+            EngineUI.setUser_uwid(user_uwid);
+            EngineUI.setUser_email(user_email);
+            EngineUI.setUser_subunitName(user_subunitName);
+            EngineUI.setUser_AccessLevel(user_accessLevel);
+            EngineUI.setType(requestsInfo[index].Type);
+            EngineUI.setSubmit_date(requestsInfo[index].Date);
+            EngineUI.setStatus(requestsInfo[index].Status);
+            EngineUI.setNote(temp.NoteFromApprover);
+            EngineUI.setBudget1(temp.LineItems[0].Budgets[0].Number);
+            EngineUI.setSplit1(temp.LineItems[0].Budgets[0].Split);
+            EngineUI.setBudget_length(temp.LineItems[0].Budgets.length);
+            EngineUI.setBudget2(null);
+            EngineUI.setSplit2(null);
+            EngineUI.setTravelBefore(temp.TravelBefore);
+            EngineUI.setReferenceNumber(temp.ReferenceNumber);
+            EngineUI.setForMyself(temp.ForMyself);
+            EngineUI.setSomeoneName(temp.SomeoneName);
+            EngineUI.setSomeoneAffliation(temp.SomeoneAffliation);
+            EngineUI.setSomeoneEmail(temp.SomeoneEmail);
+            EngineUI.setUS(temp.UScitizen);
+            EngineUI.setPurpose(temp.Purpose);
+            EngineUI.setPersonalTravel(temp.PersonalTravel);
+            EngineUI.setPersonalTravelDetails(temp.PersonalTravelDetail);
+            EngineUI.setRegistration(temp.Registration);
+            EngineUI.setAirfare(temp.AirFare);
+            EngineUI.setCar(temp.Car);
+            EngineUI.setTrain(temp.Train);
+            EngineUI.setCarRental(temp.CarRental);
+            EngineUI.setHotelFee(temp.HotelFee);
+            EngineUI.setVisa_file(temp.Visa_file);
+            EngineUI.setPassport_file(temp.Passport_file);
+            EngineUI.setAirfare_file(temp.Airfare_file);
+            EngineUI.setTrain_file(temp.Train_file);
+            EngineUI.setRental_file(temp.Rental_file);
+            EngineUI.setHotel_file(temp.Hotel_file);
+            EngineUI.setMeal(temp.Meal);
+            EngineUI.setMeal_amount(temp.Meal_amount);
+            EngineUI.setMealProvided(temp.MealProvided);
+            EngineUI.setRegistration_file(temp.Registration_file);
+            EngineUI.setCar_file(temp.Car_file);
+            EngineUI.setAmount(temp.amount);
             window.location.href = "summary-travelReimbursement.html";
         }else{
-            window.sessionStorage.setItem('orderId',orderId);
-            window.sessionStorage.setItem('user_id',requestsInfo[index].UserId);
-            window.sessionStorage.setItem('user_name',user_name);
-            window.sessionStorage.setItem('user_uwid',user_uwid);
-            window.sessionStorage.setItem('user_email',user_email);
-            window.sessionStorage.setItem('user_subunitName',user_subunitName);
-            window.sessionStorage.setItem('user_AccessLevel',user_accessLevel);
-            window.sessionStorage.setItem('type',requestsInfo[index].Type);
-            window.sessionStorage.setItem('submit_date',requestsInfo[index].Date);
-            window.sessionStorage.setItem('status',requestsInfo[index].Status);
-            window.sessionStorage.setItem('note',temp.NoteFromApprover);
-            window.sessionStorage.setItem('budget1',temp.LineItems[0].Budgets[0].Number);
-            window.sessionStorage.setItem('split1',temp.LineItems[0].Budgets[0].Split);
-            window.sessionStorage.setItem('budget_length',temp.LineItems[0].Budgets.length);
-            window.sessionStorage.setItem('budget2',temp.LineItems[0].Budgets[1].Number);
-            window.sessionStorage.setItem('split2',temp.LineItems[0].Budgets[1].Split);
-            window.sessionStorage.setItem('TravelBefore',temp.TravelBefore);
-            window.sessionStorage.setItem('ReferenceNumber',temp.ReferenceNumber);
-            window.sessionStorage.setItem('ForMyself',temp.ForMyself);
-            window.sessionStorage.setItem('SomeoneName',temp.SomeoneName);
-            window.sessionStorage.setItem('SomeoneAffliation',temp.SomeoneAffliation);
-            window.sessionStorage.setItem('SomeoneEmail',temp.SomeoneEmail);
-            window.sessionStorage.setItem('US',temp.UScitizen);
-            window.sessionStorage.setItem('purpose',temp.Purpose);
-            window.sessionStorage.setItem('personalTravel',temp.PersonalTravel);
-            window.sessionStorage.setItem('personalTravelDetails',temp.PersonalTravelDetail);
-            window.sessionStorage.setItem('registration',temp.Registration);
-            window.sessionStorage.setItem('airfare',temp.AirFare);
-            window.sessionStorage.setItem('car',temp.Car);
-            window.sessionStorage.setItem('train',temp.Train);
-            window.sessionStorage.setItem('carRental',temp.CarRental);
-            window.sessionStorage.setItem('hotelFee',temp.HotelFee);
-            window.sessionStorage.setItem('visa_file',temp.Visa_file);
-            window.sessionStorage.setItem('passport_file',temp.Passport_file);
-            window.sessionStorage.setItem('airfare_file',temp.Airfare_file);
-            window.sessionStorage.setItem('train_file',temp.Train_file);
-            window.sessionStorage.setItem('rental_file',temp.Rental_file);
-            window.sessionStorage.setItem('hotel_file',temp.Hotel_file);
-            window.sessionStorage.setItem('meal',temp.Meal);
-            window.sessionStorage.setItem('meal_amount',temp.Meal_amount);
-            window.sessionStorage.setItem('mealProvided',temp.MealProvided);
-            window.sessionStorage.setItem('registration_file',temp.Registration_file);
-            window.sessionStorage.setItem('car_file',temp.Car_file);
-            window.sessionStorage.setItem('amount',temp.amount);
+            EngineUI.setOrderId(orderId);
+            EngineUI.setUser_id(requestsInfo[index].UserId);
+            EngineUI.setUser_name(user_name);
+            EngineUI.setUser_uwid(user_uwid);
+            EngineUI.setUser_email(user_email);
+            EngineUI.setUser_subunitName(user_subunitName);
+            EngineUI.setUser_AccessLevel(user_accessLevel);
+            EngineUI.setType(requestsInfo[index].Type);
+            EngineUI.setSubmit_date(requestsInfo[index].Date);
+            EngineUI.setStatus(requestsInfo[index].Status);
+            EngineUI.setNote(temp.NoteFromApprover);
+            EngineUI.setBudget1(temp.LineItems[0].Budgets[0].Number);
+            EngineUI.setSplit1(temp.LineItems[0].Budgets[0].Split);
+            EngineUI.setBudget_length(temp.LineItems[0].Budgets.length);
+            EngineUI.setBudget2(temp.LineItems[0].Budgets[1].Number);
+            EngineUI.setSplit2(temp.LineItems[0].Budgets[1].Split);
+            EngineUI.setTravelBefore(temp.TravelBefore);
+            EngineUI.setReferenceNumber(temp.ReferenceNumber);
+            EngineUI.setForMyself(temp.ForMyself);
+            EngineUI.setSomeoneName(temp.SomeoneName);
+            EngineUI.setSomeoneAffliation(temp.SomeoneAffliation);
+            EngineUI.setSomeoneEmail(temp.SomeoneEmail);
+            EngineUI.setUS(temp.UScitizen);
+            EngineUI.setPurpose(temp.Purpose);
+            EngineUI.setPersonalTravel(temp.PersonalTravel);
+            EngineUI.setPersonalTravelDetails(temp.PersonalTravelDetail);
+            EngineUI.setRegistration(temp.Registration);
+            EngineUI.setAirfare(temp.AirFare);
+            EngineUI.setCar(temp.Car);
+            EngineUI.setTrain(temp.Train);
+            EngineUI.setCarRental(temp.CarRental);
+            EngineUI.setHotelFee(temp.HotelFee);
+            EngineUI.setVisa_file(temp.Visa_file);
+            EngineUI.setPassport_file(temp.Passport_file);
+            EngineUI.setAirfare_file(temp.Airfare_file);
+            EngineUI.setTrain_file(temp.Train_file);
+            EngineUI.setRental_file(temp.Rental_file);
+            EngineUI.setHotel_file(temp.Hotel_file);
+            EngineUI.setMeal(temp.Meal);
+            EngineUI.setMeal_amount(temp.Meal_amount);
+            EngineUI.setMealProvided(temp.MealProvided);
+            EngineUI.setRegistration_file(temp.Registration_file);
+            EngineUI.setCar_file(temp.Car_file);
+            EngineUI.setAmount(temp.amount);
             window.location.href = "summary-travelReimbursement.html";
         }
     }

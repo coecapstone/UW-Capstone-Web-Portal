@@ -147,7 +147,7 @@ function add_Unit_Unit_overview()
         if(add_unit(unit_name_input.value))
         {
 	console.log('Add unit success');
-            toastr.success(`Unit ${unit_name_input.value} added to ${window.sessionStorage.getItem("unitName")}`, 'Success', { positionClass: 'toast-top-right', containerId: 'toast-top-right' });
+            toastr.success(`Unit ${unit_name_input.value} added to ${EngineUI.getUnitName()}`, 'Success', { positionClass: 'toast-top-right', containerId: 'toast-top-right' });
             clear_Information_Unit_overview();
             update_Unit_overview_table();
         } else {
@@ -677,7 +677,7 @@ function getAllFormInformation()
     }
     
 
-    makeGetRequest("formVisibility/"+window.sessionStorage.getItem("unitID"),onSuccess,onFaliure);
+    makeGetRequest("formVisibility/"+EngineUI.getUnitID(),onSuccess,onFaliure);
 
     return return_value;
 }

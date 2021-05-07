@@ -8,7 +8,7 @@ addLoadEvent(function() {
  */
 function canAddUnits()
 {
-    var trueName = window.sessionStorage.getItem("uwid");
+    var trueName = EngineUI.getUwid();
 console.log("uwid = " + trueName);
     if (trueName != "perseant" && trueName != "yangx38" && trueName != "xiyueyao" && trueName != "ab32") {
         return false;
@@ -24,8 +24,8 @@ function update_left_navigationbar()
 {
     // Once we know who we are, we will call this
     var onSuccessKnowingNetid = function(data) {
-        window.sessionStorage.setItem('uwnetid', data.data.uwnetid);
-        window.sessionStorage.setItem('true_uwnetid', data.data.true_uwnetid);
+        EngineUI.setUwnetid( data.data.uwnetid);
+        EngineUI.setTrue_uwnetid( data.data.true_uwnetid);
 	
 	if (document.getElementById("manage_units") && canAddUnits()) {
             document.getElementById("manage_units").style.display="list-item";

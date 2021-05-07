@@ -78,7 +78,7 @@ function upload_logic()
             type: 'canvas',
             size: 'viewport'
         }).then(function (response) {
-            update_profile_pic(window.sessionStorage.getItem("id"),response);
+            update_profile_pic(EngineUI.getId(),response);
         });
 
 }
@@ -104,7 +104,7 @@ function update_profile_pic(userID,ImageData)
         }else
         {
 
-            //window.sessionStorage.setItem("profile_pic_url",data.data.profileImage_URL);
+            //EngineUI.setProfile_pic_url(data.data.profileImage_URL);
             //load_userInformation();
             //toastr.success('Profile image successfully updated', 'Success', { positionClass: 'toast-top-right', containerId: 'toast-top-right' });
         }
@@ -127,13 +127,13 @@ function update_profile_pic(userID,ImageData)
 
 function load_userInformation()
 {
-    name_input.value = window.sessionStorage.getItem("name");
-    UWID_input.value = window.sessionStorage.getItem("uwid");
-    email_input.value = window.sessionStorage.getItem("email");
+    name_input.value = EngineUI.getName();
+    UWID_input.value = EngineUI.getUwid();
+    email_input.value = EngineUI.getEmail();
 
-    if(window.sessionStorage.getItem("address") != "null")
+    if(EngineUI.getAddress() != "null")
     {
-        JSON_Object = JSON.parse(window.sessionStorage.getItem("address"));
+        JSON_Object = JSON.parse(EngineUI.getAddress());
 
         address_input.value = JSON_Object.address;
         apartment_input.value = JSON_Object.apartment;
@@ -149,18 +149,18 @@ function load_userInformation()
         zip_input.value = "";
     }
 
-    if(window.sessionStorage.getItem("profile_pic_url") == "" || window.sessionStorage.getItem("profile_pic_url") == null)
+    if(EngineUI.getProfile_pic_url() == "" || EngineUI.getProfile_pic_url() == null)
         document.getElementById("userImage").setAttribute('src','../../../app-assets/images/portrait/small/default.jpg');
     else
-        document.getElementById("userImage").setAttribute('src',window.sessionStorage.getItem("profile_pic_url"));
+        document.getElementById("userImage").setAttribute('src',EngineUI.getProfile_pic_url());
 }
 
 
 function reset_button_logic()
 {
-    name_input.value = window.sessionStorage.getItem("name");
-    UWID_input.value = window.sessionStorage.getItem("uwid");
-    email_input.value = window.sessionStorage.getItem("email");
+    name_input.value = EngineUI.getName();
+    UWID_input.value = EngineUI.getUwid();
+    email_input.value = EngineUI.getEmail();
 
     name_input_error.innerHTML = "";
     UWID_input_error.innerHTML = "";
@@ -171,14 +171,14 @@ function reset_button_logic()
 function update_user_information()
 {
     if(validate_fields() == false)
-        update_user_information_request(name_input.value,email_input.value,UWID_input.value,window.sessionStorage.getItem("profile_pic_url"));
+        update_user_information_request(name_input.value,email_input.value,UWID_input.value,EngineUI.getProfile_pic_url());
 }
 
 function enable_disable_update_btn()
 {
-    const user_name = window.sessionStorage.getItem("name");
-    const user_UWID = window.sessionStorage.getItem("uwid");
-    const user_Email = window.sessionStorage.getItem("email");
+    const user_name = EngineUI.getName();
+    const user_UWID = EngineUI.getUwid();
+    const user_Email = EngineUI.getEmail();
 
     if(name_input.value == user_name && UWID_input.value == user_UWID && email_input.value == user_Email)
         userInfo_updateBtn.disabled = true;
@@ -241,9 +241,9 @@ function update_user_information_request(newName,newEmail,newUWID,profile_pic_ur
 
     var isVerified = false;
 
-    if(window.sessionStorage.getItem("verified_user") == "false")
+    if(EngineUI.getVerified_user() == "false")
         isVerified = false;
-    else if (window.sessionStorage.getItem("verified_user") == "true")
+    else if (EngineUI.getVerified_user() == "true")
         isVerified = true;
     
     var User_JSON = {
@@ -262,11 +262,11 @@ function update_user_information_request(newName,newEmail,newUWID,profile_pic_ur
             return_value =  null;
         }else
         {
-            window.sessionStorage.setItem("name",data.data.Name);
-            window.sessionStorage.setItem("uwid",data.data.UWID);
-            window.sessionStorage.setItem("email",data.data.email);
-            window.sessionStorage.setItem("verified_user",data.data.verified_user);
-            window.sessionStorage.setItem("profile_pic_url",data.data.profileImage_URL);
+            EngineUI.setName(data.data.Name);
+            EngineUI.setUwid(data.data.UWID);
+            EngineUI.setEmail(data.data.email);
+            EngineUI.setVerified_user(data.data.verified_user);
+            EngineUI.setProfile_pic_url(data.data.profileImage_URL);
             reset_button_logic();
             toastr.success('User information successfully updated', 'Success', { positionClass: 'toast-top-right', containerId: 'toast-top-right' });
         }
@@ -280,7 +280,7 @@ function update_user_information_request(newName,newEmail,newUWID,profile_pic_ur
         return_value =  null;
     }
 
-    makePutRequest("usersbyID/"+window.sessionStorage.getItem("id"),User_JSON,onSuccess,onFaliure);
+    makePutRequest("usersbyID/"+EngineUI.getId(),User_JSON,onSuccess,onFaliure);
 
     return return_value;   
 }
@@ -304,7 +304,7 @@ function updateAddress(address,apartment,city,state,zipCode)
 
         }else
         {
-            window.sessionStorage.setItem("address",JSON.stringify(data.data.address));
+            EngineUI.setAddress(JSON.stringify(data.data.address));
             reset_address_logic();
             toastr.success('User default address successfully updated', 'Success', { positionClass: 'toast-top-right', containerId: 'toast-top-right' });
         }
@@ -318,7 +318,7 @@ function updateAddress(address,apartment,city,state,zipCode)
 
     }
 
-    makePostRequest("users/updateAddress/"+window.sessionStorage.getItem("id"),address_JSON,onSuccess,onFaliure);  
+    makePostRequest("users/updateAddress/"+EngineUI.getId(),address_JSON,onSuccess,onFaliure);  
 }
 
 function updateAddressBtn()
@@ -329,9 +329,9 @@ function updateAddressBtn()
 
 function reset_address_logic()
 {
-    if(window.sessionStorage.getItem("address") != "null")
+    if(EngineUI.getAddress() != "null")
     {
-        JSON_Object = JSON.parse(window.sessionStorage.getItem("address"));
+        JSON_Object = JSON.parse(EngineUI.getAddress());
 
         address_input.value = JSON_Object.address;
         apartment_input.value = JSON_Object.apartment;

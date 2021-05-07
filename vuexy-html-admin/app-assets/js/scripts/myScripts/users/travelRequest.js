@@ -3,7 +3,7 @@ var lineItems = [];
 var formData = new FormData();
 var type = "";
 var unitID = "";
-var user_id = window.sessionStorage.getItem("id");
+var user_id = EngineUI.getId();
 
 var user_name="";
 var user_uwid="";
@@ -316,7 +316,7 @@ $(document).on('click', '#confirm_item', function uploadFiles_without_HTML_FORMS
         //this function will get the response from the server after we upload the order
         request.onreadystatechange = function() {
             console.log("Request info is here:");
-            if (request.readyState == XMLHttpRequest.DONE) {
+            if (request.readyState == 4 /* XMLHttpRequest.DONE */) {
                 console.log(request.response);
                 // show it in the console
                 const response_obj = JSON.parse(request.response);
@@ -326,50 +326,50 @@ $(document).on('click', '#confirm_item', function uploadFiles_without_HTML_FORMS
                 console.log(requestInfo_obj);
                 sendRequestHistory(data_obj._id, "Submitted");
                 // transfer data and direct to summary.html 
-                window.sessionStorage.setItem('orderId',data_obj._id);
-                window.sessionStorage.setItem('user_id',user_id);
-                window.sessionStorage.setItem('user_name',user_name);
-                window.sessionStorage.setItem('user_uwid',user_uwid);
-                window.sessionStorage.setItem('user_email',user_email);
-                window.sessionStorage.setItem('user_subunitName',user_subunitName);
-                window.sessionStorage.setItem('user_AccessLevel',user_accessLevel);
-                window.sessionStorage.setItem('type',"Travel Request");
-                window.sessionStorage.setItem('submit_date',date);
-                window.sessionStorage.setItem('status',"Awaiting Approval");
-                window.sessionStorage.setItem('amount',"N/A");
-                window.sessionStorage.setItem('firstname',$("input[name='firstName']").val());
-                window.sessionStorage.setItem('lastname',$("input[name='lastName']").val());
-                window.sessionStorage.setItem('departure',$("input[name='departure']").val());
-                window.sessionStorage.setItem('destionation',$("input[name='destination']").val());
-                window.sessionStorage.setItem('date',$("input[name='date']").val());
-                window.sessionStorage.setItem('returndate',$("input[name='returnDate']").val());
-                window.sessionStorage.setItem('reason',$("input[name='reason']").val());
-                window.sessionStorage.setItem('flight',$("input[name='flight']:checked").val());
-                window.sessionStorage.setItem('flight_company',$("input[name='flight_company']").val());
-                window.sessionStorage.setItem('flight_number',$("input[name='flight_number']").val());
-                window.sessionStorage.setItem('flight_from',$("input[name='flight_from']").val());
-                window.sessionStorage.setItem('flight_to',$("input[name='flight_to']").val());
-                window.sessionStorage.setItem('flight_departdate',$("input[name='flight_departingDate']").val());
-                window.sessionStorage.setItem('flight_returndate',$("input[name='flight_returningDate']").val());
-                window.sessionStorage.setItem('flight_amount',$("input[name='flight_amount']").val());
-                window.sessionStorage.setItem('hotel',$("input[name='hotel']:checked").val());
-                window.sessionStorage.setItem('hotel_name',$("input[name='hotel_name']").val());
-                window.sessionStorage.setItem('hotel_address',$("input[name='hotel_address']").val());
-                window.sessionStorage.setItem('hotel_num',$("input[name='hotel_num']").val());
-                window.sessionStorage.setItem('hotel_zip',$("input[name='hotel_zip']").val());
-                window.sessionStorage.setItem('hotel_amount',$("input[name='hotel_amount']").val());
-                window.sessionStorage.setItem('hotel_link',$("input[name='hotel_link']").val());
-                window.sessionStorage.setItem('flight_reference',$("input[name='flight_reference']").val());
-                window.sessionStorage.setItem('hotel_note',$("input[name='hotel_note']").val());
-                window.sessionStorage.setItem('birthday',$("input[name='birthday']").val());
-                window.sessionStorage.setItem('note',"");
-                window.sessionStorage.setItem('budget1',budget1);
-                window.sessionStorage.setItem('split1',split1);
-                window.sessionStorage.setItem('budget_length',budgetsArr.length);
-                window.sessionStorage.setItem('budget2',budget2);
-                window.sessionStorage.setItem('split2',split2);
-                window.sessionStorage.setItem('hotel_movein',$("input[name='hotel_movenin']").val());
-                window.sessionStorage.setItem('hotel_moveout',$("input[name='hotel_movenout']").val());
+                EngineUI.setOrderId(data_obj._id);
+                EngineUI.setUser_id(user_id);
+                EngineUI.setUser_name(user_name);
+                EngineUI.setUser_uwid(user_uwid);
+                EngineUI.setUser_email(user_email);
+                EngineUI.setUser_subunitName(user_subunitName);
+                EngineUI.setUser_AccessLevel(user_accessLevel);
+                EngineUI.setType("Travel Request");
+                EngineUI.setSubmit_date(date);
+                EngineUI.setStatus("Awaiting Approval");
+                EngineUI.setAmount("N/A");
+                EngineUI.setFirstname($("input[name='firstName']").val());
+                EngineUI.setLastname($("input[name='lastName']").val());
+                EngineUI.setDeparture($("input[name='departure']").val());
+                EngineUI.setDestionation($("input[name='destination']").val());
+                EngineUI.setDate($("input[name='date']").val());
+                EngineUI.setReturndate($("input[name='returnDate']").val());
+                EngineUI.setReason($("input[name='reason']").val());
+                EngineUI.setFlight($("input[name='flight']:checked").val());
+                EngineUI.setFlight_company($("input[name='flight_company']").val());
+                EngineUI.setFlight_number($("input[name='flight_number']").val());
+                EngineUI.setFlight_from($("input[name='flight_from']").val());
+                EngineUI.setFlight_to($("input[name='flight_to']").val());
+                EngineUI.setFlight_departdate($("input[name='flight_departingDate']").val());
+                EngineUI.setFlight_returndate($("input[name='flight_returningDate']").val());
+                EngineUI.setFlight_amount($("input[name='flight_amount']").val());
+                EngineUI.setHotel($("input[name='hotel']:checked").val());
+                EngineUI.setHotel_name($("input[name='hotel_name']").val());
+                EngineUI.setHotel_address($("input[name='hotel_address']").val());
+                EngineUI.setHotel_num($("input[name='hotel_num']").val());
+                EngineUI.setHotel_zip($("input[name='hotel_zip']").val());
+                EngineUI.setHotel_amount($("input[name='hotel_amount']").val());
+                EngineUI.setHotel_link($("input[name='hotel_link']").val());
+                EngineUI.setFlight_reference($("input[name='flight_reference']").val());
+                EngineUI.setHotel_note($("input[name='hotel_note']").val());
+                EngineUI.setBirthday($("input[name='birthday']").val());
+                EngineUI.setNote("");
+                EngineUI.setBudget1(budget1);
+                EngineUI.setSplit1(split1);
+                EngineUI.setBudget_length(budgetsArr.length);
+                EngineUI.setBudget2(budget2);
+                EngineUI.setSplit2(split2);
+                EngineUI.setHotel_movein($("input[name='hotel_movenin']").val());
+                EngineUI.setHotel_moveout($("input[name='hotel_movenout']").val());
                 window.location.href = "summary.html";
             }
         }
@@ -679,7 +679,7 @@ $(document).on('click', '#budget-info-2-1-3', function() {
 
 function sendRequestHistory(request_id, actionstr) {
     var history = {
-        userName: window.sessionStorage.getItem("id"),
+        userName: EngineUI.getId(),
         action: actionstr
     };
 

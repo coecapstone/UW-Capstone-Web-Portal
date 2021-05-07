@@ -23,8 +23,8 @@ var userID = null;
 var requestInfo = null;
 
 window.addEventListener('load', function() {
-    request_id = window.sessionStorage.getItem('RequestID');
-    userID = window.sessionStorage.getItem("id");
+    request_id = EngineUI.getRequestID();
+    userID = EngineUI.getId();
 
     requestInfo = getRequestInfo(request_id);
     updateRequestInfo(requestInfo);

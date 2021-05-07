@@ -133,7 +133,7 @@ function allBudgetAdd()
     {
         update_allBudgets_table();
         clearInformation();
-        toastr.success("Budget "+JSON_Obj.BudgetNumber +' successfully added to '+window.sessionStorage.getItem('unitName'), 'Success', { positionClass: 'toast-top-right', containerId: 'toast-top-right' });
+        toastr.success("Budget "+JSON_Obj.BudgetNumber +' successfully added to '+EngineUI.getUnitName(), 'Success', { positionClass: 'toast-top-right', containerId: 'toast-top-right' });
 
     }
         
@@ -149,7 +149,7 @@ function allBudgetRemove()
         if(remove_budget_from_allBudgets(BudgetID))
         {
 
-            toastr.success(`Budget: ${BudgetNumber} successfully removed from ${window.sessionStorage.getItem("unitName")} unit`, 'Success', { positionClass: 'toast-top-right', containerId: 'toast-top-right' });
+            toastr.success(`Budget: ${BudgetNumber} successfully removed from ${EngineUI.getUnitName()} unit`, 'Success', { positionClass: 'toast-top-right', containerId: 'toast-top-right' });
             update_allBudgets_table();
             clearInformation();
             
@@ -244,7 +244,7 @@ function modal_file_upload_btn_logic()
         }
 
     }
-    request.open('PUT', baseURL+"allBudgets/uploadExcelFile/"+window.sessionStorage.getItem("unitID"));
+    request.open('PUT', baseURL+"allBudgets/uploadExcelFile/"+EngineUI.getUnitID());
     request.send(formData);
 }
 
@@ -431,7 +431,7 @@ function get_all_budgets_under_Unit()
     }
     
 
-    makeGetRequest("allBudgets/"+window.sessionStorage.getItem("unitID"),onSuccess,onFaliure);
+    makeGetRequest("allBudgets/"+EngineUI.getUnitID(),onSuccess,onFaliure);
 
     return return_val;
 }
@@ -459,7 +459,7 @@ function add_new_budget(JSON_data)
         return_value =  null;
     }
 
-    makePostRequest("allBudgets/"+window.sessionStorage.getItem("unitID"),JSON_data,onSuccess,onFaliure);
+    makePostRequest("allBudgets/"+EngineUI.getUnitID(),JSON_data,onSuccess,onFaliure);
 
     return return_value;
 }
@@ -487,7 +487,7 @@ function remove_budget_from_allBudgets(BudgetID)
         return_value =  false;
     }
 
-    makeDeleteRequest("allBudgets/"+window.sessionStorage.getItem("unitID")+"/"+BudgetID,onSuccess,onFaliure);
+    makeDeleteRequest("allBudgets/"+EngineUI.getUnitID()+"/"+BudgetID,onSuccess,onFaliure);
 
     return return_value;
 }

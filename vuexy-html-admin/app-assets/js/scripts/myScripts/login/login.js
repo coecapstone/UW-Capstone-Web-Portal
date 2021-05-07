@@ -11,16 +11,16 @@ function login()
         {
             window.sessionStorage.clear();
             console.log(data);
-            window.sessionStorage.setItem('infomation',JSON.stringify(data.data));
+            EngineUI.setInfomation(JSON.stringify(data.data));
             //saving following data in session storage
-            /*window.sessionStorage.setItem("id",data.data.userInfo._id);
-            window.sessionStorage.setItem("name",data.data.userInfo.Name);
-            window.sessionStorage.setItem("uwid",data.data.userInfo.UWID);
-            window.sessionStorage.setItem("email",data.data.userInfo.email);
-            window.sessionStorage.setItem("verified_user",data.data.userInfo.verified_user);
-            window.sessionStorage.setItem("unitID",data.data.UnitID);
-            window.sessionStorage.setItem("unitName",data.data.UnitName);
-            window.sessionStorage.setItem("profile_pic_url",data.data.userInfo.profileImage_URL);*/
+            /*EngineUI.setId(data.data.userInfo._id);
+            EngineUI.setName(data.data.userInfo.Name);
+            EngineUI.setUwid(data.data.userInfo.UWID);
+            EngineUI.setEmail(data.data.userInfo.email);
+            EngineUI.setVerified_user(data.data.userInfo.verified_user);
+            EngineUI.setUnitID(data.data.UnitID);
+            EngineUI.setUnitName(data.data.UnitName);
+            EngineUI.setProfile_pic_url(data.data.userInfo.profileImage_URL);*/
 
 
             window.location.replace("chooseRole.html");

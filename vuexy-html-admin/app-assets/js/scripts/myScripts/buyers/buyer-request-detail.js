@@ -8,7 +8,7 @@ var feedback = document.getElementById("feedback_input");
 var request_id = null;
 
 addLoadEvent(function() {
-    request_id = window.sessionStorage.getItem('RequestID');
+    request_id = EngineUI.getRequestID();
     this.console.log(request_id);
 
     // Request Example: Reimbursement
@@ -83,7 +83,7 @@ function finishClicked() {
     };
 
     var history = {
-        userName: window.sessionStorage.getItem("id"),
+        userName: EngineUI.getId(),
         action: "Completed"
     };
 
@@ -112,7 +112,7 @@ function sendBackClicked() {
     };
 
     var history = {
-        userName: window.sessionStorage.getItem("id"),
+        userName: EngineUI.getId(),
         action: "Sent Back"
     };
 
@@ -141,7 +141,7 @@ function approveClicked() {
     };
 
     var history = {
-        userName: window.sessionStorage.getItem("id"),
+        userName: EngineUI.getId(),
         action: "Accepted"
     };
 
@@ -164,7 +164,7 @@ function approveClicked() {
 function takeNoteClicked() {
     // send data
     var data = {
-        userName: window.sessionStorage.getItem("id"),
+        userName: EngineUI.getId(),
         comment: feedback.value
     };
     var onSuccess = function(data) {

@@ -9,7 +9,7 @@ var request_id = null;
 var requestInfo = null;
 
 addLoadEvent(function() {
-    request_id = window.sessionStorage.getItem('RequestID');
+    request_id = EngineUI.getRequestID();
     this.console.log(request_id);
 
     // Request Example: Reimbursement
@@ -66,7 +66,7 @@ function updateActionField(data) {
 function takeNoteClicked() {
     // send data
     var data = {
-        userName: window.sessionStorage.getItem("id"),
+        userName: EngineUI.getId(),
         comment: feedback.value
     };
     var onSuccess = function(data) {
@@ -88,16 +88,16 @@ function takeNoteClicked() {
 
 function updateClicked() {
     if (requestInfo.OrderType == "Reimbursement") {
-        window.sessionStorage.setItem('RequestType', "Reimbursement");
+        EngineUI.setRequestType( "Reimbursement");
         window.location.href = "../../../html/ltr/users/user-reimbursement-3.html";
     } else if (requestInfo.OrderType == "Purchase Request") {
-        window.sessionStorage.setItem('RequestType', "Purchase Request");
+        EngineUI.setRequestType( "Purchase Request");
         window.location.href = "../../../html/ltr/users/user-purchase.html";
     } else if (requestInfo.OrderType == "Procard Receipt") {
-        window.sessionStorage.setItem('RequestType', "Procard Receipt");
+        EngineUI.setRequestType( "Procard Receipt");
         window.location.href = "../../../html/ltr/users/user-procard.html";
     } else if (requestInfo.OrderType == "Pay an Invoice") {
-        window.sessionStorage.setItem('RequestType', "Pay an Invoice");
+        EngineUI.setRequestType( "Pay an Invoice");
         window.location.href = "../../../html/ltr/users/user-invoice.html";
     }
     

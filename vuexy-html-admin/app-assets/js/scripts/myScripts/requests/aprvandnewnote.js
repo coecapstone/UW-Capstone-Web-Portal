@@ -9,7 +9,7 @@ var accessLevel = null;
 let approverMap = new Map();
 
 window.addEventListener('load', function() {
-    accessLevel = window.sessionStorage.getItem('level');
+    accessLevel = EngineUI.getLevel();
 
     updateApprovalBoard(requestInfo);
     updateActionField(requestInfo);
@@ -150,16 +150,16 @@ function adjustActionHeight() {
 
 function updateClicked() {
     if (requestInfo.OrderType == "Reimbursement") {
-        window.sessionStorage.setItem('RequestType', "Reimbursement");
+        EngineUI.setRequestType( "Reimbursement");
         window.location.href = "../../../html/ltr/users/user-reimbursement-3.html";
     } else if (requestInfo.OrderType == "Purchase Request") {
-        window.sessionStorage.setItem('RequestType', "Purchase Request");
+        EngineUI.setRequestType( "Purchase Request");
         window.location.href = "../../../html/ltr/users/user-purchase.html";
     } else if (requestInfo.OrderType == "Procard Receipt") {
-        window.sessionStorage.setItem('RequestType', "Procard Receipt");
+        EngineUI.setRequestType( "Procard Receipt");
         window.location.href = "../../../html/ltr/users/user-procard.html";
     } else if (requestInfo.OrderType == "Pay an Invoice") {
-        window.sessionStorage.setItem('RequestType', "Pay an Invoice");
+        EngineUI.setRequestType( "Pay an Invoice");
         window.location.href = "../../../html/ltr/users/user-invoice.html";
     }
 }
@@ -175,7 +175,7 @@ function sendBackClickedByApprover(budgetnum, lineitemid) {
     };
 
     var history = {
-        userName: window.sessionStorage.getItem("id"),
+        userName: EngineUI.getId(),
         action: "Budget Number " + budgetnum + " Sent Back"
     };
 
@@ -244,7 +244,7 @@ function sendBackClickedByStaff() {
 
     if (optionVal == "back_pass") {
         history = {
-            userName: window.sessionStorage.getItem("id"),
+            userName: EngineUI.getId(),
             action: "Sent Back and Back Pass Approvers"
         };
 
@@ -253,7 +253,7 @@ function sendBackClickedByStaff() {
         };
     } else if (optionVal == "require_approval") {
         history = {
-            userName: window.sessionStorage.getItem("id"),
+            userName: EngineUI.getId(),
             action: "Sent Back and Require Approvers Approval"
         };
 
@@ -281,7 +281,7 @@ function approveClicked(budgetnum, lineitemid) {
     };
 
     var history = {
-        userName: window.sessionStorage.getItem("id"),
+        userName: EngineUI.getId(),
         action: "Budget Number " + budgetnum + " Approved"
     };
 
@@ -314,7 +314,7 @@ function approveClicked(budgetnum, lineitemid) {
 function takeNoteClicked() {
     // send data
     var data = {
-        userName: window.sessionStorage.getItem("id"),
+        userName: EngineUI.getId(),
         comment: feedback.value
     };
     var onSuccess = function(data) {
