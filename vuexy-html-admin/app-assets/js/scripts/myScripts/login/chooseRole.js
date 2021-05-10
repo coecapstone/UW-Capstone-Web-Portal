@@ -23,23 +23,22 @@ function main()
     var fiscalStaff = data.fiscalStaff;
     var fiscalAdmin =data.fiscalAdmin;
 
+    var done = {};
+
     for(var x=0;x<fiscalAdmin.length;x++)
     {
         elementID++;
         parent_section.appendChild(generate_card(elementID,"bg-gradient-danger","admin","Financial Administrator",fiscalAdmin[x].UnitName,fiscalAdmin[x].UnitID));
         parent_section.appendChild(generate_card(elementID,"bg-gradient-danger","staff","Financial Staff",fiscalAdmin[x].UnitName,fiscalAdmin[x].UnitID));
+        done["staff/" + fiscalAdmin[x].UnitID] = 1;
     }
 
     for(var x=0;x<fiscalStaff.length;x++)
     {
+        if (done["staff/" + fiscalAdmin[x].UnitID])
+	    continue;
         elementID++;
         parent_section.appendChild(generate_card(elementID,"bg-gradient-info","staff","Financial Staff",fiscalStaff[x].UnitName,fiscalStaff[x].UnitID));
-    }
-
-    for(var x=0;x<submitter.length;x++)
-    {
-        elementID++;
-        parent_section.appendChild(generate_card(elementID,"bg-gradient-success","submitter","Submitter",submitter[x].SubunitName,submitter[x].SubunitID));
     }
 
     for(var x=0;x<approverRoles.length;x++)
@@ -47,7 +46,21 @@ function main()
         console.log(approverRoles[x]);
         elementID++;
         parent_section.appendChild(generate_card(elementID,"bg-gradient-primary","approver","Approver",approverRoles[x].SubunitName,approverRoles[x].SubunitID));
+
+	// All approvers are also submitters
+       	elementID++;
+       	parent_section.appendChild(generate_card(elementID,"bg-gradient-success","submitter","Submitter",approverRoles[x].SubunitName,approverRoles[x].SubunitID));
+        done["submitter/" + submitter[x].SubunitID] = 1;
     }
+
+    for(var x=0;x<submitter.length;x++)
+    {
+        if (!done["submitter/" + approverRoles[x].SubunitID]) {
+            elementID++;
+            parent_section.appendChild(generate_card(elementID,"bg-gradient-success","submitter","Submitter",submitter[x].SubunitName,submitter[x].SubunitID));
+	}
+    }
+
 }
 
 function generate_impersonate_card(cardColor) {
