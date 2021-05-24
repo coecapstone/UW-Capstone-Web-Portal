@@ -35,7 +35,7 @@ function main()
 
     for(var x=0;x<fiscalStaff.length;x++)
     {
-        if (done["staff/" + fiscalAdmin[x].UnitID])
+        if (done["staff/" + fiscalStaff[x].UnitID])
 	    continue;
         elementID++;
         parent_section.appendChild(generate_card(elementID,"bg-gradient-info","staff","Financial Staff",fiscalStaff[x].UnitName,fiscalStaff[x].UnitID));
